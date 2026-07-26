@@ -1,0 +1,395 @@
+:host {
+  display: block;
+}
+
+.comparison-shell {
+  min-height: 100vh;
+  padding: 6.5rem clamp(1rem, 4vw, 3rem) 4rem;
+  background:
+    radial-gradient(circle at 84% 8%, rgba(120, 165, 73, 0.2), transparent 23rem),
+    linear-gradient(180deg, #fff8e8 0%, #f1f5e7 100%);
+}
+
+.comparison-container {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.comparison-hero {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 1.8rem);
+}
+
+.module-icon {
+  display: grid;
+  width: clamp(4.2rem, 8vw, 6.6rem);
+  height: clamp(4.2rem, 8vw, 6.6rem);
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(120, 165, 73, 0.26);
+  border-radius: 8px;
+  background: rgba(255, 253, 244, 0.78);
+  color: #78a549;
+  box-shadow: 0 18px 44px rgba(49, 69, 34, 0.12);
+}
+
+.module-icon mat-icon {
+  width: auto;
+  height: auto;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+.eyebrow {
+  margin: 0 0 0.55rem;
+  color: #d9890f;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin-bottom: 0;
+  margin-top: 0;
+  color: #26351f;
+  font-weight: 950;
+  line-height: 1.05;
+  font-size: clamp(2.5rem, 6vw, 5.1rem);
+}
+
+.comparison-lead {
+  max-width: 760px;
+  margin: 1.2rem 0 0;
+  color: #58634d;
+  font-size: 1.08rem;
+  font-weight: 650;
+  line-height: 1.7;
+}
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.fruit-gallery,
+.blender-section {
+  padding: clamp(1rem, 3vw, 1.6rem);
+  border: 1px solid rgba(120, 165, 73, 0.22);
+  border-radius: 0.9rem;
+  background: rgba(255, 253, 244, 0.78);
+  box-shadow: 0 18px 44px rgba(49, 69, 34, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: #26351f;
+  font-weight: 950;
+  font-size: clamp(1.4rem, 3vw, 2.45rem);
+}
+
+.gallery-hint {
+  color: #657b41;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+/* Scroll para la lista de frutas */
+.fruit-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 300px;
+  max-height: 450px;
+  padding-right: 0.5rem;
+}
+
+/* Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.fruit-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.fruit-tile {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.45rem;
+  border: 1px solid rgba(120, 165, 73, 0.2);
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #3f6528;
+  cursor: grab;
+  outline: none;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+
+.fruit-tile:hover,
+.fruit-tile:focus-visible {
+  border-color: #3f6528;
+  box-shadow: 0 9px 20px rgba(63, 101, 40, 0.14);
+  transform: translateY(-2px);
+}
+
+.fruit-tile:active {
+  cursor: grabbing;
+}
+
+.fruit-tile img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 0.55rem;
+  object-fit: cover;
+  background: #f6efdf;
+}
+
+.fruit-tile span,
+.fruit-tile small {
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fruit-tile span {
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.fruit-tile small {
+  color: #899572;
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+/* BLENDER CSS */
+.blender-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 400px;
+  position: relative;
+  margin-top: 2rem;
+}
+
+.blender-lid {
+  width: 190px;
+  height: 25px;
+  background: #4a5c3a;
+  border-radius: 12px 12px 0 0;
+  margin-bottom: 0px;
+  z-index: 5;
+  box-shadow: inset 0 -3px 5px rgba(0,0,0,0.2);
+}
+
+.blender-jar {
+  width: 220px;
+  height: 250px;
+  border: 4px solid rgba(255, 255, 255, 0.8);
+  border-top: none;
+  border-radius: 0 0 35px 35px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(5px);
+  position: relative;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-content: flex-start;
+  justify-content: center;
+  gap: 5px;
+  padding: 15px;
+  z-index: 2;
+  box-shadow: inset 0 0 20px rgba(255,255,255,0.5), 0 10px 20px rgba(0,0,0,0.05);
+  transition: background-color 0.3s ease;
+  overflow: hidden;
+}
+
+.blender-jar.cdk-drop-list-dragging {
+  background: rgba(200, 235, 200, 0.5);
+  border-color: #78a549;
+}
+
+/* Markings */
+.blender-jar::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  bottom: 30px;
+  height: 70%;
+  width: 10px;
+  border-left: 2px solid rgba(255,255,255,0.7);
+  border-bottom: 2px solid rgba(255,255,255,0.7);
+  border-top: 2px solid rgba(255,255,255,0.7);
+  opacity: 0.6;
+}
+
+.blender-base {
+  width: 240px;
+  height: 90px;
+  background: linear-gradient(145deg, #3f6528, #2a4519);
+  border-radius: 12px 12px 25px 25px;
+  margin-top: -5px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 15px 30px rgba(42, 69, 25, 0.4);
+  position: relative;
+}
+
+/* Botón Mix */
+.blender-button {
+  width: 50px;
+  height: 50px;
+  background: #d9890f;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.9);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: inset 0 2px 5px rgba(255,255,255,0.4), 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.blender-button mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.blender-button:hover:not(:disabled) {
+  transform: scale(1.05);
+  background: #f0a020;
+}
+.blender-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #888;
+}
+
+/* Frutas en la licuadora */
+.blender-fruit-item {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  z-index: 10;
+  cursor: grab;
+  background: white;
+}
+
+.blender-fruit-item:active {
+  cursor: grabbing;
+}
+
+/* Animaciones */
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+.shake-animation {
+  animation: shake 0.4s infinite;
+}
+
+@keyframes mixSpin {
+  0% { transform: rotate(0deg) scale(1); filter: blur(0px); }
+  50% { transform: rotate(180deg) scale(0.8); filter: blur(3px); }
+  100% { transform: rotate(360deg) scale(1); filter: blur(0px); }
+}
+.spin-mixing .blender-fruit-item {
+  animation: mixSpin 0.3s ease-in-out infinite;
+}
+
+/* CDK Drag Drop */
+.cdk-drag-preview {
+  box-sizing: border-box;
+  opacity: 0.8 !important;
+  z-index: 1000 !important;
+  pointer-events: none;
+}
+.cdk-drag-placeholder {
+  opacity: 0.2;
+}
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.fruit-list.cdk-drop-list-dragging .fruit-tile:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate3d(0, 20px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@media (max-width: 1023px) {
+  .comparison-shell {
+    padding-top: 7.8rem;
+  }
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+  .fruit-scroll-area {
+    min-height: 200px;
+    max-height: 300px;
+  }
+  .fruit-gallery-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .fruit-gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

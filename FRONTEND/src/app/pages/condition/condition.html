@@ -1,0 +1,45 @@
+<section class="condition-shell" @stagger40ms>
+  <div class="condition-hero">
+    <div class="title-row" @fadeInRight400ms>
+      <span class="module-icon" @scaleIn400ms>
+        <mat-icon fontSet="material-symbols-outlined">{{ icon }}</mat-icon>
+      </span>
+      <div>
+        <p class="eyebrow">Orientación educativa</p>
+        <h1>Descubre la infusión según tu perfil de interés</h1>
+      </div>
+    </div>
+    <p class="lead" data-stagger>
+      Elige una condición como punto de partida y conoce de qué frutas puedes obtener un beneficio.
+      Después podrás ordenar las opciones por sabor, aprovechamiento y experiencia sensorial.
+    </p>
+  </div>
+
+  <aside class="condition-disclaimer" data-stagger>
+    <mat-icon fontSet="material-symbols-outlined">info</mat-icon>
+    <p>Este módulo permite dar sugerencias educativas de infusiones. No sustituye una valoración médica ni indica
+      tratamientos.</p>
+  </aside>
+
+  @if (loading) {
+  <div class="condition-grid condition-grid-loading" aria-label="Cargando condiciones" aria-busy="true">
+    @for (item of [1, 2, 3, 4, 5, 6]; track item) {
+    <div class="condition-skeleton"><span></span><span></span><span></span></div>
+    }
+  </div>
+  } @else {
+  <div class="condition-grid">
+    @for (condition of conditions; track condition.condicionId) {
+    <a class="condition-card" data-stagger [routerLink]="['/condiciones', condition.condicionId]">
+      <span>{{ $index + 1 }}</span>
+      <h2>{{ condition.nombre }}</h2>
+      <p>{{ condition.descripcion }}</p>
+      <span class="condition-card-action">
+        <span>Descubrir opciones</span>
+        <mat-icon fontSet="material-symbols-outlined">north_east</mat-icon>
+      </span>
+    </a>
+    }
+  </div>
+  }
+</section>

@@ -1,0 +1,118 @@
+<main class="bioactive-map-shell">
+  <div class="bioactive-map-container">
+    <header class="map-header">
+      <div style="display: flex; align-items: center; gap: clamp(1rem, 2.4vw, 1.8rem);" data-stagger @fadeInRight400ms>
+        <span class="module-icon" @scaleIn400ms>
+          <mat-icon fontSet="material-symbols-outlined">map</mat-icon>
+        </span>
+        <div>
+          <p class="map-eyebrow">Exploración visual</p>
+          <h1>Mapa bioactivo de Ecuador</h1>
+        </div>
+      </div>
+      <p class="map-lead" data-stagger>
+        Selecciona un compuesto para explorar qué frutas destacan en las distintas provincias del Ecuador.
+      </p>
+    </header>
+
+    <section class="map-toolbar" aria-label="Filtros del mapa bioactivo">
+      <mat-chip-listbox class="map-filter-list" [value]="selectedState" aria-label="Selecciona un estado">
+        @for (filter of filters; track filter.key) {
+        <mat-chip-option [value]="filter.key" (click)="selectState(filter.key)">
+          {{ filter.label }}
+        </mat-chip-option>
+        }
+      </mat-chip-listbox>
+
+      <div class="state-explanation"
+        style="margin-top: 1rem; font-size: 0.9rem; color: #58634d; background: rgba(255, 255, 255, 0.6); padding: 0.8rem 1rem; border-radius: 0.6rem; border-left: 4px solid #3f6528;">
+        @if (selectedState === 'antes') {
+        <p style="margin: 0;"><strong>Antes de digestión (Infusión/Fresco):</strong> Representa la cantidad total de
+          nutrientes y antioxidantes originalmente presentes en la fruta antes de ser consumida y procesada por el
+          estómago.</p>
+        } @else {
+        <p style="margin: 0;"><strong>Después de digestión (Bioaccesibilidad):</strong> Representa qué porcentaje de
+          esos nutrientes realmente se liberan en nuestro sistema digestivo y quedan disponibles para ser aprovechados
+          por nuestro cuerpo.</p>
+        }
+      </div>
+    </section>
+
+    <section class="map-stage" aria-label="Mapa interactivo de Ecuador">
+      <div style="position: relative; width: 100%; height: 100%;">
+        <div #mapHost class="bioactive-map" role="application" aria-label="Mapa de frutas bioactivas de Ecuador"></div>
+        <p class="map-hint">Pasa sobre un marcador para ver el nombre; haz clic para consultar los detalles.</p>
+      </div>
+
+      <aside class="fruit-list-panel">
+        <div class="fruit-list-header">
+          <h3>Listado de Frutas</h3>
+        </div>
+        <div class="fruit-list-scroll">
+          @for (fruit of fruits; track fruit.frutaId) {
+          <button class="fruit-list-item" [class.selected]="selectedFruit?.frutaId === fruit.frutaId"
+            (click)="selectFruitFromList(fruit)">
+            <img [src]="fruit.imagen || '/images/fruit-hero.png'" [alt]="fruit.nombreComun" />
+            <span>{{ fruit.nombreComun }}</span>
+          </button>
+          }
+        </div>
+      </aside>
+    </section>
+
+    @if (selectedFruit) {
+    <section class="detail-section" aria-label="Detalles de fruta seleccionada">
+      <div class="detail-card">
+        <div class="detail-fruit-identity"
+          style="display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem;">
+          <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <img [src]="selectedFruit.imagen || '/images/fruit-hero.png'" [alt]="selectedFruit.nombreComun"
+              class="detail-image" />
+            <div class="detail-titles">
+              <p class="eyebrow">Perfil de bioaccesibilidad</p>
+              <h3>{{ selectedFruit.nombreComun }}</h3>
+              <p class="scientific-name">{{ selectedFruit.nombreCientifico }}</p>
+            </div>
+          </div>
+
+          <button
+            style="background: #dfeaca; color: #3f6528; border: none; border-radius: 99px; padding: 0.5rem 1rem; font-size: 0.9rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.2s;"
+            (click)="openHelpModal()" onmouseover="this.style.background='#c5d8a4'"
+            onmouseout="this.style.background='#dfeaca'">
+            <mat-icon fontSet="material-symbols-outlined"
+              style="font-size: 1.2rem; width: 1.2rem; height: 1.2rem;">help</mat-icon>
+            ¿Cómo puedo interpretar esto?
+          </button>
+        </div>
+
+        <div class="detail-scores">
+          @for (item of selectedFruitScores; track item.label) {
+          <div class="score-row">
+            <span class="score-label">{{ item.label }}</span>
+            <div class="indicator-bar detail-bar">
+              @if (item.score === -1) {
+              <span class="ranking-value-empty">Sin datos</span>
+              } @else {
+              <div class="indicator-dot" [style.left.%]="item.score" (mouseenter)="item.showTooltip = true"
+                (mouseleave)="item.showTooltip = false"></div>
+              @if (item.showTooltip) {
+              <div class="custom-tooltip" [style.left.%]="item.score">
+                Valor: {{ item.value }}
+              </div>
+              }
+              }
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </section>
+    } @else {
+    <div class="detail-placeholder">
+      <mat-icon fontSet="material-symbols-outlined">touch_app</mat-icon>
+      <p>Selecciona una fruta para ver su cuadro de bioaccesibilidad.</p>
+    </div>
+    }
+
+  </div>
+</main>

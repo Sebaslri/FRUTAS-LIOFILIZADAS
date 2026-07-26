@@ -1,0 +1,186 @@
+<main class="comparison-shell">
+  <div class="comparison-container">
+    <div class="comparison-hero">
+      <div class="title-row" data-stagger @fadeInRight400ms>
+        <span class="module-icon" @scaleIn400ms>
+          <mat-icon fontSet="material-symbols-outlined">compare</mat-icon>
+        </span>
+        <div>
+          <p class="eyebrow">Exploración lado a lado</p>
+          <h1>Comparador de frutas</h1>
+        </div>
+      </div>
+      <p class="comparison-lead" data-stagger>
+        Arrastra dos frutas hacia los espacios de comparación para revisar sus diferencias de forma rápida y visual.
+        También puedes presionar una fruta para colocarla automáticamente.
+      </p>
+    </div>
+
+    <aside class="comparison-note">
+      <mat-icon fontSet="material-symbols-outlined">compare_arrows</mat-icon>
+      <p>Cada propiedad se compara por separado para respetar su medida. El detalle se presenta en una tabla cuando ambas frutas están listas.</p>
+    </aside>
+
+    @if (loading) {
+      <section class="comparison-skeleton-panel" aria-label="Cargando frutas" aria-busy="true">
+        <span class="skeleton-line skeleton-line-short"></span>
+        <span class="skeleton-line skeleton-line-title"></span>
+        <div class="skeleton-fruit-grid">
+          @for (item of [1, 2, 3, 4, 5, 6, 7, 8]; track item) {
+            <span class="skeleton-fruit"></span>
+          }
+        </div>
+      </section>
+    } @else {
+    <section class="fruit-gallery" aria-labelledby="gallery-title" @fadeInRight400ms>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">1 · Selecciona tus frutas</p>
+          <h2 id="gallery-title">Arrastra o presiona una imagen</h2>
+        </div>
+        <span class="gallery-hint">{{ fruits.length }} disponibles</span>
+      </div>
+
+      <div class="fruit-gallery-grid" role="list" aria-label="Frutas para comparar">
+        @for (fruit of fruits; track fruit.frutaId) {
+          <article
+            class="fruit-tile"
+            [class.fruit-tile-dragging]="draggingFruitId === fruit.frutaId"
+            [class.fruit-tile-selected]="isFruitSelected(fruit)"
+            draggable="true"
+            role="button"
+            tabindex="0"
+            [attr.aria-label]="'Agregar ' + fruit.nombreComun + ' a la comparación'"
+            (click)="selectFruit(fruit)"
+            (keydown.enter)="selectFruit(fruit)"
+            (keydown.space)="selectFruit(fruit); $event.preventDefault()"
+            (dragstart)="onDragStart($event, fruit)"
+            (dragend)="onDragEnd()"
+          >
+            <img
+              [src]="fruit.imagen || '/images/fruit-hero.png'"
+              [alt]="'Imagen de ' + fruit.nombreComun"
+              draggable="false"
+            />
+            <span>{{ fruit.nombreComun }}</span>
+            <small>{{ isFruitSelected(fruit) ? 'Ya seleccionada' : 'Arrastrar' }}</small>
+          </article>
+        } @empty {
+          <p class="empty-state">No hay frutas disponibles para comparar.</p>
+        }
+        @for (mix of mixes; track mix.mixId) {
+          <article
+            class="fruit-tile mix-tile"
+            [class.fruit-tile-dragging]="draggingFruitId === mix.mixId"
+            [class.fruit-tile-selected]="isFruitSelected($any({frutaId: mix.mixId}), true)"
+            draggable="true"
+            role="button"
+            tabindex="0"
+            [attr.aria-label]="'Agregar mix ' + mix.frutas + ' a la comparación'"
+            (click)="selectMix(mix)"
+            (keydown.enter)="selectMix(mix)"
+            (keydown.space)="selectMix(mix); $event.preventDefault()"
+            (dragstart)="onMixDragStart($event, mix)"
+            (dragend)="onDragEnd()"
+          >
+            <div class="comparison-mix-circle">
+              @for (img of mix.fruitImages; track img; let i = $index) {
+                <img [src]="img" alt="" class="comparison-circle-img" [class]="'img-' + i" draggable="false" />
+              }
+            </div>
+            <span>{{ mix.frutas }}</span>
+            <small>{{ isFruitSelected($any({frutaId: mix.mixId}), true) ? 'Ya seleccionada' : 'Arrastrar' }}</small>
+          </article>
+        }
+      </div>
+    </section>
+    }
+
+    <section class="drop-section" aria-labelledby="drop-title" @fadeInRight400ms>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">2 · Suelta aquí</p>
+          <h2 id="drop-title">Construye tu comparación</h2>
+        </div>
+        <span class="drop-hint">Una fruta por cuadro</span>
+      </div>
+
+      <div class="drop-grid">
+        @for (slot of slots; track slot.label; let slotIndex = $index) {
+          <article
+            class="drop-slot"
+            [class.drop-slot-filled]="slot.fruit"
+            [class.drop-slot-recalculating]="comparisonLoading && slot.fruit"
+            [attr.aria-busy]="comparisonLoading"
+            (dragover)="onDragOver($event)"
+            (drop)="onDrop($event, slotIndex)"
+          >
+            @if (comparisonLoading && slot.fruit) {
+              <div class="slot-loading" role="status">
+                <mat-spinner diameter="28" />
+                <span>Recalculando comparación…</span>
+              </div>
+            }
+
+            @if (slot.fruit; as fruit) {
+              <div class="slot-fruit-header">
+                @if (slot.isMix) {
+                  <div class="mix-images-circle-large">
+                    @for (img of slot.fruitImages; track img; let i = $index) {
+                      <img [src]="img" alt="" class="mix-circle-img-large" [class]="'img-' + i" draggable="false" />
+                    }
+                  </div>
+                } @else {
+                  <img [src]="fruit.imagen || '/images/fruit-hero.png'" [alt]="'Imagen de ' + fruit.nombreComun" />
+                }
+                <div>
+                  <span class="slot-label">{{ slot.label }}</span>
+                  <h3>{{ fruit.nombreComun }}</h3>
+                  <p>{{ fruit.nombreCientifico }}</p>
+                </div>
+                <button type="button" class="remove-slot" aria-label="Quitar fruta" (click)="removeFruit(slotIndex)">
+                  <mat-icon fontSet="material-symbols-outlined">close</mat-icon>
+                </button>
+              </div>
+
+              <p class="slot-waiting">
+                @if (readyToCompare) {
+                  Fruta lista para la tabla comparativa.
+                } @else {
+                  Selecciona una segunda fruta para calcular la comparación.
+                }
+              </p>
+            } @else {
+              <div class="drop-placeholder">
+                <div class="drop-placeholder-icon" aria-hidden="true">
+                  <mat-icon fontSet="material-symbols-outlined">download</mat-icon>
+                </div>
+                <span class="slot-label">{{ slot.label }}</span>
+                <h3>Suelta una fruta aquí</h3>
+                <p>O presiona una imagen de arriba para ocupar este espacio.</p>
+              </div>
+            }
+          </article>
+        }
+      </div>
+    </section>
+
+    @if (readyToCompare) {
+      <button
+        type="button"
+        class="open-comparison-button"
+        [disabled]="comparisonLoading"
+        (click)="openComparison()"
+      >
+        @if (comparisonLoading) {
+          <mat-spinner diameter="20" />
+          <span>Preparando comparación…</span>
+        } @else {
+          <mat-icon fontSet="material-symbols-outlined">table_view</mat-icon>
+          <span>Ver detalles</span>
+        }
+      </button>
+    }
+
+  </div>
+</main>

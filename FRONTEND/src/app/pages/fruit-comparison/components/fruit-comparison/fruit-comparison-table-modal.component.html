@@ -1,0 +1,60 @@
+<mat-dialog-content class="comparison-modal-content">
+  <header class="comparison-modal-header">
+    <div>
+      <p class="modal-eyebrow">Resultados por propiedad</p>
+      <h2>Tabla comparativa</h2>
+      <p>{{ data.firstFruit.nombreComun }} frente a {{ data.secondFruit.nombreComun }}</p>
+    </div>
+    <button type="button" class="modal-close" aria-label="Cerrar tabla comparativa" (click)="close()">
+      <mat-icon fontSet="material-symbols-outlined">close</mat-icon>
+    </button>
+  </header>
+
+  <aside class="comparison-modal-note">
+    Cada fila compara la misma propiedad y unidad. El porcentaje representa la participación de cada fruta dentro del
+    total de ambas para esa propiedad; no se mezclan variables con escalas diferentes.
+  </aside>
+
+  <div class="comparison-table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Propiedad</th>
+          <th scope="col">{{ data.firstFruit.nombreComun }}</th>
+          <th scope="col">{{ data.secondFruit.nombreComun }}</th>
+          <th scope="col">Mayor valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of data.rows; track row.key) {
+          <tr>
+            <th scope="row">
+              <span>{{ row.group }}</span>
+              <strong>{{ row.label }}</strong>
+            </th>
+            <td>
+              <strong>{{ formatValue(row.firstValue, row.unit) }}</strong>
+              <small>{{ formatPercentage(row.firstPercentage) }}</small>
+              <div class="table-bar" aria-hidden="true">
+                <span [style.width.%]="row.firstPercentage || 0" [style.background]="firstFruitColor"></span>
+              </div>
+            </td>
+            <td>
+              <strong>{{ formatValue(row.secondValue, row.unit) }}</strong>
+              <small>{{ formatPercentage(row.secondPercentage) }}</small>
+              <div class="table-bar" aria-hidden="true">
+                <span [style.width.%]="row.secondPercentage || 0" [style.background]="secondFruitColor"></span>
+              </div>
+            </td>
+            <td><span class="winner-label">{{ winner(row) }}</span></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p class="comparison-modal-footnote">
+    Aceptación sensorial y potencial funcional no se presentan como un promedio único porque no cuentan con una
+    medición directa común y mezclarían variables con unidades diferentes.
+  </p>
+</mat-dialog-content>

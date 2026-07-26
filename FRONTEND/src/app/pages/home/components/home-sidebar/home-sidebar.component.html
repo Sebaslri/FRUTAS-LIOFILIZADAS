@@ -1,0 +1,30 @@
+<nav
+  class="gap-3"
+  [class.hidden]="variant === 'desktop'"
+  [class.min-[801px]:flex]="variant === 'desktop'"
+  [class.grid]="variant === 'dropdown'"
+  aria-label="Acceso publico"
+>
+  @for (item of authItems; track item.route) {
+    <a
+      [routerLink]="item.route"
+      class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-[#fff8e8b8] px-4 py-2.5 font-black text-[#26351f] shadow-[0_12px_28px_rgba(49,69,34,0.14),inset_0_1px_0_rgba(255,255,255,0.84)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_44px_rgba(49,69,34,0.2)]"
+      [class.bg-gradient-to-br]="isPrimary(item)"
+      [class.from-[#f2c769]]="isPrimary(item)"
+      [class.to-[#78a549]]="isPrimary(item)"
+      [class.bg-[#fffdf4d1]]="!isPrimary(item)"
+    >
+      @if (item.icon === 'login') {
+        <svg class="size-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 17v-2h4.6l-5.3-5.3 1.4-1.4 5.3 5.3V9h2v8h-8Z" />
+          <path d="M4 21V3h8v2H6v14h6v2H4Z" />
+        </svg>
+      } @else {
+        <svg class="size-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4Zm-8 9v-3H4v-2h3v-3h2v3h3v2H9v3H7Zm8-7c-2.7 0-8 1.3-8 4v1h14v-1c0-2.7-5.3-4-8-4Z" />
+        </svg>
+      }
+      {{ item.label }}
+    </a>
+  }
+</nav>

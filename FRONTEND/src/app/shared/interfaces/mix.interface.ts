@@ -1,0 +1,37 @@
+export interface Mix {
+  mixId: number;
+  nombre: string;
+  frutas: string;
+  frutaIds: number[];
+  imagen: string | null;
+  densidad?: number | null;
+  gradosBrix?: number | null;
+  acidez?: number | null;
+  indiceMadurez?: number | null;
+  pH?: number | null;
+  L?: number | null;
+  a?: number | null;
+  b?: number | null;
+  firmeza?: number | null;
+  humedad?: number | null;
+  cenizas?: number | null;
+  dpph_FF?: number | null;
+  fenolesTotales_FF?: number | null;
+  frap_FF?: number | null;
+  flavonoides_FF?: number | null;
+  antocianinas_FF?: number | null;
+  dpph_FL?: number | null;
+  frap_FL?: number | null;
+  fenolesTotales_FL?: number | null;
+  flavonoides_FL?: number | null;
+  antocianinas_FL?: number | null;
+  cap_ant_infusion?: number | null;
+  cap_ant_digerido?: number | null;
+  bioacc_carotenoides?: number | null;
+  bioacc_flavonoides?: number | null;
+  bioacc_acAsc?: number | null;
+  ActAntiox_dpph_inf22?: number | null;
+  ActAntiox_dpph_inf90?: number | null;
+  fenolesTotales_inf22?: number | null;
+  fenolesTotales_inf90?: number | null;
+}

@@ -1,0 +1,95 @@
+<section class="grid min-h-screen place-items-center bg-[radial-gradient(circle_at_18%_18%,rgba(232,132,58,0.24),transparent_22rem),radial-gradient(circle_at_82%_16%,rgba(119,166,66,0.24),transparent_24rem),linear-gradient(135deg,#fff8e8,#edf5de)] px-5 py-12">
+  @if (isLoading) {
+    <mat-progress-bar mode="indeterminate" class="fixed! inset-x-0 top-0 z-20" />
+  }
+
+  <div class="mb-6 flex items-center justify-between gap-3" @fadeInRight400ms>
+      <a routerLink="/" class="inline-flex items-center gap-2 rounded-lg bg-[#78a5491f] px-3 py-2 font-black text-[#26351f] transition hover:-translate-y-px hover:bg-[#78a5492e]">
+        <mat-icon fontSet="material-symbols-outlined">home</mat-icon>
+        Home
+      </a>
+      <a routerLink="/signin" class="rounded-lg bg-[#f2c7692e] px-3 py-2 font-black text-[#334029] transition hover:-translate-y-px hover:bg-[#78a5492e]">Ya tengo cuenta</a>
+    </div>
+  <form class="w-[min(920px,100%)] rounded-lg border border-white/75 bg-[#fffdf4c7] p-[clamp(1.4rem,4vw,3rem)] shadow-[0_32px_90px_rgba(49,69,34,0.18),inset_0_1px_0_rgba(255,255,255,0.78)] backdrop-blur-[22px] backdrop-saturate-150" 
+  [formGroup]="form"
+  (ngSubmit)="register()"
+  @stagger40ms
+  @scaleIn400ms>
+    
+    <p data-stagger class="mb-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#f2a922]">Nueva cuenta</p>
+    <h1 data-stagger class="mb-4 max-w-[12ch] text-[clamp(2.2rem,4.6vw,4.8rem)] font-black leading-none text-[#26351f]">Registrate y explora</h1>
+
+    <div class="flex justify-center mb-6" data-stagger>
+      <div class="relative w-24 h-24 rounded-full bg-[#78a5492e] flex items-center justify-center cursor-pointer overflow-hidden border-2 border-[#78a549]" (click)="fileInput.click()">
+        @if (previewUrl) {
+          <img [src]="previewUrl" alt="Avatar Preview" class="w-full h-full object-cover" />
+        } @else {
+          <mat-icon fontSet="material-symbols-outlined" class="text-4xl text-[#78a549]">add_a_photo</mat-icon>
+        }
+        <input type="file" #fileInput class="hidden" accept="image/*" (change)="onFileSelected($event)" />
+      </div>
+    </div>
+
+    <div class="my-7 grid gap-4 md:grid-cols-2">
+      <mat-form-field data-stagger appearance="outline" class="textbox">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre"/>
+
+          @if (form.get('nombre')?.hasError('required')) {
+            <mat-error>Campo nombre es requerido.</mat-error>
+          }
+      </mat-form-field>
+
+      <mat-form-field data-stagger appearance="outline" class="textbox">
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="apellido"/>
+
+          @if (form.get('apellido')?.hasError('required')) {
+            <mat-error>Campo apellido es requerido.</mat-error>
+          }
+      </mat-form-field>
+
+      <mat-form-field data-stagger appearance="outline" class="textbox">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="email"/>
+
+          @if (form.get('email')?.hasError('required')) {
+            <mat-error>Campo correo es requerido.</mat-error>
+          }
+          @if (form.get('email')?.hasError('email')) {
+            <mat-error>Formato correo inválido.</mat-error>
+          }
+        </mat-form-field>
+
+      <mat-form-field data-stagger appearance="outline" class="textbox">
+          <mat-label>Contraseña</mat-label>
+          <input [type]="inputType" matInput formControlName="password" autocomplete="current-password" />
+
+          <button
+            (click)="toggleVisibility()"
+            mat-icon-button
+            matSuffix
+            matTooltip="{{ !visible ? 'Ver contraseña' : 'Ocultar contraseña'}}"
+            type="button"
+            [attr.aria-label]="!visible ? 'Ver contraseña' : 'Ocultar contraseña'"
+          >
+            <mat-icon fontSet="material-symbols-outlined">{{ visible ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+
+          @if (form.get('password')?.hasError('required')) {
+            <mat-error>Campo contraseña es requerido.</mat-error>
+          }
+        </mat-form-field>
+    </div>
+
+
+    <button class="mx-auto flex min-h-[46px] w-[min(360px,100%)] items-center justify-center rounded-lg bg-[#26351f] px-5 py-3 font-black text-[#fff8e8] shadow-[0_16px_34px_rgba(38,53,31,0.18)] transition hover:-translate-y-0.5 hover:bg-[#314527] hover:shadow-[0_22px_44px_rgba(38,53,31,0.24)] disabled:cursor-not-allowed disabled:opacity-60" type="submit" [disabled]="isLoading">
+      <span class="inline-flex w-full items-center justify-center gap-2">
+        @if (isLoading) {
+          <mat-spinner diameter="20" />
+        }
+        <span>Registrarse</span>
+      </span>
+    </button>
+  </form>
+</section>

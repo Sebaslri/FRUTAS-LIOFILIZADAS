@@ -1,0 +1,19 @@
+@if (loading) {
+  <mat-progress-bar mode="indeterminate" class="fixed inset-x-0 top-0 z-50" />
+}
+
+<main class="min-h-screen overflow-x-hidden bg-[#f7f8f3] text-[#26351f]">
+  <app-sidebar [collapsed]="sidebarCollapsed" (collapsedChange)="setSidebarCollapsed($event)" />
+
+  <section [class]="sidebarCollapsed ? 'min-h-screen transition-[padding] duration-300 lg:pl-20' : 'min-h-screen transition-[padding] duration-300 lg:pl-72'">
+    <div class="relative min-h-screen" [@routeFadeSlide]="routeAnimationState">
+      <router-outlet #outlet="outlet" (activate)="onActivate(outlet)" />
+    </div>
+  </section>
+
+  @if (loading) {
+    <div class="fixed inset-0 z-40 grid place-items-center bg-[#f7f8f3]/48 backdrop-blur-[2px]">
+      <mat-spinner diameter="44" />
+    </div>
+  }
+</main>

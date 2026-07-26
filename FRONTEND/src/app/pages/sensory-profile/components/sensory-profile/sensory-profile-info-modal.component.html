@@ -1,0 +1,32 @@
+<mat-dialog-content class="sensory-info-content">
+  <header class="sensory-info-header">
+    <div class="sensory-info-icon" aria-hidden="true">
+      <mat-icon fontSet="material-symbols-outlined">insights</mat-icon>
+    </div>
+    <div>
+      <p class="eyebrow">Cómo leer el gráfico</p>
+      <h2>¿Qué significa el promedio orientativo?</h2>
+    </div>
+    <button type="button" class="sensory-info-close" aria-label="Cerrar explicación" (click)="close()">
+      <mat-icon fontSet="material-symbols-outlined">close</mat-icon>
+    </button>
+  </header>
+
+  <p class="sensory-info-intro">
+    Es un resumen visual del perfil de {{ data?.fruitName || 'la fruta' }}. Sirve para comparar rápidamente su
+    comportamiento con el de las demás frutas disponibles.
+  </p>
+
+  <section class="sensory-info-section">
+    <h3>¿Qué puedes interpretar?</h3>
+    <p>
+      Un valor alto indica que la fruta se encuentra relativamente por encima de otras en ese conjunto de datos. No
+      representa un porcentaje de dulzor ni una aceptación real del consumidor.
+    </p>
+  </section>
+
+  <p class="sensory-info-footnote">
+    Aroma, intensidad y aceptación son estimaciones educativas construidas a partir de las mediciones disponibles; no
+    sustituyen una prueba sensorial con consumidores.
+  </p>
+</mat-dialog-content>

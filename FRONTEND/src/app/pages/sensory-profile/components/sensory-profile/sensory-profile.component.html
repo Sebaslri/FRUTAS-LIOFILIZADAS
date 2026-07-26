@@ -1,0 +1,191 @@
+<main class="sensory-shell">
+  <div class="sensory-container">
+    <div class="sensory-hero">
+      <div class="title-row" data-stagger @fadeInRight400ms>
+        <span class="module-icon" @scaleIn400ms>
+          <mat-icon fontSet="material-symbols-outlined">psychology</mat-icon>
+        </span>
+        <div>
+          <p class="eyebrow">Exploración visual para consumidores</p>
+          <h1>Perfil sensorial interactivo</h1>
+        </div>
+      </div>
+      <p class="sensory-lead" data-stagger>
+        Presiona la imagen de una fruta para conocer su perfil de dulzor, acidez, aroma frutal, color,
+        intensidad y aceptación global en una escala fácil de comparar.
+      </p>
+    </div>
+
+    <aside class="sensory-note">
+      <mat-icon fontSet="material-symbols-outlined">lightbulb</mat-icon>
+      <p>
+        Las barras muestran una escala relativa de 0 a 100 entre las frutas disponibles. Aroma, intensidad y
+        aceptación son indicadores orientativos calculados desde las mediciones fisicoquímicas; no sustituyen una
+        prueba de consumidores.
+      </p>
+    </aside>
+
+    @if (loading) {
+      <section class="sensory-skeleton-panel" aria-label="Cargando frutas" aria-busy="true">
+        <span class="skeleton-line skeleton-line-short"></span>
+        <span class="skeleton-line skeleton-line-title"></span>
+        <div class="skeleton-fruit-grid">
+          @for (item of [1, 2, 3, 4, 5, 6]; track item) {
+            <span class="skeleton-fruit"></span>
+          }
+        </div>
+      </section>
+    } @else {
+    <section class="fruit-picker" aria-labelledby="fruit-picker-title" @fadeInRight400ms>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">1 · Elige una fruta</p>
+          <h2 id="fruit-picker-title">¿Qué perfil quieres explorar?</h2>
+        </div>
+        @if (selectedFruit) {
+          <span class="selected-label">Seleccionada: {{ selectedFruit.nombreComun }}</span>
+        }
+      </div>
+
+      <div class="fruit-picker-grid" role="list" aria-label="Frutas disponibles">
+        @for (fruit of fruits; track fruit.frutaId) {
+          <button
+            type="button"
+            class="fruit-option"
+            [class.fruit-option-active]="selectedFruit?.frutaId === fruit.frutaId"
+            [attr.aria-pressed]="selectedFruit?.frutaId === fruit.frutaId"
+            (click)="selectFruit(fruit)"
+          >
+            <img
+              [src]="fruit.imagen || '/images/fruit-hero.png'"
+              [alt]="'Ver perfil sensorial de ' + fruit.nombreComun"
+            />
+            <span>{{ fruit.nombreComun }}</span>
+          </button>
+        } @empty {
+          <p class="empty-state">No hay frutas disponibles para construir el perfil.</p>
+        }
+        @for (mix of mixes; track mix.mixId) {
+          <button
+            type="button"
+            class="fruit-option mix-option"
+            [class.fruit-option-active]="selectedFruit?.frutaId === mix.mixId && selectedIsMix"
+            [attr.aria-pressed]="selectedFruit?.frutaId === mix.mixId && selectedIsMix"
+            (click)="selectMix(mix)"
+          >
+            <div class="sensory-mix-circle">
+              @for (img of mix.fruitImages; track img; let i = $index) {
+                <img [src]="img" alt="" class="sensory-circle-img" [class]="'img-' + i" />
+              }
+            </div>
+            <span>{{ mix.frutas }}</span>
+          </button>
+        }
+      </div>
+    </section>
+    }
+
+    @if (selection; as profile) {
+      <section class="profile-section" aria-labelledby="profile-title" aria-live="polite">
+        <header class="profile-selected-header">
+          <div class="selected-fruit-identity">
+            @if (selectedIsMix) {
+              <div class="mix-images-circle-large">
+                @for (img of selectedMixImages; track img; let i = $index) {
+                  <img [src]="img" alt="" class="mix-circle-img-large" [class]="'img-' + i" />
+                }
+              </div>
+            } @else {
+              <img
+                [src]="profile.fruit.imagen || '/images/fruit-hero.png'"
+                [alt]="'Imagen de ' + profile.fruit.nombreComun"
+              />
+            }
+            <div>
+              <p class="eyebrow">2 · {{ selectedIsMix ? 'Perfil del mix' : 'Perfil de la fruta' }}</p>
+              <h2 id="profile-title">{{ profile.fruit.nombreComun }}</h2>
+              <p>{{ profile.fruit.nombreCientifico }}</p>
+            </div>
+          </div>
+          <div class="profile-average" [attr.aria-label]="'Promedio orientativo ' + formatScore(profile.average)">
+            <strong>{{ formatScore(profile.average) }}</strong>
+            <span>promedio orientativo</span>
+          </div>
+        </header>
+
+        <p class="profile-highlight">{{ highestMetric(profile.metrics) }}</p>
+
+        <div class="charts-grid">
+          <article class="chart-panel bars-panel">
+            <div class="chart-heading">
+              <div>
+                <p class="eyebrow">Comparación rápida</p>
+                <h3>Así se percibe el perfil</h3>
+              </div>
+              <span class="scale-label">0 · bajo&nbsp;&nbsp; 100 · alto</span>
+            </div>
+
+            <div class="bar-list" role="list" aria-label="Indicadores sensoriales en escala de cero a cien">
+              @for (metric of profile.metrics; track metric.key) {
+                <div class="bar-row" [class.bar-row-empty]="metric.value === null">
+                  <div class="bar-label">
+                    <span>{{ metric.label }}</span>
+                    <strong>{{ formatScore(metric.value) }}</strong>
+                  </div>
+                  <div
+                    class="bar-track"
+                    role="progressbar"
+                    [attr.aria-label]="metric.label"
+                    [attr.aria-valuenow]="roundedScore(metric.value)"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    <span class="bar-fill" [style.width.%]="scoreWidth(metric.value)" [style.background]="metric.color"></span>
+                  </div>
+                  <p>{{ metric.explanation }}</p>
+                </div>
+              }
+            </div>
+          </article>
+
+          <article class="chart-panel circle-panel">
+            <div class="chart-heading">
+              <div>
+                <p class="eyebrow">Lectura circular</p>
+                <h3>Vista general</h3>
+              </div>
+            </div>
+
+            <div
+              class="circle-chart"
+              role="img"
+              [style.background]="circleGradient(profile.metrics)"
+              [attr.aria-label]="'Vista circular del perfil sensorial de ' + profile.fruit.nombreComun"
+            >
+              <div class="circle-chart-center">
+                <strong>{{ formatScore(profile.average) }}</strong>
+                <span>perfil</span>
+              </div>
+            </div>
+
+            <ul class="circle-legend" aria-label="Leyenda del perfil sensorial">
+              @for (metric of profile.metrics; track metric.key) {
+                <li>
+                  <span class="legend-dot" [style.background]="metric.color"></span>
+                  <span>{{ metric.shortLabel }}</span>
+                  <strong>{{ formatScore(metric.value) }}</strong>
+                </li>
+              }
+            </ul>
+          </article>
+        </div>
+
+        <button type="button" class="sensory-info-button" (click)="openInfo()">
+          <mat-icon fontSet="material-symbols-outlined">info</mat-icon>
+          <span>¿Cómo se calcula este promedio?</span>
+        </button>
+      </section>
+    }
+
+  </div>
+</main>

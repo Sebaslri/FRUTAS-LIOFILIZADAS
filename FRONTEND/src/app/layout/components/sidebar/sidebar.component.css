@@ -1,0 +1,30 @@
+.mobile-sidebar-toggle {
+  position: fixed !important;
+  top: 1rem;
+  left: 1rem;
+  z-index: 90;
+  transition:
+    left 300ms ease,
+    transform 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.mobile-sidebar-toggle-open {
+  left: calc(18rem - 3.75rem);
+}
+
+.desktop-sidebar-toggle {
+  display: inline-flex;
+}
+
+@media (max-width: 1023px) {
+  .desktop-sidebar-toggle {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-sidebar-toggle {
+    display: none !important;
+  }
+}

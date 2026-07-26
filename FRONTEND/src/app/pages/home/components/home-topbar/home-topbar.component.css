@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+.home-desktop-actions {
+  display: flex;
+}
+
+.home-mobile-menu-button,
+.home-mobile-dropdown {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .home-desktop-actions {
+    display: none;
+  }
+
+  .home-mobile-menu-button {
+    display: inline-flex;
+  }
+
+  .home-mobile-dropdown {
+    display: flex;
+  }
+}

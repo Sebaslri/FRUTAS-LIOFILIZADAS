@@ -1,0 +1,79 @@
+<mat-dialog-content
+  class="condition-fruit-dialog-content"
+  [attr.aria-label]="'Perfil ampliado de ' + data.fruit.nombreComun"
+>
+  <section class="condition-fruit-shell">
+    <header class="fruit-modal-header">
+      <div class="fruit-identity">
+        @if (data.isMix) {
+          <div class="mix-images-circle">
+            @for (img of data.fruitImages; track img; let i = $index) {
+              <img [src]="img" alt="" class="mix-circle-img" [class]="'img-' + i" />
+            }
+          </div>
+        } @else {
+          <img
+            class="fruit-thumbnail"
+            [src]="data.fruit.imagen || '/images/fruit-hero.png'"
+            [alt]="'Imagen de ' + data.fruit.nombreComun"
+          />
+        }
+        <div>
+          <p class="fruit-eyebrow">{{ data.isMix ? 'Perfil del mix' : 'Perfil científico de la fruta' }}</p>
+          <h2>{{ data.fruit.nombreComun }}</h2>
+          <p class="fruit-scientific-name">{{ data.fruit.nombreCientifico }}</p>
+        </div>
+      </div>
+
+      <button type="button" class="fruit-close-button" aria-label="Cerrar modal" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </header>
+
+    <div class="fruit-summary">
+      <p>{{ data.fruit.descripcion }}</p>
+      <span>{{ data.fruit.region }}</span>
+    </div>
+
+    @if (data.selectedGoal) {
+      <div class="profile-heading">
+        <div>
+          <p class="fruit-eyebrow">Resultados del perfil seleccionado</p>
+          <h3>{{ data.selectedGoal.label }}</h3>
+        </div>
+      </div>
+
+      <section class="profile-panel">
+        <div class="profile-panel-heading">
+          <div class="profile-panel-icon" aria-hidden="true">
+            <mat-icon fontSet="material-symbols-outlined">analytics</mat-icon>
+          </div>
+          <div>
+            <h3>Valores obtenidos</h3>
+            <p>{{ getExplanation(data.selectedGoal.metric) }}</p>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          @for (metric of getMetricsForGoal(data.selectedGoal.metric); track metric.key) {
+            <article class="metric-card" [class.metric-card-empty]="metricValue(metric) === 'Sin datos'">
+              <span>{{ metric.label }}</span>
+              <strong>{{ metricValue(metric) }}</strong>
+            </article>
+          }
+        </div>
+      </section>
+
+      <p class="data-note">
+        Los valores corresponden a promedios de los registros experimentales disponibles y son de carácter informativo.
+      </p>
+    } @else {
+      <div class="profile-heading" style="margin-bottom: 2rem;">
+        <div>
+          <p class="fruit-eyebrow">Nota</p>
+          <h3>Selecciona un perfil de infusión para ver más detalles técnicos y entender sus valores.</h3>
+        </div>
+      </div>
+    }
+  </section>
+</mat-dialog-content>

@@ -1,0 +1,99 @@
+﻿<section class="relative grid min-h-screen overflow-hidden bg-[radial-gradient(circle_at_16%_12%,rgba(242,169,34,0.26),transparent_20rem),radial-gradient(circle_at_84%_18%,rgba(120,165,73,0.24),transparent_24rem),linear-gradient(135deg,#fff8e8,#eef4df)] px-5 py-8">
+  @if (isLoading) {
+    <mat-progress-bar mode="indeterminate" class="absolute! inset-x-0 top-0 z-20" />
+  }
+
+  <button
+    type="button"
+    mat-button
+    class="absolute! left-5 top-5 rounded-lg! bg-[#78a5491f]! px-4! py-2 font-black! text-[#26351f]! transition hover:-translate-y-px hover:bg-[#78a5492e]!"
+    (click)="goBack()"
+  >
+    <mat-icon fontSet="material-symbols-outlined">arrow_back</mat-icon>
+    Volver
+  </button>
+
+  <div class="mx-auto grid w-[min(1080px,100%)] items-center gap-8 py-16 lg:grid-cols-[0.95fr_1.05fr]" @stagger40ms>
+    <div class="hidden lg:block" data-stagger @fadeInRight400ms>
+      <p class="mb-4 text-xs font-extrabold uppercase text-[#f2a922]">Frutas tropicales UAE</p>
+      <h1 class="max-w-[11ch] text-[clamp(3rem,6vw,5.5rem)] font-black leading-none text-[#26351f]">
+        Bienvenido de nuevo
+      </h1>
+      <p class="mt-5 max-w-md text-lg font-bold leading-8 text-[#58634d]">
+        Ingresa y continua explorando informacion sensorial, nutricional y antioxidante de tus frutas favoritas.
+      </p>
+    </div>
+
+    <form
+      [formGroup]="form"
+      class="w-full rounded-lg border border-white/75 bg-[#fffdf4d9] p-[clamp(1.4rem,4vw,3rem)] shadow-[0_32px_90px_rgba(49,69,34,0.18),inset_0_1px_0_rgba(255,255,255,0.78)] backdrop-blur-[22px] backdrop-saturate-150"
+      (ngSubmit)="login()"
+      data-stagger
+      @scaleIn400ms
+    >
+      <p class="mb-4 text-xs font-extrabold uppercase text-[#f2a922] lg:hidden">Bienvenido de nuevo</p>
+      <h2 class="mb-7 text-[clamp(2.15rem,5vw,4rem)] font-black leading-none text-[#26351f]">Iniciar sesion</h2>
+
+      <div class="grid gap-5">
+        <mat-form-field appearance="outline" class="textbox">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="email"/>
+
+          @if (form.get('email')?.hasError('required')) {
+            <mat-error>Campo correo es requerido.</mat-error>
+          }
+          @if (form.get('email')?.hasError('email')) {
+            <mat-error>Formato correo inválido.</mat-error>
+          }
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="textbox">
+          <mat-label>Contraseña</mat-label>
+          <input [type]="inputType" matInput formControlName="password" autocomplete="current-password" />
+
+          <button
+            (click)="toggleVisibility()"
+            mat-icon-button
+            matSuffix
+            matTooltip="{{ !visible ? 'Ver contraseña' : 'Ocultar contraseña'}}"
+            type="button"
+            [attr.aria-label]="!visible ? 'Ver contraseña' : 'Ocultar contraseña'"
+          >
+            <mat-icon fontSet="material-symbols-outlined">{{ visible ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+
+          @if (form.get('password')?.hasError('required')) {
+            <mat-error>Campo contraseña es requerido.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="isLoading"
+        mat-raised-button
+        class="mt-3 min-h-12! w-full! rounded-lg! bg-[#26351f]! px-5! font-black! text-[#fff8e8]! shadow-[0_16px_34px_rgba(38,53,31,0.18)]! transition hover:-translate-y-0.5 hover:bg-[#314527]!"
+      >
+        <span class="inline-flex w-full items-center justify-center gap-2">
+          @if (isLoading) {
+            <mat-spinner diameter="20" />
+          }
+          <span>Iniciar Sesion</span>
+        </span>
+      </button>
+
+      <p class="mt-5 flex flex-wrap items-center justify-center gap-2 font-bold text-[#58634d]">
+        No tienes cuenta?
+        <button
+          type="button"
+          mat-button
+          class="rounded-lg! bg-[#78a5491f]! px-3! py-2! font-black! text-[#385a25]! transition hover:-translate-y-px hover:bg-[#78a54933]!"
+          (click)="goToSignUp()"
+        >
+          Registrate
+        </button>
+      </p>
+    </form>
+  </div>
+</section>

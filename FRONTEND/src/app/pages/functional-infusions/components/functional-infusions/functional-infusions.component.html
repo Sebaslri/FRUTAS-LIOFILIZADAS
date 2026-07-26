@@ -1,0 +1,170 @@
+<main class="infusions-shell">
+  <div class="infusions-container">
+    <div class="infusions-hero">
+      <div class="title-row" data-stagger @fadeInRight400ms>
+        <span class="module-icon" @scaleIn400ms>
+          <mat-icon fontSet="material-symbols-outlined">science</mat-icon>
+        </span>
+        <div>
+          <p class="eyebrow">Análisis Funcional</p>
+          <h1>Infusiones funcionales</h1>
+        </div>
+      </div>
+      <p class="infusions-lead" data-stagger>
+        Visualiza la composición bioactiva de las matrices, desde su forma fresca y liofilizada, hasta el potencial bioactivo disponible después de la infusión y digestión simulada.
+      </p>
+    </div>
+
+    @if (loading) {
+      <section class="infusions-skeleton" aria-label="Cargando datos" aria-busy="true">
+        <span></span><span></span><span></span><span></span>
+      </section>
+    } @else {
+      <section class="source-section" aria-labelledby="source-title" @fadeInRight400ms>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">1 · Selecciona una matriz alimentaria</p>
+            <h2 id="source-title">Fruta o formulación</h2>
+          </div>
+          <span class="source-count">{{ fruits.length }} frutas · {{ mixes.length }} mixes</span>
+        </div>
+        
+        <div class="source-grid">
+          @for (fruit of fruits; track fruit.frutaId) {
+            <button type="button" class="source-card" [class.source-card-active]="selected === fruit" (click)="selectSource(fruit)">
+              <img [src]="fruit.imagen || '/images/fruit-hero.png'" [alt]="fruit.nombreComun" />
+              <span>{{ fruit.nombreComun }}</span>
+            </button>
+          }
+          @for (mix of mixes; track $any(mix).mixId) {
+            <button type="button" class="source-card source-card-mix" [class.source-card-active]="selected === mix" (click)="selectSource(mix)">
+              <div class="bio-mix-circle">
+                @for (img of $any(mix).fruitImages; track img; let i = $index) {
+                  <img [src]="img" alt="" class="bio-circle-img" [class]="'img-' + i" draggable="false" />
+                }
+              </div>
+              <span>{{ $any(mix).frutas }}</span>
+            </button>
+          }
+        </div>
+      </section>
+
+      <section class="results-layout" @fadeInRight400ms>
+        
+        <article class="controls-panel">
+          <p class="eyebrow">Matriz seleccionada</p>
+          <h2>{{ selectedName }}</h2>
+          <div class="selected-source">
+            @if (selected && !('nombreComun' in selected)) {
+              <div class="mix-images-circle-large">
+                @for (img of $any(selected).fruitImages; track img; let i = $index) {
+                  <img [src]="img" alt="" class="mix-circle-img-large" [class]="'img-' + i" draggable="false" />
+                }
+              </div>
+            } @else {
+              <img [src]="selectedImage" [alt]="selectedName" />
+            }
+            <span>{{ selected ? sourceType(selected) : '' }}</span>
+          </div>
+          
+          <div class="info-note digest-note">
+            <mat-icon fontSet="material-symbols-outlined">biotech</mat-icon>
+            <p>
+              <strong>Digestión in vitro simulada</strong><br>
+              El modelo evalúa la transición desde la ingesta hasta el paso por el sistema gastrointestinal, revelando la proporción de compuestos que realmente superan las barreras digestivas.
+            </p>
+          </div>
+        </article>
+
+        <div class="tables-wrapper">
+          <!-- Tabla 1: Fresca vs Liofilizada -->
+          <article class="results-panel" aria-live="polite">
+            <div class="results-heading">
+              <div>
+                <p class="eyebrow">2 · Perfil Inicial</p>
+                <h2>Fruta Fresca vs Liofilizada</h2>
+              </div>
+            </div>
+            
+            <div class="table-container">
+              <table class="bio-table">
+                <thead>
+                  <tr>
+                    <th colspan="5" class="header-ff">Fruta Fresca (FF)</th>
+                    <th colspan="5" class="header-fl">Fruta Liofilizada (FL)</th>
+                  </tr>
+                  <tr>
+                    <!-- FF Columns -->
+                    <th>DPPH<br><small>(mg áci. Asc/mL)</small></th>
+                    <th>Fenoles Totales<br><small>(mg GAE/g)</small></th>
+                    <th>FRAP<br><small>(µmol Trolox/g)</small></th>
+                    <th>Flavonoides<br><small>(mg Qc Eq/g)</small></th>
+                    <th>Antocianinas<br><small>(mg AT/g)</small></th>
+                    <!-- FL Columns -->
+                    <th>DPPH<br><small>(mg áci. Asc/mL)</small></th>
+                    <th>Fenoles Totales<br><small>(mg GAE/g)</small></th>
+                    <th>FRAP<br><small>(µmol Trolox/g)</small></th>
+                    <th>Flavonoides<br><small>(mg Qc Eq Ext Sc/g)</small></th>
+                    <th>Antocianinas<br><small>(mg AT Ext Sc/g)</small></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @if (table1Row) {
+                    <tr>
+                      <td class="cell-ff">{{ format(table1Row.dpph_ff) }}</td>
+                      <td class="cell-ff">{{ format(table1Row.fenoles_ff) }}</td>
+                      <td class="cell-ff">{{ format(table1Row.frap_ff) }}</td>
+                      <td class="cell-ff">{{ format(table1Row.flavonoides_ff) }}</td>
+                      <td class="cell-ff">{{ format(table1Row.antocianinas_ff) }}</td>
+                      
+                      <td class="cell-fl">{{ format(table1Row.dpph_fl) }}</td>
+                      <td class="cell-fl">{{ format(table1Row.fenoles_fl) }}</td>
+                      <td class="cell-fl">{{ format(table1Row.frap_fl) }}</td>
+                      <td class="cell-fl">{{ format(table1Row.flavonoides_fl) }}</td>
+                      <td class="cell-fl">{{ format(table1Row.antocianinas_fl) }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <!-- Tabla 2: Infusión vs Digerido -->
+          <article class="results-panel" aria-live="polite">
+            <div class="results-heading">
+              <div>
+                <p class="eyebrow">3 · Retención tras digestión</p>
+                <h2>Potencial Bioactivo Disponible</h2>
+              </div>
+            </div>
+            
+            <div class="table-container">
+              <table class="bio-table">
+                <thead>
+                  <tr>
+                    <th>Cap. Antioxidante<br>Infusión<br><small>(mg Trolox/L ppm)</small></th>
+                    <th>Cap. Antioxidante<br>Digerido<br><small>(mg Trolox/L ppm)</small></th>
+                    <th>Bioaccesibilidad<br>Carotenoides<br><small>(%)</small></th>
+                    <th>Bioaccesibilidad<br>Flavonoides<br><small>(%)</small></th>
+                    <th>Bioaccesibilidad<br>Ácido Ascórbico<br><small>(%)</small></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @if (table2Row) {
+                    <tr>
+                      <td>{{ format(table2Row.cap_ant_infusion) }}</td>
+                      <td>{{ format(table2Row.cap_ant_digerido) }}</td>
+                      <td>{{ format(table2Row.bioacc_carotenoides) }}</td>
+                      <td>{{ format(table2Row.bioacc_flavonoides) }}</td>
+                      <td>{{ format(table2Row.bioacc_acAsc) }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+    }
+  </div>
+</main>

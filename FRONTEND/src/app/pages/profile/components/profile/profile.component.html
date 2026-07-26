@@ -1,0 +1,58 @@
+<div class="profile-container">
+  <div class="profile-card">
+    @if (isLoading) {
+    <div class="loading-state">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p class="mt-4 font-semibold text-gray-500">Cargando tu perfil...</p>
+    </div>
+    } @else {
+    <!-- Header con Foto -->
+    <div class="profile-header">
+      <div class="avatar-container cursor-pointer" (click)="fileInput.click()" title="Cambiar foto de perfil">
+        @if (previewUrl || editFoto) {
+        <img [src]="previewUrl ? previewUrl : editFoto.startsWith('http') ? editFoto : backendUrl + editFoto"
+          alt="Foto de perfil" class="avatar-img" (error)="editFoto = ''; previewUrl = null" />
+        } @else {
+        <div class="avatar-placeholder">
+          {{ editNombre.charAt(0) | uppercase }}{{ editApellido.charAt(0) | uppercase }}
+        </div>
+        }
+
+        <input type="file" #fileInput class="hidden" accept="image/*" (change)="onFileSelected($event)" />
+      </div>
+      <h1 class="profile-name">{{ profile?.nombre }} {{ profile?.apellido }}</h1>
+      <p class="profile-email">{{ profile?.email }}</p>
+    </div>
+
+    <!-- Formulario de Edición -->
+    <div class="profile-form">
+      <h2 class="form-title flex items-center gap-2">
+        <mat-icon fontSet="material-symbols-outlined">person</mat-icon> Información Personal
+      </h2>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Nombre</mat-label>
+          <input matInput [(ngModel)]="editNombre" placeholder="Tu nombre" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Apellido</mat-label>
+          <input matInput [(ngModel)]="editApellido" placeholder="Tu apellido" required>
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions mt-4">
+        <button mat-flat-button color="primary" class="w-full !bg-[#78a549]"
+          [disabled]="isSaving" (click)="saveProfile()">
+          @if (isSaving) {
+            Guardando...
+          } @else {
+            Guardar cambios
+          }
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,152 @@
+<main class="calculator-shell">
+  <div class="calculator-container">
+    <div class="calculator-hero">
+      <div class="title-row" data-stagger @fadeInRight400ms>
+        <span class="module-icon" @scaleIn400ms>
+          <mat-icon fontSet="material-symbols-outlined">device_thermostat</mat-icon>
+        </span>
+        <div>
+          <p class="eyebrow">Aprovechamiento térmico</p>
+          <h1>Calculadora de Preparación</h1>
+        </div>
+      </div>
+      <p class="calculator-lead" data-stagger>Explora cómo la temperatura (de 22°C a 90°C) afecta la actividad
+        antioxidante y los fenoles totales de tu infusión.</p>
+    </div>
+
+    @if (loading) {
+    <section class="calculator-skeleton" aria-label="Cargando datos" aria-busy="true">
+      <span></span><span></span><span></span><span></span>
+    </section>
+    } @else {
+    <section class="source-section" aria-labelledby="source-title" @fadeInRight400ms>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">1 · Selecciona tu fruta o mix</p>
+          <h2 id="source-title">Ingrediente</h2>
+        </div><span class="source-count">{{ fruits.length }} frutas · {{ mixes.length }} mixes</span>
+      </div>
+      <div class="fruit-gallery-grid" role="list">
+        @for (fruit of fruits; track fruit.frutaId) {
+        <article class="fruit-tile" [class.fruit-tile-selected]="selected === fruit" (click)="selectSource(fruit)"
+          role="button" tabindex="0">
+          <img [src]="fruit.imagen || '/images/fruit-hero.png'" [alt]="fruit.nombreComun" draggable="false" />
+          <span>{{ fruit.nombreComun }}</span>
+          <small>{{ selected === fruit ? 'Seleccionada' : 'Seleccionar' }}</small>
+        </article>
+        }
+        @for (mix of mixes; track mix.mixId) {
+        <article class="fruit-tile mix-tile" [class.fruit-tile-selected]="selected === mix" (click)="selectSource(mix)"
+          role="button" tabindex="0">
+          <div class="comparison-mix-circle">
+            @for (img of mix.fruitImages; track img; let i = $index) {
+            <img [src]="img" alt="" class="comparison-circle-img" [class]="'img-' + i" draggable="false" />
+            }
+          </div>
+          <span>{{ mix.frutas }}</span>
+          <small>{{ selected === mix ? 'Seleccionada' : 'Seleccionar' }}</small>
+        </article>
+        }
+      </div>
+    </section>
+
+    <section class="temperature-control-section" @fadeInRight400ms>
+      <div class="control-header">
+        <p class="eyebrow">2 · Control de Temperatura</p>
+        <h2>
+          {{ selectedName }}
+          <span class="type-badge">{{ selected ? sourceType(selected) : '' }}</span>
+        </h2>
+      </div>
+
+      <div class="slider-wrapper">
+        <div class="slider-container">
+          <div class="thermos-tracker" [style.left]="trackerPosition">
+            <div class="smart-thermos-mini" [class.is-sliding]="isSliding">
+              <div class="thermos-cap-mini"></div>
+              <div class="thermos-body-mini">
+                <div class="thermos-glass-mini">
+                  <div class="thermos-liquid-mini" [style.height.%]="100" [style.background]="thermosColor">
+                  </div>
+                  <div class="thermos-reflection-mini"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slider-track-layout">
+            <span class="slider-label cold">Frío<br><small>(22°C)</small></span>
+            <div class="slider-input-wrapper">
+              <div class="thumb-badge" [style.left]="trackerPosition">
+                {{ temperature }}°C
+              </div>
+              <input type="range" class="temperature-slider" min="22" max="90" step="1" [(ngModel)]="temperature"
+                (mousedown)="isSliding = true" (mouseup)="isSliding = false" (touchstart)="isSliding = true"
+                (touchend)="isSliding = false" />
+            </div>
+            <span class="slider-label hot">Caliente<br><small>(90°C)</small></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-section" @fadeInRight400ms>
+      <div class="results-card-centered">
+        <div class="metrics-heading-centered">
+          <h3>Propiedades extraídas a {{ temperature }}°C</h3>
+        </div>
+
+        <div class="metric-cards-row">
+          <div class="metric-card">
+            <div class="metric-icon">🧪</div>
+            <div class="metric-info">
+              <h4>Actividad Antioxidante</h4>
+              <div class="metric-value" [class.no-data]="currentDpph === null">
+                {{ format(currentDpph) }}
+              </div>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">🌿</div>
+            <div class="metric-info">
+              <h4>Fenoles Totales</h4>
+              <div class="metric-value" [class.no-data]="currentFenoles === null">
+                {{ format(currentFenoles) }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="source-and-explanation-row">
+          <div class="selected-source-centered">
+            @if (selected && !('nombreComun' in selected)) {
+            <div class="comparison-mix-circle scale-huge">
+              @for (img of $any(selected).fruitImages; track img; let i = $index) {
+              <img [src]="img" alt="" class="comparison-circle-img" [class]="'img-' + i" draggable="false" />
+              }
+            </div>
+            } @else {
+            <img [src]="selectedImage" [alt]="selectedName" class="fruit-image-huge" />
+            }
+            <div class="source-info-centered">
+              <h3>{{ selectedName }}</h3>
+              @if (selected && 'nombreCientifico' in selected) {
+                <p class="scientific-name">{{ $any(selected).nombreCientifico }}</p>
+              }
+              <span class="type-badge-centered">{{ selected ? sourceType(selected) : '' }}</span>
+            </div>
+          </div>
+
+          <div class="metrics-explanation-centered">
+            <mat-icon fontSet="material-symbols-outlined">info</mat-icon>
+            <p>Descubre qué tan bien aprovecha la fruta su <strong>actividad antioxidante</strong> y
+              <strong>fenoles</strong>. Recuerda que elevar la temperatura no siempre significa perder potencial
+              bioaccesible; algunas frutas liberan más nutrientes y bioactivos con el calor, mientras que otras
+              prefieren el frío.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    }
+  </div>
+</main>

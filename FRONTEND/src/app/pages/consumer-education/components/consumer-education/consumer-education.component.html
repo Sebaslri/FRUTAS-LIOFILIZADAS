@@ -1,0 +1,89 @@
+<div class="education-container">
+  <div class="education-header">
+    <h1 class="education-title">Educación para el Consumidor</h1>
+    <p class="education-subtitle">Descubre el poder secreto de las frutas a través de la ciencia. Toca las cápsulas para aprender más.</p>
+  </div>
+
+  <div class="capsules-grid">
+    @for (capsule of capsules; track capsule.id) {
+      <div 
+        class="capsule-card-container" 
+        [class.active]="activeCapsuleId === capsule.id"
+        (click)="toggleCapsule(capsule.id)"
+      >
+        <div class="capsule-card {{ capsule.colorClass }}">
+          <!-- Frente de la tarjeta -->
+          <div class="capsule-front">
+            <div class="capsule-icon">{{ capsule.icon }}</div>
+            <h2 class="capsule-title">{{ capsule.title }}</h2>
+            <p class="capsule-short">{{ capsule.shortDescription }}</p>
+            <div class="interaction-hint">
+              <span>Toca para explorar</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            </div>
+          </div>
+          
+          <!-- Dorso de la tarjeta -->
+          <div class="capsule-back">
+            <div class="capsule-icon-small">{{ capsule.icon }}</div>
+            <h3 class="capsule-back-title">{{ capsule.title }}</h3>
+            
+            <div class="explanation-box">
+              <h4>¿Qué es?</h4>
+              <p>{{ capsule.detailedExplanation }}</p>
+            </div>
+            
+            <div class="analogy-box">
+              <h4>Para que lo entiendas fácil:</h4>
+              <p><i>{{ capsule.analogy }}</i></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="context-container">
+    <div class="context-header">
+      <h2>Guía de Columnas y Variables</h2>
+      <p>Entiende qué significa cada dato en nuestras tablas con esta guía interactiva.</p>
+    </div>
+
+    <div class="accordion">
+      @for (section of sections; track section.title; let i = $index) {
+        <div class="accordion-item" [class.open]="activeSectionIndex === i">
+          <button class="accordion-button {{ section.colorClass }}" (click)="toggleSection(i)">
+            <span class="accordion-title">{{ section.title }}</span>
+            <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="accordion-content-wrapper">
+            <div class="accordion-content">
+              <p class="section-desc">{{ section.content }}</p>
+              <ul class="variable-list">
+                @for (item of section.items; track item.name) {
+                  <li>
+                    <strong>{{ item.name }}:</strong> {{ item.desc }}
+                  </li>
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="summary-box">
+      <h3>Resumen Rápido</h3>
+      <ul class="summary-list">
+        @for (sum of summaryItems; track sum.label) {
+          <li>
+            <span class="color-badge" [style.background]="sum.color"></span>
+            <strong>{{ sum.label }}:</strong> {{ sum.desc }}
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</div>

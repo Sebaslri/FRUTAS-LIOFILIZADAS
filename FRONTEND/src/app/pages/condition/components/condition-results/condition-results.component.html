@@ -1,0 +1,97 @@
+<main class="condition-results-shell">
+  <div class="condition-results-container">
+    <a class="back-link" routerLink="/condiciones">
+      <span class="back-link-icon" aria-hidden="true">←</span>
+      <span>Explorar condiciones</span>
+    </a>
+
+    @if (loading) {
+      <section class="results-skeleton" aria-label="Cargando recomendación" aria-busy="true">
+        <span class="skeleton-line skeleton-line-short"></span>
+        <span class="skeleton-line skeleton-line-title"></span>
+        <span class="skeleton-line skeleton-line-copy"></span>
+      </section>
+    } @else if (condition) {
+      <header class="results-header">
+        <p class="eyebrow">Recomendador educativo de infusiones</p>
+        <h1>{{ condition.nombre }}</h1>
+        <p class="results-lead">
+          {{ condition.descripcion }} Úsalas como punto de partida para comparar perfiles de sabor,
+          bioactividad y aceptación sensorial.
+        </p>
+      </header>
+    }
+
+    @if (!loading) {
+    <section class="goal-filter" aria-labelledby="goal-title" @fadeInRight400ms>
+      <div>
+        <p class="eyebrow">Personaliza la exploración</p>
+        <h2 id="goal-title">¿Qué perfil de infusión buscas?</h2>
+        @if (selectedGoalDetails) {
+          <p>{{ selectedGoalDetails.description }}</p>
+        } @else {
+          <p>Selecciona una intención para ordenar las frutas relacionadas.</p>
+        }
+      </div>
+
+      <div class="goal-buttons">
+        @for (goal of goals; track goal.key) {
+          <button
+            type="button"
+            class="goal-button"
+            [class.goal-button-active]="selectedGoal === goal.key"
+            [attr.aria-pressed]="selectedGoal === goal.key"
+            (click)="selectGoal(goal.key)"
+          >
+            {{ goal.label }}
+          </button>
+        }
+      </div>
+    </section>
+
+    <section class="results-fruits" aria-labelledby="fruits-title">
+      <div class="results-section-heading">
+        <div>
+          <p class="eyebrow">Frutas relacionadas</p>
+          <h2 id="fruits-title">Compara tus opciones</h2>
+        </div>
+        <span class="results-count">{{ visibleFruits.length }} opciones</span>
+      </div>
+
+      <div class="results-grid">
+        @for (fruit of visibleFruits; track fruit.frutaId) {
+          <app-card [fruit]="fruit" (detailsRequested)="openFruitDetails($event)" />
+        } @empty {
+          <p class="empty-results">No hay frutas asociadas todavía a esta condición.</p>
+        }
+      </div>
+    </section>
+
+    @if (!loading && mixes.length) {
+      <section class="mix-recommendations" aria-labelledby="mix-title" @fadeInRight400ms>
+        <div class="results-section-heading">
+          <div>
+            <p class="eyebrow">Recomendación experimental</p>
+            <h2 id="mix-title">También puedes probar estos mixes</h2>
+          </div>
+          <span class="results-count">{{ mixes.length }} disponibles</span>
+        </div>
+        <div class="mix-grid">
+          @for (mix of mixes; track mix.mixId) {
+            <article class="mix-card mix-card-clickable" (click)="openMixDetails(mix)" tabindex="0" role="button" (keydown.enter)="openMixDetails(mix)">
+              <div class="mix-images-circle">
+                @for (img of mix.fruitImages; track img; let i = $index) {
+                  <img [src]="img" [alt]="'Imagen de fruta en ' + mix.frutas" class="mix-circle-img" [class]="'img-' + i" />
+                }
+              </div>
+              <div>
+                <h3>{{ mix.frutas }}</h3>
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+    }
+    }
+  </div>
+</main>

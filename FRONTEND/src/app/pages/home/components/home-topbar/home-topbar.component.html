@@ -1,0 +1,54 @@
+<header
+  class="fixed top-0 left-0 right-0 z-50 border-b px-4 py-3 sm:px-8 transition-all duration-300 ease-in-out"
+  [class.border-[#e9dec066]]="true"
+  [class.bg-[#fff8e899]]="true"
+  [class.backdrop-blur-md]="true"
+  [class.shadow-[0_4px_30px_rgba(38,53,31,0.05)]]="scrolled"
+>
+  <nav class="relative mx-auto flex min-h-12 max-w-7xl items-center justify-end gap-3">
+    
+    <div class="home-desktop-actions items-center gap-2">
+      <div class="flex gap-3">
+        <a routerLink="/signin" class="inline-flex min-h-10 items-center rounded-lg bg-[#26351f] px-4 font-bold text-[#fff8e8] transition hover:opacity-90">Iniciar sesión</a>
+        <a routerLink="/signup" class="inline-flex min-h-10 items-center rounded-lg border border-[#78a54940] bg-white px-4 font-bold text-[#26351f] transition hover:bg-gray-50">Crear cuenta</a>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="home-mobile-menu-button inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#e9dec099] bg-white/80 text-[#26351f] transition-all duration-200 hover:bg-gray-50 focus:outline-none"
+      aria-label="Mostrar opciones"
+      [attr.aria-expanded]="menuOpen"
+      (click)="toggleMenu()"
+    >
+      <mat-icon fontSet="material-symbols-outlined" class="text-[22px]">
+        {{ menuOpen ? 'close' : 'menu' }}
+      </mat-icon>
+    </button>
+  </nav>
+
+  @if (menuOpen) {
+    <div 
+      class="home-mobile-dropdown mx-auto mt-3 flex flex-col gap-1 rounded-xl border border-[#e9dec088] bg-[#fffcf5] p-2 shadow-[0_10px_25px_rgba(38,53,31,0.08)]" 
+      @scaleIn400ms
+    >
+      <a
+        routerLink="/signin"
+        class="flex items-center gap-3 py-3 px-3 rounded-lg font-semibold text-[#26351f] transition-colors duration-150 hover:bg-[#26351f]/10 active:bg-[#26351f]/15"
+        (click)="closeMenu()"
+      >
+        <mat-icon fontSet="material-symbols-outlined" class="text-[#26351f]/70">login</mat-icon>
+        Iniciar sesión
+      </a>
+      
+      <a
+        routerLink="/signup"
+        class="flex items-center gap-3 py-3 px-3 rounded-lg font-semibold text-[#26351f] transition-colors duration-150 hover:bg-[#26351f]/10 active:bg-[#26351f]/15"
+        (click)="closeMenu()"
+      >
+        <mat-icon fontSet="material-symbols-outlined" class="text-[#26351f]/70">person_add</mat-icon>
+        Crear cuenta
+      </a>
+    </div>
+  }
+</header>

@@ -1,0 +1,37 @@
+<mat-dialog-content
+  class="fruit-dialog-content"
+  [attr.aria-label]="'Detalles de ' + data.fruit.nombreComun"
+>
+  <section class="fruit-detail-shell">
+    <div class="fruit-detail-layout">
+      <div class="fruit-image-panel">
+        <img
+          class="fruit-detail-image"
+          [src]="data.fruit.imagen || '/images/fruit-hero.png'"
+          [alt]="'Imagen de ' + data.fruit.nombreComun"
+        />
+      </div>
+
+      <div class="fruit-information">
+        <div class="fruit-info-header">
+          <div>
+            <p class="fruit-eyebrow">Ficha de fruta</p>
+            <h2>{{ data.fruit.nombreComun }}</h2>
+            <p class="fruit-scientific-name">{{ data.fruit.nombreCientifico }}</p>
+          </div>
+
+          <button type="button" class="fruit-close-button" aria-label="Cerrar modal" (click)="close()">
+            &times;
+          </button>
+        </div>
+
+        <p class="fruit-description">{{ data.fruit.descripcion }}</p>
+
+        <div class="fruit-location">
+          <span>{{ data.fruit.region }}</span>
+          <p>{{ data.fruit.provincias.join(', ') }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</mat-dialog-content>
