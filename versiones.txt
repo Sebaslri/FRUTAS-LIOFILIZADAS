@@ -1,0 +1,5 @@
+Versiones del Proyecto FRUTASAPP:
+
+- PHP: 8.2
+- Angular: 20.3
+- Tailwind CSS: 4.3.1

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-07-2026 a las 03:09:37
+-- Tiempo de generación: 27-07-2026 a las 01:53:01
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -37,28 +37,14 @@ CREATE TABLE `condicion` (
 -- Volcado de datos para la tabla `condicion`
 --
 
-INSERT INTO `condicion` (`condicionId`, `descripcion`) VALUES
-(1, 'Colesterol elevado'),
-(2, 'Inflamación'),
-(3, 'Alta presión arterial'),
-(4, 'Glucemia elevada'),
-(5, 'Sistema inmunologico debilitado'),
-(6, 'Estreñimiento'),
-(7, 'Anemia');
-
-UPDATE `condicion`
-SET `nombre` = `descripcion`;
-
-UPDATE `condicion`
-SET `descripcion` = CASE `condicionId`
-  WHEN 1 THEN 'Puede no presentar síntomas y suele identificarse mediante un análisis; mantener hábitos saludables ayuda a cuidar el perfil cardiovascular.'
-  WHEN 2 THEN 'Es una respuesta del organismo que puede sentirse como dolor, hinchazón, calor o cansancio.'
-  WHEN 3 THEN 'A menudo no presenta síntomas; algunas personas pueden sentir dolor de cabeza, mareo o visión borrosa.'
-  WHEN 4 THEN 'Puede manifestarse con sed excesiva, cansancio, más hambre o ganas frecuentes de orinar.'
-  WHEN 5 THEN 'Puede aumentar la susceptibilidad a infecciones y hacer más lenta la recuperación del organismo.'
-  WHEN 6 THEN 'Incluye evacuaciones poco frecuentes o dificultad para evacuar, a veces con heces duras, gases o malestar.'
-  WHEN 7 THEN 'Puede causar cansancio, palidez, mareo o falta de aire cuando disminuyen los glóbulos rojos o la hemoglobina.'
-END;
+INSERT INTO `condicion` (`condicionId`, `nombre`, `descripcion`) VALUES
+(1, 'Colesterol elevado', 'Puede no presentar síntomas y suele identificarse mediante un análisis; mantener hábitos saludables ayuda a cuidar el perfil cardiovascular.'),
+(2, 'Inflamación', 'Es una respuesta del organismo que puede sentirse como dolor, hinchazón, calor o cansancio.'),
+(3, 'Alta presión arterial', 'A menudo no presenta síntomas; algunas personas pueden sentir dolor de cabeza, mareo o visión borrosa.'),
+(4, 'Glucemia elevada', 'Puede manifestarse con sed excesiva, cansancio, más hambre o ganas frecuentes de orinar.'),
+(5, 'Sistema inmunologico debilitado', 'Puede aumentar la susceptibilidad a infecciones y hacer más lenta la recuperación del organismo.'),
+(6, 'Estreñimiento', 'Incluye evacuaciones poco frecuentes o dificultad para evacuar, a veces con heces duras, gases o malestar.'),
+(7, 'Anemia', 'Puede causar cansancio, palidez, mareo o falta de aire cuando disminuyen los glóbulos rojos o la hemoglobina.');
 
 -- --------------------------------------------------------
 
@@ -79,21 +65,21 @@ CREATE TABLE `fruta` (
 --
 
 INSERT INTO `fruta` (`frutaId`, `nombreComun`, `nombreCientifico`, `descripcion`, `imagen`) VALUES
-(1, 'Arazá', 'Eugenia stipitata', 'Fruta amazónica de aroma intenso y sabor ácido, con potencial para el desarrollo de infusiones, bebidas e ingredientes liofilizados. Su perfil puede analizarse por contenido de compuestos bioactivos, capacidad antioxidante, acidez, color y aceptación sensorial.', NULL),
-(2, 'Borojó', 'Alibertia patinoi', 'Fruta tropical de pulpa densa y sabor característico, apreciada en bebidas y formulaciones funcionales. Su estudio permite valorar su composición, compuestos bioactivos y posible aprovechamiento como ingrediente liofilizado de origen ecuatoriano.', NULL),
-(3, 'Cacao', 'Theobroma cacao', 'Fruto de gran importancia agroindustrial, reconocido por su contenido de compuestos fenólicos. Además de sus semillas, su pulpa puede aprovecharse en bebidas, infusiones y productos con valor agregado, evaluando su capacidad antioxidante y características sensoriales.', NULL),
-(4, 'Granadilla', 'Passiflora ligularis', 'Fruta de sabor dulce, aroma suave y acidez moderada. Su versión liofilizada puede utilizarse en infusiones y mezclas frutales, aportando características sensoriales agradables y compuestos bioactivos que pueden estudiarse antes y después de la digestión in vitro.', NULL),
-(5, 'Guanábana', 'Annona muricata', 'Fruta tropical de pulpa cremosa, aroma delicado y sabor ligeramente ácido. Presenta potencial para infusiones, bebidas y alimentos funcionales, donde pueden evaluarse su composición, aceptación sensorial y bioaccesibilidad de compuestos después de una digestión simulada.', NULL),
-(6, 'Guayaba', 'Psidium guajava', 'Fruta aromática asociada a un contenido importante de vitamina C y otros compuestos bioactivos. Puede aprovecharse liofilizada en infusiones, snacks y bebidas, comparando su actividad antioxidante, color, acidez y potencial bioactivo disponible tras digestión in vitro.', NULL),
-(7, 'Mango', 'Mangifera indica', 'Fruta de sabor dulce y aroma tropical, fuente natural de carotenoides y otros compuestos bioactivos. Su formato liofilizado puede emplearse en infusiones y mezclas, aportando color, dulzor y valor funcional sin atribuir efectos médicos.', NULL),
-(8, 'Maracuyá', 'Passiflora edulis', 'Fruta de aroma intenso y acidez marcada, ideal para formulaciones refrescantes e infusiones frutales. Su perfil científico puede incluir sólidos solubles, acidez, color, fenoles, capacidad antioxidante y aceptación sensorial.', NULL),
-(9, 'Mora', 'Rubus glaucus', 'Fruta andina de color intenso, sabor agridulce y presencia de antocianinas y compuestos fenólicos. Es de especial interés para comparar capacidad antioxidante, estabilidad del color y bioaccesibilidad de compuestos antes y después de la digestión simulada.', NULL),
-(10, 'Naranjilla', 'Solanum quitoense', 'Fruta ecuatoriana de aroma cítrico, sabor ácido y gran potencial para bebidas e infusiones. Su estudio permite relacionar características sensoriales con acidez, color, compuestos bioactivos y aceptación del consumidor.', NULL),
-(11, 'Piña', 'Ananas comosus', 'Fruta tropical de sabor dulce, aroma fresco y acidez equilibrada. Liofilizada puede utilizarse en infusiones, snacks y mezclas funcionales, aportando notas frutales y permitiendo evaluar su composición y capacidad antioxidante.', NULL),
-(12, 'Pitahaya', 'Selenicereus megalanthus', 'Fruta de sabor suave, pulpa delicada y semillas comestibles. Su perfil sensorial la convierte en una opción adecuada para mezclas e infusiones menos ácidas, mientras sus compuestos bioactivos y bioaccesibilidad pueden analizarse científicamente.', NULL),
-(13, 'Taxo', 'Passiflora tripartita', 'Fruta andina de aroma intenso y sabor ácido, también conocida como curuba. Tiene potencial para infusiones y bebidas funcionales, especialmente en formulaciones donde se busca mayor intensidad frutal, acidez y contenido de compuestos bioactivos.', NULL),
-(14, 'Tomate de árbol', 'Solanum betaceum', 'Fruta andina de sabor agridulce, color atractivo y aroma característico. Puede ser valorizada como ingrediente liofilizado para infusiones, bebidas y alimentos, evaluando carotenoides, fenoles, capacidad antioxidante y aceptación sensorial.', NULL),
-(15, 'Uvilla', 'Physalis peruviana', 'Fruta pequeña de sabor agridulce y color amarillo intenso, asociada a carotenoides, vitamina C y otros compuestos bioactivos. Su uso liofilizado puede aportar valor a infusiones, snacks y mezclas, estudiando también su bioaccesibilidad tras digestión in vitro.', NULL);
+(1, 'Arazá', 'Eugenia stipitata', 'Fruta amazónica de aroma intenso y sabor ácido, con potencial para el desarrollo de infusiones, bebidas e ingredientes liofilizados. Su perfil puede analizarse por contenido de compuestos bioactivos, capacidad antioxidante, acidez, color y aceptación sensorial.', '/images/araza.png'),
+(2, 'Borojó', 'Alibertia patinoi', 'Fruta tropical de pulpa densa y sabor característico, apreciada en bebidas y formulaciones funcionales. Su estudio permite valorar su composición, compuestos bioactivos y posible aprovechamiento como ingrediente liofilizado de origen ecuatoriano.', '/images/borojo.png'),
+(3, 'Cacao', 'Theobroma cacao', 'Fruto de gran importancia agroindustrial, reconocido por su contenido de compuestos fenólicos. Además de sus semillas, su pulpa puede aprovecharse en bebidas, infusiones y productos con valor agregado, evaluando su capacidad antioxidante y características sensoriales.', '/images/cacao.png'),
+(4, 'Granadilla', 'Passiflora ligularis', 'Fruta de sabor dulce, aroma suave y acidez moderada. Su versión liofilizada puede utilizarse en infusiones y mezclas frutales, aportando características sensoriales agradables y compuestos bioactivos que pueden estudiarse antes y después de la digestión in vitro.', '/images/granadilla.png'),
+(5, 'Guanábana', 'Annona muricata', 'Fruta tropical de pulpa cremosa, aroma delicado y sabor ligeramente ácido. Presenta potencial para infusiones, bebidas y alimentos funcionales, donde pueden evaluarse su composición, aceptación sensorial y bioaccesibilidad de compuestos después de una digestión simulada.', '/images/guanabana.png'),
+(6, 'Guayaba', 'Psidium guajava', 'Fruta aromática asociada a un contenido importante de vitamina C y otros compuestos bioactivos. Puede aprovecharse liofilizada en infusiones, snacks y bebidas, comparando su actividad antioxidante, color, acidez y potencial bioactivo disponible tras digestión in vitro.', '/images/guayaba.png'),
+(7, 'Mango', 'Mangifera indica', 'Fruta de sabor dulce y aroma tropical, fuente natural de carotenoides y otros compuestos bioactivos. Su formato liofilizado puede emplearse en infusiones y mezclas, aportando color, dulzor y valor funcional sin atribuir efectos médicos.', '/images/mango.png'),
+(8, 'Maracuyá', 'Passiflora edulis', 'Fruta de aroma intenso y acidez marcada, ideal para formulaciones refrescantes e infusiones frutales. Su perfil científico puede incluir sólidos solubles, acidez, color, fenoles, capacidad antioxidante y aceptación sensorial.', '/images/maracuya.png'),
+(9, 'Mora', 'Rubus glaucus', 'Fruta andina de color intenso, sabor agridulce y presencia de antocianinas y compuestos fenólicos. Es de especial interés para comparar capacidad antioxidante, estabilidad del color y bioaccesibilidad de compuestos antes y después de la digestión simulada.', '/images/mora.png'),
+(10, 'Naranjilla', 'Solanum quitoense', 'Fruta ecuatoriana de aroma cítrico, sabor ácido y gran potencial para bebidas e infusiones. Su estudio permite relacionar características sensoriales con acidez, color, compuestos bioactivos y aceptación del consumidor.', '/images/naranjilla.png'),
+(11, 'Piña', 'Ananas comosus', 'Fruta tropical de sabor dulce, aroma fresco y acidez equilibrada. Liofilizada puede utilizarse en infusiones, snacks y mezclas funcionales, aportando notas frutales y permitiendo evaluar su composición y capacidad antioxidante.', '/images/pina.png'),
+(12, 'Pitahaya', 'Selenicereus megalanthus', 'Fruta de sabor suave, pulpa delicada y semillas comestibles. Su perfil sensorial la convierte en una opción adecuada para mezclas e infusiones menos ácidas, mientras sus compuestos bioactivos y bioaccesibilidad pueden analizarse científicamente.', '/images/pitahaya.png'),
+(13, 'Taxo', 'Passiflora tripartita', 'Fruta andina de aroma intenso y sabor ácido, también conocida como curuba. Tiene potencial para infusiones y bebidas funcionales, especialmente en formulaciones donde se busca mayor intensidad frutal, acidez y contenido de compuestos bioactivos.', '/images/taxo.png'),
+(14, 'Tomate de árbol', 'Solanum betaceum', 'Fruta andina de sabor agridulce, color atractivo y aroma característico. Puede ser valorizada como ingrediente liofilizado para infusiones, bebidas y alimentos, evaluando carotenoides, fenoles, capacidad antioxidante y aceptación sensorial.', '/images/tomate-arbol.png'),
+(15, 'Uvilla', 'Physalis peruviana', 'Fruta pequeña de sabor agridulce y color amarillo intenso, asociada a carotenoides, vitamina C y otros compuestos bioactivos. Su uso liofilizado puede aportar valor a infusiones, snacks y mezclas, estudiando también su bioaccesibilidad tras digestión in vitro.', '/images/uvilla.png');
 
 -- --------------------------------------------------------
 
@@ -101,35 +87,14 @@ INSERT INTO `fruta` (`frutaId`, `nombreComun`, `nombreCientifico`, `descripcion`
 -- Estructura de tabla para la tabla `frutacondicion`
 --
 
-UPDATE `fruta`
-SET `imagen` = CASE `frutaId`
-  WHEN 1 THEN '/images/araza.png'
-  WHEN 2 THEN '/images/borojo.png'
-  WHEN 3 THEN '/images/cacao.png'
-  WHEN 4 THEN '/images/granadilla.png'
-  WHEN 5 THEN '/images/guanabana.png'
-  WHEN 6 THEN '/images/guayaba.png'
-  WHEN 7 THEN '/images/mango.png'
-  WHEN 8 THEN '/images/maracuya.png'
-  WHEN 9 THEN '/images/mora.png'
-  WHEN 10 THEN '/images/naranjilla.png'
-  WHEN 11 THEN '/images/pina.png'
-  WHEN 12 THEN '/images/pitahaya.png'
-  WHEN 13 THEN '/images/taxo.png'
-  WHEN 14 THEN '/images/tomate-arbol.png'
-  WHEN 15 THEN '/images/uvilla.png'
-END;
-
 CREATE TABLE `frutacondicion` (
   `frutaCondicionId` int(11) NOT NULL,
   `frutaId` int(11) NOT NULL,
   `condicionId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `frutapropiedad`
+-- Volcado de datos para la tabla `frutacondicion`
 --
 
 INSERT INTO `frutacondicion` (`frutaCondicionId`, `frutaId`, `condicionId`) VALUES
@@ -164,6 +129,12 @@ INSERT INTO `frutacondicion` (`frutaCondicionId`, `frutaId`, `condicionId`) VALU
 (29, 8, 7),
 (30, 9, 7),
 (31, 15, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `frutapropiedad`
+--
 
 CREATE TABLE `frutapropiedad` (
   `frutaPropiedadId` int(11) NOT NULL,
@@ -619,19 +590,21 @@ CREATE TABLE `usuario` (
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,
   `email` varchar(150) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `foto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`usuarioId`, `rolId`, `nombre`, `apellido`, `email`, `password`) VALUES
-(2, 1, 'Ariel', 'Loor', 'arielloor123@hotmail.com', '$2y$10$h9LihBo5Ql.9gSJGnKhpN.LDQvklj1PkmNOtZ63ExNLRc6DctTMv2'),
-(4, 1, 'Juan', 'Maldonado', 'jmaldonado@gmail.com', '$2y$10$eGmK8I4YG/fOtTw8Dzqy7O8vBlkuOssS.Xjh2d0VmfZ3lUh6Kpo5W'),
-(5, 1, 'Ariel', 'Loor', 'ar123@gmail.com', '$2y$10$B.1xIQnRiuhGxrUiDZ4Wj.nUT8wKViAJ.mgDkBpiIc6Vb4.YwxyWu'),
-(6, 1, 'Britany', 'Torres', 'b@gmail.com', '$2y$10$HvF7s1kkB0x00PKRHfqE0.VtoNkU8xUi/GY1pWf2YccB3JwEIY2pS'),
-(7, 1, 'Diego', 'Flores', 'd123@gmail.com', '$2y$10$8dzcmjdq888Gxge.2SIv2.5M2SvO8Q1O2hhnwZ47pYzATrtL8eReK');
+INSERT INTO `usuario` (`usuarioId`, `rolId`, `nombre`, `apellido`, `email`, `password`, `foto`) VALUES
+(2, 1, 'Ariel', 'Loor', 'arielloor123@hotmail.com', '$2y$10$h9LihBo5Ql.9gSJGnKhpN.LDQvklj1PkmNOtZ63ExNLRc6DctTMv2', NULL),
+(4, 1, 'Juan', 'Maldonado', 'jmaldonado@gmail.com', '$2y$10$eGmK8I4YG/fOtTw8Dzqy7O8vBlkuOssS.Xjh2d0VmfZ3lUh6Kpo5W', NULL),
+(5, 1, 'Ariel', 'Loor', 'ar123@gmail.com', '$2y$10$B.1xIQnRiuhGxrUiDZ4Wj.nUT8wKViAJ.mgDkBpiIc6Vb4.YwxyWu', NULL),
+(6, 1, 'Britany', 'Torres', 'b@gmail.com', '$2y$10$HvF7s1kkB0x00PKRHfqE0.VtoNkU8xUi/GY1pWf2YccB3JwEIY2pS', NULL),
+(7, 1, 'Ariel', 'Loor', 'd123@gmail.com', '$2y$10$8dzcmjdq888Gxge.2SIv2.5M2SvO8Q1O2hhnwZ47pYzATrtL8eReK', 'uploads/avatars/avatar_6a621ee7187f3.jpeg'),
+(8, 1, 'asd', 'ad', 'asd@gmail.com', '$2y$10$E8d3KynsKTnh/.hV5tB8JOD.UyJmJWYEpby5db8bVPSyabS0zeVW2', 'uploads/avatars/avatar_6a5ee1c958509.png');
 
 -- --------------------------------------------------------
 
@@ -744,7 +717,7 @@ ALTER TABLE `fruta`
 -- AUTO_INCREMENT de la tabla `frutacondicion`
 --
 ALTER TABLE `frutacondicion`
-  MODIFY `frutaCondicionId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `frutaCondicionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `frutapropiedad`
@@ -780,7 +753,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `usuarioId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `usuarioId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuariocondicion`
