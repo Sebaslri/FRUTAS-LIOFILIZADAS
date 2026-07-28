@@ -5,9 +5,9 @@ import { Title } from '@angular/platform-browser';
   providedIn: 'root',
 })
 export class CustomTitleService {
-  
-  
-  constructor(private title: Title) {}
+
+
+  constructor(private title: Title) { }
 
   set(title: string): void {
     this.title.setTitle(`${title} | AppFrutas UAE`);

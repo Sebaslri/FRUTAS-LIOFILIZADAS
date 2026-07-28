@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FruitService } from '../../../fruit/service/fruit.service';
 import { Fruta } from '../../../fruit/models/Fruta.interface';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
+import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 
 @Component({
   selector: 'app-mix-creation',
@@ -24,6 +25,7 @@ export class MixCreationComponent implements OnInit {
   
   private readonly _fruitService = inject(FruitService);
   private readonly _http = inject(HttpClient);
+  private readonly customTitle = inject(CustomTitleService);
 
   availableFruits: Fruta[] = [];
   mixerFruits: Fruta[] = [];
@@ -32,6 +34,7 @@ export class MixCreationComponent implements OnInit {
   envApi = env.api; // Para acceder a las imágenes si es necesario construir URL
 
   ngOnInit(): void {
+    this.customTitle.set('Laboratorio de Mixes');
     this.loadFruits();
   }
 

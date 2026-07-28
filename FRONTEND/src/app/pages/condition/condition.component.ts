@@ -4,16 +4,24 @@ import { MaterialModule } from '../../shared/material.module';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../shared/animations/page.animations';
 import { ConditionService } from './services/condition.service';
 import { ConditionItem } from './models/condition.interface';
+import { CustomTitleService } from '../../shared/services/custom-title.service';
 
 @Component({
   selector: 'app-condition',
   standalone: true,
   imports: [MaterialModule, RouterLink],
-  templateUrl: './condition.html',
-  styleUrl: './condition.css',
+  templateUrl: './condition.component.html',
+  styleUrl: './condition.component.css',
   animations: [stagger40ms, scaleIn400ms, fadeInRight400ms],
 })
 export class Condition implements OnInit {
+  private readonly conditionService = inject(ConditionService);
+  private readonly customTitle = inject(CustomTitleService);
+
+  constructor() {
+    setTimeout(() => this.customTitle.set('Condiciones de Salud'));
+  }
+
   protected readonly icon = 'medical_information';
   protected conditions: ConditionItem[] = [];
   protected loading = true;
@@ -27,8 +35,6 @@ export class Condition implements OnInit {
     { title: 'Mejor aceptación sensorial', text: 'Orienta la exploración hacia perfiles agradables y equilibrados.' },
   ];
 
-  private readonly conditionService = inject(ConditionService);
-
   ngOnInit(): void {
     this.conditionService.getAll().subscribe({
       next: (conditions) => { this.conditions = conditions; },
@@ -36,4 +42,6 @@ export class Condition implements OnInit {
       complete: () => { this.loading = false; },
     });
   }
+
+
 }

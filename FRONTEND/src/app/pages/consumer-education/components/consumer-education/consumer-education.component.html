@@ -1,13 +1,23 @@
-<div class="education-container">
-  <div class="education-header">
-    <h1 class="education-title">Educación para el Consumidor</h1>
-    <p class="education-subtitle">Descubre el poder secreto de las frutas a través de la ciencia. Toca las cápsulas para aprender más.</p>
+<section class="education-shell" @stagger40ms>
+  <div class="education-hero">
+    <div class="title-row" data-stagger @fadeInRight400ms>
+      <span class="module-icon" @scaleIn400ms>
+        <mat-icon fontSet="material-symbols-outlined">{{ icon }}</mat-icon>
+      </span>
+      <div>
+        <p class="eyebrow">Educación interactiva</p>
+        <h1>Educación para el Consumidor</h1>
+      </div>
+    </div>
+    <p class="lead" data-stagger>
+      Descubre el poder secreto de las frutas a través de la ciencia. Toca las cápsulas para aprender más.
+    </p>
   </div>
-
   <div class="capsules-grid">
     @for (capsule of capsules; track capsule.id) {
       <div 
         class="capsule-card-container" 
+        data-stagger
         [class.active]="activeCapsuleId === capsule.id"
         (click)="toggleCapsule(capsule.id)"
       >
@@ -43,47 +53,4 @@
     }
   </div>
 
-  <div class="context-container">
-    <div class="context-header">
-      <h2>Guía de Columnas y Variables</h2>
-      <p>Entiende qué significa cada dato en nuestras tablas con esta guía interactiva.</p>
-    </div>
-
-    <div class="accordion">
-      @for (section of sections; track section.title; let i = $index) {
-        <div class="accordion-item" [class.open]="activeSectionIndex === i">
-          <button class="accordion-button {{ section.colorClass }}" (click)="toggleSection(i)">
-            <span class="accordion-title">{{ section.title }}</span>
-            <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </button>
-          <div class="accordion-content-wrapper">
-            <div class="accordion-content">
-              <p class="section-desc">{{ section.content }}</p>
-              <ul class="variable-list">
-                @for (item of section.items; track item.name) {
-                  <li>
-                    <strong>{{ item.name }}:</strong> {{ item.desc }}
-                  </li>
-                }
-              </ul>
-            </div>
-          </div>
-        </div>
-      }
-    </div>
-
-    <div class="summary-box">
-      <h3>Resumen Rápido</h3>
-      <ul class="summary-list">
-        @for (sum of summaryItems; track sum.label) {
-          <li>
-            <span class="color-badge" [style.background]="sum.color"></span>
-            <strong>{{ sum.label }}:</strong> {{ sum.desc }}
-          </li>
-        }
-      </ul>
-    </div>
-  </div>
-</div>
+</section>

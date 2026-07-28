@@ -24,7 +24,7 @@ const childrenRoutes: Routes = [
   },
   {
     path: 'condiciones',
-    loadComponent: () => import('./pages/condition/condition').then((m) => m.Condition)
+    loadComponent: () => import('./pages/condition/condition.component').then((m) => m.Condition)
   },
   {
     path: 'infusiones-funcionales',

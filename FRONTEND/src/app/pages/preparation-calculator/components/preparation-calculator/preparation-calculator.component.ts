@@ -6,6 +6,7 @@ import { Mix } from '../../../../shared/interfaces/mix.interface';
 import { MixService } from '../../../../shared/services/mix.service';
 import { Fruta } from '../../../fruit/models/Fruta.interface';
 import { FruitComparisonService } from '../../../fruit-comparison/services/fruit-comparison.service';
+import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 import { PreparationSource } from './configuration.interface';
 
 @Component({
@@ -25,8 +26,10 @@ export class PreparationCalculatorComponent implements OnInit {
 
   private readonly fruitService = inject(FruitComparisonService);
   private readonly mixService = inject(MixService);
+  private readonly customTitle = inject(CustomTitleService);
 
   ngOnInit(): void {
+    this.customTitle.set('Calculadora de Preparación');
     let pending = 2;
     const done = () => { pending -= 1; if (pending === 0) this.loading = false; };
 

@@ -5,6 +5,7 @@ import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/
 import { Fruta } from '../../../fruit/models/Fruta.interface';
 import { FunctionalInfusionSource, Table1Row, Table2Row } from '../../models/functional-infusions.model';
 import { FunctionalInfusionsService } from '../../services/functional-infusions.service';
+import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 
 @Component({
   selector: 'app-functional-infusions',
@@ -21,15 +22,15 @@ export class FunctionalInfusionsComponent implements OnInit {
   protected loading = true;
 
   private readonly infusionsService = inject(FunctionalInfusionsService);
+  private readonly customTitle = inject(CustomTitleService);
 
   ngOnInit(): void {
+    this.customTitle.set('Infusiones Funcionales');
     this.infusionsService.getSources().subscribe({
       next: ({ fruits, mixes }) => {
         this.fruits = fruits;
         this.mixes = mixes;
-        if (this.fruits.length > 0) {
-          this.selected = this.fruits[0];
-        } else if (this.mixes.length > 0) {
+        if (this.mixes.length > 0) {
           this.selected = this.mixes[0];
         }
       },

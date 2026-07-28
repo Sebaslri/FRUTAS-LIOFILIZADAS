@@ -1,98 +1,88 @@
-<button
-  type="button"
-  mat-icon-button
+<button type="button" mat-icon-button
   class="mobile-sidebar-toggle bg-white! shadow-[0_14px_34px_rgba(36,48,33,0.16)]! transition-transform duration-300 lg:hidden"
   [class.mobile-sidebar-toggle-open]="mobileOpen"
-  [attr.aria-label]="mobileOpen ? 'Cerrar menu lateral' : 'Abrir menu lateral'"
-  [attr.aria-expanded]="mobileOpen"
-  (click)="toggleMobile()"
->
-  <mat-icon fontSet="material-symbols-outlined">{{ mobileOpen ? 'keyboard_double_arrow_left' : 'keyboard_double_arrow_right' }}</mat-icon>
+  [attr.aria-label]="mobileOpen ? 'Cerrar menu lateral' : 'Abrir menu lateral'" [attr.aria-expanded]="mobileOpen"
+  (click)="toggleMobile()">
+  <mat-icon fontSet="material-symbols-outlined">{{ mobileOpen ? 'keyboard_double_arrow_left' :
+    'keyboard_double_arrow_right' }}</mat-icon>
 </button>
 
 @if (mobileOpen) {
-  <button
-    type="button"
-    class="fixed inset-0 z-30 bg-[#11180f]/38 backdrop-blur-[2px] lg:hidden"
-    aria-label="Cerrar menu lateral"
-    (click)="closeMobile()"
-  ></button>
+<button type="button" class="fixed inset-0 z-30 bg-[#11180f]/38 backdrop-blur-[2px] lg:hidden"
+  aria-label="Cerrar menu lateral" (click)="closeMobile()"></button>
 }
 
 <aside
   [class]="collapsed
     ? 'fixed inset-y-0 left-0 z-50 flex w-20 -translate-x-full flex-col border-r border-[#dfe6d5] bg-[#fbfcf7] px-2 py-4 shadow-[18px_0_44px_rgba(34,46,31,0.12)] transition-all duration-300 lg:translate-x-0'
     : 'fixed inset-y-0 left-0 z-50 flex w-72 -translate-x-full flex-col border-r border-[#dfe6d5] bg-[#fbfcf7] px-3 py-4 shadow-[18px_0_44px_rgba(34,46,31,0.12)] transition-all duration-300 lg:translate-x-0'"
-  [class.translate-x-0]="mobileOpen"
->
-  <div class="flex min-h-12 items-center gap-2 px-2 text-sm font-black uppercase tracking-[0.12em] text-[#7d8c72]" [class.justify-center]="collapsed" [class.justify-between]="!collapsed">
+  [class.translate-x-0]="mobileOpen">
+  <div class="flex min-h-12 items-center gap-2 px-2 text-sm font-black uppercase tracking-[0.12em] text-[#7d8c72]"
+    [class.justify-center]="collapsed" [class.justify-between]="!collapsed">
     @if (!collapsed) {
-      <span>Modulos</span>
+    <span>FrutasApp</span>
     }
 
-    <button
-      type="button"
-      mat-icon-button
-      class="desktop-sidebar-toggle bg-[#edf3e7]!"
-      [matTooltip]="collapsed ? 'Expandir menu' : 'Colapsar menu'"
-      aria-label="Colapsar menu lateral"
-      (click)="toggleCollapsed()"
-    >
-      <mat-icon fontSet="material-symbols-outlined">{{ collapsed ? 'keyboard_double_arrow_right' : 'keyboard_double_arrow_left' }}</mat-icon>
+    <button type="button" mat-icon-button class="desktop-sidebar-toggle bg-[#edf3e7]!"
+      [matTooltip]="collapsed ? 'Expandir menu' : 'Colapsar menu'" aria-label="Colapsar menu lateral"
+      (click)="toggleCollapsed()">
+      <mat-icon fontSet="material-symbols-outlined">{{ collapsed ? 'keyboard_double_arrow_right' :
+        'keyboard_double_arrow_left' }}</mat-icon>
     </button>
   </div>
 
   <nav class="mt-6 grid gap-1" aria-label="Modulos" @stagger40ms>
     @for (item of navigationItems; track item.label) {
-      @if (isLink(item)) {
-        <a
-          data-stagger
-          [routerLink]="item.route"
-          [fragment]="item.fragment"
-          [routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }"
-          [matTooltip]="collapsed ? item.label : ''"
-          routerLinkActive="bg-[#edf3e7] text-[#26351f]"
-          [class]="collapsed
+    @if (isLink(item)) {
+    <a data-stagger [routerLink]="item.route" [fragment]="item.fragment"
+      [routerLinkActiveOptions]="item.routerLinkActiveOptions ?? { exact: false }"
+      [matTooltip]="collapsed ? item.label : ''" routerLinkActive="bg-[#edf3e7] text-[#26351f]"
+      [class]="collapsed
             ? 'group grid min-h-11 place-items-center rounded-lg px-2 text-sm font-extrabold text-[#5c6b52] transition hover:bg-[#edf3e7] hover:text-[#26351f]'
             : 'group grid min-h-11 grid-cols-[2.25rem_1fr_auto] items-center gap-2 rounded-lg px-3 text-sm font-extrabold text-[#5c6b52] transition hover:bg-[#edf3e7] hover:text-[#26351f]'"
-          (click)="closeMobile()"
-        >
-          <mat-icon fontSet="material-symbols-outlined" class="text-[22px]! text-[#789660] transition group-hover:text-[#26351f]">
-            {{ item.icon ?? 'apps' }}
-          </mat-icon>
-          @if (!collapsed) {
-            <span class="truncate">{{ item.label }}</span>
-          }
-          @if (item.badge && !collapsed) {
-            <span class="rounded-full px-2 py-0.5 text-xs font-black" [class]="item.badge.bgClass + ' ' + item.badge.textClass">
-              {{ item.badge.value }}
-            </span>
-          }
-        </a>
-      } @else if (isSubheading(item) && !collapsed) {
-        <p data-stagger class="mb-1 mt-4 px-3 text-xs font-black uppercase tracking-[0.12em] text-[#98a48f]">{{ item.label }}</p>
+      (click)="closeMobile()">
+      <mat-icon fontSet="material-symbols-outlined"
+        class="text-[22px]! text-[#789660] transition group-hover:text-[#26351f]">
+        {{ item.icon ?? 'apps' }}
+      </mat-icon>
+      @if (!collapsed) {
+      <span class="truncate">{{ item.label }}</span>
       }
+      @if (item.badge && !collapsed) {
+      <span class="rounded-full px-2 py-0.5 text-xs font-black"
+        [class]="item.badge.bgClass + ' ' + item.badge.textClass">
+        {{ item.badge.value }}
+      </span>
+      }
+    </a>
+    } @else if (isSubheading(item) && !collapsed) {
+    <p data-stagger class="mb-1 mt-4 px-3 text-xs font-black uppercase tracking-[0.12em] text-[#98a48f]">{{ item.label
+      }}</p>
+    }
     }
   </nav>
 
   <div class="mt-auto border-t border-[#dfe6d5] pt-3">
     @if (currentUser$ | async; as user) {
-      <button type="button" class="group flex w-full items-center gap-3 p-3 transition hover:bg-[#78a54914]" [matMenuTriggerFor]="userMenu">
-        <div class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#78a5494d] bg-[#78a5491f] text-sm font-black text-[#314527] shadow-[0_4px_12px_rgba(49,69,39,0.08)]">
-          @if (user.foto) {
-            <img [src]="user.foto.startsWith('http') ? user.foto : backendUrl + user.foto" alt="Avatar" class="h-full w-full object-cover">
-          } @else {
-            {{ getInitials(user) }}
-          }
-        </div>
-        @if (!collapsed) {
-          <span class="min-w-0 flex-1 text-left">
-            <span class="block truncate text-sm font-black text-[#26351f]">{{ user.nombre }} {{ user.apellido }}</span>
-            <span class="block truncate text-xs font-bold text-[#718066]">{{ user.email || user.correo }}</span>
-          </span>
-          <mat-icon fontSet="material-symbols-outlined" class="shrink-0 text-[#6c7a61]">expand_more</mat-icon>
+    <button type="button" class="group flex w-full items-center gap-3 p-3 transition hover:bg-[#78a54914]"
+      [matMenuTriggerFor]="userMenu">
+      <div
+        class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#78a5494d] bg-[#78a5491f] text-sm font-black text-[#314527] shadow-[0_4px_12px_rgba(49,69,39,0.08)]">
+        @if (user.foto) {
+        <img [src]="user.foto.startsWith('http') ? user.foto : backendUrl + user.foto" alt="Avatar"
+          class="h-full w-full object-cover">
+        } @else {
+        {{ getInitials(user) }}
         }
-      </button>
+      </div>
+      @if (!collapsed) {
+      <span class="min-w-0 flex-1 text-left">
+        <span class="block truncate text-sm font-black text-[#26351f]">{{ user.nombre }} {{ user.apellido }}</span>
+        <span class="block truncate text-xs font-bold text-[#718066]">{{ user.email || user.correo }}</span>
+      </span>
+      <mat-icon fontSet="material-symbols-outlined" class="shrink-0 text-[#6c7a61]">expand_more</mat-icon>
+      }
+    </button>
     }
 
     <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above">

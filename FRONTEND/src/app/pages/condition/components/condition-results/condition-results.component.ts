@@ -12,7 +12,7 @@ import { MixService } from '../../../../shared/services/mix.service';
 import { Mix } from '../../../../shared/interfaces/mix.interface';
 import { FruitService } from '../../../fruit/service/fruit.service';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
-
+import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 @Component({
   selector: 'app-condition-results',
   standalone: true,
@@ -56,6 +56,7 @@ export class ConditionResultsComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
   private readonly mixService = inject(MixService);
   private readonly fruitService = inject(FruitService);
+  private readonly customTitle = inject(CustomTitleService);
 
   ngOnInit(): void {
     const conditionId = Number(this.route.snapshot.paramMap.get('id'));
@@ -70,7 +71,12 @@ export class ConditionResultsComponent implements OnInit {
     };
 
     this.conditionService.getAll().subscribe({
-      next: (conditions) => { this.condition = conditions.find((item) => item.condicionId === conditionId); },
+      next: (conditions) => { 
+        this.condition = conditions.find((item) => item.condicionId === conditionId);
+        if (this.condition) {
+          setTimeout(() => this.customTitle.set(this.condition!.nombre));
+        }
+      },
       error: () => finish(),
       complete: finish,
     });
