@@ -6,6 +6,7 @@ import { FruitComparisonService } from '../../services/fruit-comparison.service'
 import { FruitComparisonTableModalComponent } from './fruit-comparison-table-modal.component';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
 import { MixService } from '../../../../shared/services/mix.service';
+import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 import { Mix } from '../../../../shared/interfaces/mix.interface';
 import {
   ComparisonPropertyConfig,
@@ -75,9 +76,11 @@ export class FruitComparisonComponent implements OnInit {
   private readonly comparisonService = inject(FruitComparisonService);
   private readonly dialog = inject(MatDialog);
   private readonly mixService = inject(MixService);
+  private readonly customTitle = inject(CustomTitleService);
   private comparisonTimer?: number;
 
   ngOnInit(): void {
+    this.customTitle.set('Comparador de Frutas');
     this.comparisonService.getFruits().subscribe({
       next: (fruits) => {
         this.fruits = fruits;

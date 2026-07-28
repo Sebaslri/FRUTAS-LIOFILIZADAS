@@ -15,6 +15,7 @@
 }
 
 .fruit-detail-shell {
+  position: relative;
   min-width: min(52rem, calc(100vw - 2rem));
   padding: clamp(1.25rem, 3vw, 2.25rem);
 }
@@ -106,6 +107,10 @@ h2 {
 }
 
 .fruit-close-button {
+  position: absolute;
+  top: clamp(1rem, 2vw, 1.5rem);
+  right: clamp(1rem, 2vw, 1.5rem);
+  z-index: 10;
   display: grid;
   width: 2.75rem;
   height: 2.75rem;

@@ -3,6 +3,9 @@
   [attr.aria-label]="'Detalles de ' + data.fruit.nombreComun"
 >
   <section class="fruit-detail-shell">
+    <button type="button" class="fruit-close-button" aria-label="Cerrar modal" (click)="close()">
+      &times;
+    </button>
     <div class="fruit-detail-layout">
       <div class="fruit-image-panel">
         <img
@@ -19,10 +22,6 @@
             <h2>{{ data.fruit.nombreComun }}</h2>
             <p class="fruit-scientific-name">{{ data.fruit.nombreCientifico }}</p>
           </div>
-
-          <button type="button" class="fruit-close-button" aria-label="Cerrar modal" (click)="close()">
-            &times;
-          </button>
         </div>
 
         <p class="fruit-description">{{ data.fruit.descripcion }}</p>

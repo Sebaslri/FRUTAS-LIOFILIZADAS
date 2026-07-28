@@ -16,6 +16,7 @@ export interface FruitDetailScore {
 }
 
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
+import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 
 @Component({
   selector: 'app-bioactive-map',
@@ -41,6 +42,7 @@ export class BioactiveMapComponent implements AfterViewInit, OnDestroy {
   private readonly mapService = inject(BioactiveMapService);
   private readonly http = inject(HttpClient);
   private readonly ngZone = inject(NgZone);
+  private readonly customTitle = inject(CustomTitleService);
   private map?: L.Map;
   private tileLayer?: L.TileLayer;
   private markerLayer?: L.LayerGroup;
@@ -75,6 +77,7 @@ export class BioactiveMapComponent implements AfterViewInit, OnDestroy {
   };
 
   ngAfterViewInit(): void {
+    this.customTitle.set('Mapa Bioactivo');
     this.map = L.map(this.mapHost.nativeElement, {
       center: [-1.45, -78.55],
       zoom: 6,

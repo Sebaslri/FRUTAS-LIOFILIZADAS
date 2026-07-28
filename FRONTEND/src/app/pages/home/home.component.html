@@ -2,24 +2,39 @@
   <app-home-topbar />
 
   <section id="inicio" class="relative" @stagger40ms>
-    <header class="relative z-2 h-[min(76vh,650px)] min-h-140 origin-top overflow-hidden transition duration-100 max-[800px]:h-[78vh] max-[800px]:min-h-135" [ngStyle]="heroStyle">
-      <img src="/images/fruit-hero.png" alt="Mesa natural con frutas tropicales frescas" class="h-full w-full object-cover" />
-      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(25,42,24,0.82),rgba(25,42,24,0.32)_48%,rgba(25,42,24,0.08)),linear-gradient(180deg,rgba(0,0,0,0.04),rgba(38,52,27,0.46))]"></div>
+    <header
+      class="relative z-2 h-[min(76vh,650px)] min-h-140 origin-top overflow-hidden transition duration-100 max-[800px]:h-[78vh] max-[800px]:min-h-135"
+      [ngStyle]="heroStyle">
+      <img src="/images/fruit-hero.png" alt="Mesa natural con frutas tropicales frescas"
+        class="h-full w-full object-cover" />
+      <div
+        class="absolute inset-0 bg-[linear-gradient(90deg,rgba(25,42,24,0.82),rgba(25,42,24,0.32)_48%,rgba(25,42,24,0.08)),linear-gradient(180deg,rgba(0,0,0,0.04),rgba(38,52,27,0.46))]">
+      </div>
 
-      <div class="absolute left-[clamp(1.25rem,6vw,6.5rem)] top-[52%] w-[min(700px,calc(100%-2.5rem))] translate-y-[-48%] text-[#fff8e8] max-[800px]:top-[54%]" data-stagger @fadeInRight400ms>
-        <p class="mb-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#f2c769]">Frutas ecuatorianas liofilizadas</p>
-        <h1 class="mb-5 max-w-[11ch] text-[clamp(3.35rem,8vw,7rem)] font-black leading-[0.92] tracking-normal">Potencial bioactivo y sensorial</h1>
+      <div
+        class="absolute left-[clamp(1.25rem,6vw,6.5rem)] top-[52%] w-[min(700px,calc(100%-2.5rem))] translate-y-[-48%] text-[#fff8e8] max-[800px]:top-[54%]"
+        data-stagger @fadeInRight400ms>
+        <p class="mb-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#f2c769]">Frutas ecuatorianas
+          liofilizadas</p>
+        <h1 class="mb-5 max-w-[11ch] text-[clamp(3.35rem,8vw,7rem)] font-black leading-[0.92] tracking-normal">Potencial
+          bioactivo y sensorial</h1>
         <p class="mb-5 max-w-155 text-[clamp(1rem,1.8vw,1.24rem)] leading-relaxed text-[#fff4d8]">
           Una app cientifica para conocer, comparar y valorizar frutas ecuatorianas liofilizadas e infusiones derivadas.
         </p>
         <div class="flex flex-wrap gap-3" data-stagger>
-          <a href="#frutas" class="inline-flex min-h-11 items-center rounded-lg bg-[#f2c769] px-5 py-2.5 font-black text-[#26351f] shadow-[0_14px_30px_rgba(38,53,31,0.16)] transition hover:-translate-y-0.5">Explorar fichas</a>
-          <a href="#consejos" class="inline-flex min-h-11 items-center rounded-lg border border-[#fff8e8b8] bg-[#fff8e81a] px-5 py-2.5 font-black text-[#fff8e8] transition hover:bg-[#fff8e829]">Ver modulos</a>
+          <a href="#frutas"
+            class="inline-flex min-h-11 items-center rounded-lg bg-[#f2c769] px-5 py-2.5 font-black text-[#26351f] shadow-[0_14px_30px_rgba(38,53,31,0.16)] transition hover:-translate-y-0.5">Explorar
+            fichas</a>
+          <a href="#modulos"
+            class="inline-flex min-h-11 items-center rounded-lg border border-[#fff8e8b8] bg-[#fff8e81a] px-5 py-2.5 font-black text-[#fff8e8] transition hover:bg-[#fff8e829]">Ver
+            modulos</a>
         </div>
       </div>
 
-      <div class="absolute bottom-5 left-1/2 h-12 w-7.5 -translate-x-1/2 rounded-full border-2 border-[#fff8e8b8]" aria-hidden="true">
-        <span class="absolute left-1/2 top-2.5 size-1.5 -translate-x-1/2 animate-[scrollDot_1.5s_ease-in-out_infinite] rounded-full bg-[#fff8e8]"></span>
+      <div class="absolute bottom-5 left-1/2 h-12 w-7.5 -translate-x-1/2 rounded-full border-2 border-[#fff8e8b8]"
+        aria-hidden="true">
+        <span
+          class="absolute left-1/2 top-2.5 size-1.5 -translate-x-1/2 animate-[scrollDot_1.5s_ease-in-out_infinite] rounded-full bg-[#fff8e8]"></span>
       </div>
     </header>
   </section>
@@ -28,15 +43,19 @@
     <div class="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24" @stagger40ms>
       <div class="max-w-4xl" data-stagger>
         <p class="mb-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#f2a922]">Base cientifica</p>
-        <h2 class="text-[clamp(2.2rem,4.6vw,4.8rem)] font-black leading-none text-[#26351f]">Datos claros para divulgar y decidir mejor.</h2>
+        <h2 class="text-[clamp(2.2rem,4.6vw,4.8rem)] font-black leading-none text-[#26351f]">Datos claros para divulgar
+          y decidir mejor.</h2>
         <p class="mt-5 max-w-[54ch] text-[1.05rem] leading-[1.8] text-[#58634d]">
           Cada ficha resume origen, atributos sensoriales, composicion, acidez, Brix, color,
           compuestos bioactivos, capacidad antioxidante y posibles usos agroindustriales.
         </p>
         <div class="mt-6 flex flex-wrap gap-2">
-          <span class="rounded-full border border-[#78a54940] bg-white/70 px-3 py-1.5 text-sm font-bold text-[#384128]">Bioactivos</span>
-          <span class="rounded-full border border-[#78a54940] bg-white/70 px-3 py-1.5 text-sm font-bold text-[#384128]">Bioaccesibilidad</span>
-          <span class="rounded-full border border-[#78a54940] bg-white/70 px-3 py-1.5 text-sm font-bold text-[#384128]">Sensorial</span>
+          <span
+            class="rounded-full border border-[#78a54940] bg-white/70 px-3 py-1.5 text-sm font-bold text-[#384128]">Bioactivos</span>
+          <span
+            class="rounded-full border border-[#78a54940] bg-white/70 px-3 py-1.5 text-sm font-bold text-[#384128]">Bioaccesibilidad</span>
+          <span
+            class="rounded-full border border-[#78a54940] bg-white/70 px-3 py-1.5 text-sm font-bold text-[#384128]">Sensorial</span>
         </div>
       </div>
 
@@ -44,33 +63,23 @@
         <div class="mb-5 flex items-center justify-between gap-4">
           <p class="m-0 text-sm font-bold text-[#58634d]">Explora las fichas en grupos de cuatro frutas.</p>
           <div class="flex shrink-0 gap-3">
-          <button
-            type="button"
-            class="grid size-12 place-items-center rounded-lg border border-[#78a54940] bg-white/80 text-2xl font-black text-[#26351f] shadow-[0_14px_30px_rgba(49,69,34,0.14)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-35"
-            [disabled]="!canMoveBackward"
-            aria-label="Ver frutas anteriores"
-            (click)="previousFruits()"
-          >
-            ‹
-          </button>
-          <button
-            type="button"
-            class="grid size-12 place-items-center rounded-lg bg-[#f2c769] text-2xl font-black text-[#26351f] shadow-[0_14px_30px_rgba(49,69,34,0.18)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-35"
-            [disabled]="!canMoveForward"
-            aria-label="Ver siguientes frutas"
-            (click)="nextFruits()"
-          >
-            ›
-          </button>
+            <button type="button"
+              class="grid size-12 place-items-center rounded-lg border border-[#78a54940] bg-white/80 text-2xl font-black text-[#26351f] shadow-[0_14px_30px_rgba(49,69,34,0.14)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-35"
+              [disabled]="!canMoveBackward" aria-label="Ver frutas anteriores" (click)="previousFruits()">
+              ‹
+            </button>
+            <button type="button"
+              class="grid size-12 place-items-center rounded-lg bg-[#f2c769] text-2xl font-black text-[#26351f] shadow-[0_14px_30px_rgba(49,69,34,0.18)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-35"
+              [disabled]="!canMoveForward" aria-label="Ver siguientes frutas" (click)="nextFruits()">
+              ›
+            </button>
           </div>
         </div>
 
-        <div
-          class="fruit-carousel-grid grid grid-cols-4 gap-4 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1"
-          [@carouselTransition]="carouselAnimationState"
-        >
+        <div class="fruit-carousel-grid grid grid-cols-4 gap-4 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1"
+          [@carouselTransition]="carouselAnimationState">
           @for (fruit of visibleFruits; track fruit.frutaId) {
-            <app-card data-stagger [fruit]="fruit" (detailsRequested)="openFruitDetails($event)" />
+          <app-card data-stagger [fruit]="fruit" (detailsRequested)="openFruitDetails($event)" />
           }
         </div>
 
@@ -82,47 +91,196 @@
     </div>
   </section>
 
-  <section class="relative z-4 bg-[#fff8e8]">
-    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-5 px-5 py-12 sm:px-8">
-      <div>
-        <p class="mb-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[#f2a922]">Acceso a la plataforma</p>
-        <h2 class="max-w-[18ch] text-[clamp(2rem,4vw,3.8rem)] font-black leading-none text-[#26351f]">Inicia sesion y explora todo el potencial.</h2>
-        <p class="mt-4 max-w-[62ch] leading-relaxed text-[#58634d]">
-          Al entrar podras consultar fichas completas, comparar frutas, explorar infusiones, revisar bioaccesibilidad
-          y guardar tus preferencias de investigacion.
-        </p>
+  <!-- ═══════════════════════════════════════════
+       NUEVA SECCIÓN: Stats strip
+       ═══════════════════════════════════════════ -->
+  <section class="stats-strip" aria-label="Cifras destacadas" #statsSection [class.stats-visible]="statsAnimated">
+    <div class="stats-strip-container">
+      <div class="stat-item stat-item--animated">
+        <span class="stat-number">{{ displayedStats.modules }}</span>
+        <span class="stat-label">Módulos científicos interactivos</span>
       </div>
-      <div class="flex flex-wrap gap-3">
-        <a routerLink="/signin" class="inline-flex min-h-11 items-center rounded-lg bg-[#26351f] px-5 py-2.5 font-black text-[#fff8e8] shadow-[0_16px_34px_rgba(38,53,31,0.18)] transition hover:-translate-y-0.5">Iniciar sesion</a>
-        <a routerLink="/signup" class="inline-flex min-h-11 items-center rounded-lg border border-[#78a54940] bg-white px-5 py-2.5 font-black text-[#26351f] shadow-[0_12px_28px_rgba(49,69,34,0.1)] transition hover:-translate-y-0.5">Crear cuenta</a>
+      <div class="stat-item stat-item--animated">
+        <span class="stat-number">{{ displayedStats.fruits }}+</span>
+        <span class="stat-label">Frutas ecuatorianas analizadas</span>
+      </div>
+      <div class="stat-item stat-item--animated">
+        <span class="stat-number">{{ displayedStats.indicators }}+</span>
+        <span class="stat-label">Indicadores estudiados</span>
+      </div>
+      <div class="stat-item stat-item--ia">
+        <div class="stat-ia-reveal">
+          <span class="stat-ia-text">MODELO DE IA</span>
+          <span class="stat-ia-sub">Redes neuronales</span>
+        </div>
+        <span class="stat-label">Predice que tan bioaccesible puede ser un mix de frutas</span>
       </div>
     </div>
   </section>
 
-  <section id="consejos" class="relative z-4 bg-[#26351f] text-[#f8f0d8]">
-    <div class="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
-      <div class="min-h-95 rounded-lg border border-[#f8f0d833] bg-[linear-gradient(135deg,rgba(247,186,68,0.22),transparent_42%),rgba(255,255,255,0.06)] p-[clamp(1.5rem,4vw,3rem)]">
-        <span class="mb-5 inline-grid size-22 place-items-center rounded-full bg-[#f2c769] text-xs font-black text-[#26351f]">I+D</span>
-        <p class="mb-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#f2c769]">Decision educativa</p>
-        <h2 class="text-[clamp(2.2rem,4.6vw,4.8rem)] font-black leading-none text-[#fff5dc]">Del dato de laboratorio a una herramienta de valorizacion.</h2>
-        <p class="mt-5 max-w-[54ch] text-[1.05rem] leading-[1.8] text-[#fff5dc]">
-          Explora mapas bioactivos, comparadores, formulaciones de infusiones, perfiles sensoriales,
-          calculadoras de preparacion y oportunidades para productores y agroindustria.
+  <!-- ═══════════════════════════════════════════
+       NUEVA SECCIÓN: Grid de módulos
+       ═══════════════════════════════════════════ -->
+  <section id="modulos" class="modules-grid-section" aria-labelledby="modules-title">
+    <div class="modules-grid-container">
+      <div class="modules-grid-header">
+        <span class="section-eyebrow">Plataforma integral</span>
+        <h2 id="modules-title">Todo lo que necesitas para explorar frutas liofilizadas</h2>
+        <p class="section-lead">
+          Ocho módulos científicos interconectados que cubren desde la composición hasta la predicción con inteligencia
+          artificial.
         </p>
       </div>
 
-      <div class="self-center overflow-hidden rounded-lg bg-[#fff7e1] text-[#26351f]">
-        @for (note of harvestNotes; track note; let index = $index) {
-          <div class="grid grid-cols-[4rem_1fr] gap-4 p-6 max-[800px]:grid-cols-1">
-            <strong class="text-2xl text-[#c66b2b]">0{{ index + 1 }}</strong>
-            <p class="m-0 leading-relaxed text-[#536047]">{{ note }}</p>
+      <div class="modules-grid">
+        @for (mod of appModules; track mod.name) {
+        <div class="module-card cursor-pointer" [style.--module-accent]="mod.color" (click)="openLoginPrompt(mod)" (keydown.enter)="openLoginPrompt(mod)" tabindex="0" role="button">
+          <span class="module-card-badge">
+            <mat-icon fontSet="material-symbols-outlined">lock</mat-icon>
+            Explora
+          </span>
+          <div class="module-card-icon" [style.background]="mod.color + '14'" [style.color]="mod.color">
+            <mat-icon fontSet="material-symbols-outlined">{{ mod.icon }}</mat-icon>
           </div>
-          @if (index < harvestNotes.length - 1) {
-            <div class="h-px bg-[#26351f1f]"></div>
-          }
+          <h3>{{ mod.name }}</h3>
+          <p>{{ mod.description }}</p>
+        </div>
         }
       </div>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════════
+       NUEVA SECCIÓN: Módulo destacado 1 — Comparador
+       ═══════════════════════════════════════════ -->
+  <section class="featured-module-section featured-module-section--light" aria-labelledby="featured-1-title">
+    <div class="featured-module-container">
+      <div class="featured-content">
+        <span class="section-eyebrow">{{ featuredModules[0].eyebrow }}</span>
+        <h2 id="featured-1-title">{{ featuredModules[0].title }}</h2>
+        <p class="featured-description">{{ featuredModules[0].description }}</p>
+        <ul class="featured-highlights">
+          @for (item of featuredModules[0].highlights; track item) {
+          <li>
+            <mat-icon fontSet="material-symbols-outlined">check_circle</mat-icon>
+            {{ item }}
+          </li>
+          }
+        </ul>
+      </div>
+      <div class="featured-visual">
+        <div class="featured-icon-showcase">
+          <div class="featured-icon-ring"></div>
+          <div class="featured-icon-ring-inner"></div>
+          <div class="featured-icon-glow" [style.background]="featuredModules[0].color"></div>
+          <div class="featured-icon-main"
+            [style.background]="'linear-gradient(135deg, ' + featuredModules[0].color + ', ' + featuredModules[0].color + 'cc)'"
+            style="color: #fff">
+            <mat-icon fontSet="material-symbols-outlined">{{ featuredModules[0].icon }}</mat-icon>
+          </div>
+          <span class="featured-orbit-dot featured-orbit-dot--1" [style.background]="featuredModules[0].color"></span>
+          <span class="featured-orbit-dot featured-orbit-dot--2" [style.background]="featuredModules[0].color"></span>
+          <span class="featured-orbit-dot featured-orbit-dot--3" [style.background]="featuredModules[0].color"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       NUEVA SECCIÓN: Módulo destacado 2 — Mapa Bioactivo
+       ═══════════════════════════════════════════ -->
+  <section class="featured-module-section featured-module-section--dark featured-module-section--reverse"
+    aria-labelledby="featured-2-title">
+    <div class="featured-module-container">
+      <div class="featured-content">
+        <span class="section-eyebrow">{{ featuredModules[1].eyebrow }}</span>
+        <h2 id="featured-2-title">{{ featuredModules[1].title }}</h2>
+        <p class="featured-description">{{ featuredModules[1].description }}</p>
+        <ul class="featured-highlights">
+          @for (item of featuredModules[1].highlights; track item) {
+          <li>
+            <mat-icon fontSet="material-symbols-outlined">check_circle</mat-icon>
+            {{ item }}
+          </li>
+          }
+        </ul>
+      </div>
+      <div class="featured-visual">
+        <div class="featured-icon-showcase">
+          <div class="featured-icon-ring"></div>
+          <div class="featured-icon-ring-inner"></div>
+          <div class="featured-icon-glow" [style.background]="featuredModules[1].color"></div>
+          <div class="featured-icon-main"
+            [style.background]="'linear-gradient(135deg, ' + featuredModules[1].color + ', ' + featuredModules[1].color + 'cc)'"
+            style="color: #fff">
+            <mat-icon fontSet="material-symbols-outlined">{{ featuredModules[1].icon }}</mat-icon>
+          </div>
+          <span class="featured-orbit-dot featured-orbit-dot--1" [style.background]="featuredModules[1].color"></span>
+          <span class="featured-orbit-dot featured-orbit-dot--2" [style.background]="featuredModules[1].color"></span>
+          <span class="featured-orbit-dot featured-orbit-dot--3" [style.background]="featuredModules[1].color"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       NUEVA SECCIÓN: Módulo destacado 3 — Lab de Mixes
+       ═══════════════════════════════════════════ -->
+  <section class="featured-module-section featured-module-section--accent" aria-labelledby="featured-3-title">
+    <div class="featured-module-container">
+      <div class="featured-content">
+        <span class="section-eyebrow">{{ featuredModules[2].eyebrow }}</span>
+        <h2 id="featured-3-title">{{ featuredModules[2].title }}</h2>
+        <p class="featured-description">{{ featuredModules[2].description }}</p>
+        <ul class="featured-highlights">
+          @for (item of featuredModules[2].highlights; track item) {
+          <li>
+            <mat-icon fontSet="material-symbols-outlined">check_circle</mat-icon>
+            {{ item }}
+          </li>
+          }
+        </ul>
+      </div>
+      <div class="featured-visual">
+        <div class="featured-icon-showcase">
+          <div class="featured-icon-ring"></div>
+          <div class="featured-icon-ring-inner"></div>
+          <div class="featured-icon-glow" [style.background]="featuredModules[2].color"></div>
+          <div class="featured-icon-main"
+            [style.background]="'linear-gradient(135deg, ' + featuredModules[2].color + ', ' + featuredModules[2].color + 'cc)'"
+            style="color: #fff">
+            <mat-icon fontSet="material-symbols-outlined">{{ featuredModules[2].icon }}</mat-icon>
+          </div>
+          <span class="featured-orbit-dot featured-orbit-dot--1" [style.background]="featuredModules[2].color"></span>
+          <span class="featured-orbit-dot featured-orbit-dot--2" [style.background]="featuredModules[2].color"></span>
+          <span class="featured-orbit-dot featured-orbit-dot--3" [style.background]="featuredModules[2].color"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       NUEVA SECCIÓN: Footer
+       ═══════════════════════════════════════════ -->
+  <footer class="home-footer">
+    <div class="home-footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>Frutas Liofilizadas EC</h3>
+          <p>Plataforma científica para conocer, comparar y valorizar frutas ecuatorianas liofilizadas e infusiones
+            derivadas.</p>
+        </div>
+        <div class="footer-cta">
+          <a routerLink="/signup">Crear cuenta gratis</a>
+          <a routerLink="/signin">Iniciar sesión</a>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <span>© 2026 Frutas Liofilizadas. Proyecto de investigación.</span>
+      </div>
+    </div>
+  </footer>
 
 </div>

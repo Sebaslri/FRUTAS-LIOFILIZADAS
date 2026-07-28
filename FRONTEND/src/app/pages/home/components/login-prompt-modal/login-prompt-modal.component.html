@@ -1,0 +1,24 @@
+<div class="login-prompt-dialog">
+  <button class="close-button" (click)="close()" aria-label="Cerrar modal">
+    <mat-icon fontSet="material-symbols-outlined">close</mat-icon>
+  </button>
+
+  <div class="icon-container" [style.background]="data.color + '1a'" [style.color]="data.color">
+    <mat-icon fontSet="material-symbols-outlined" class="main-icon">{{ data.icon }}</mat-icon>
+    <div class="icon-glow" [style.background]="data.color"></div>
+  </div>
+
+  <h2>{{ data.moduleName }}</h2>
+  <p class="description">
+    Para explorar este módulo y descubrir todo su potencial, necesitas iniciar sesión en tu cuenta.
+  </p>
+
+  <div class="actions">
+    <a routerLink="/signin" class="btn-primary" (click)="close()">
+      Iniciar sesión
+    </a>
+    <a routerLink="/signup" class="btn-secondary" (click)="close()">
+      Crear una cuenta
+    </a>
+  </div>
+</div>
