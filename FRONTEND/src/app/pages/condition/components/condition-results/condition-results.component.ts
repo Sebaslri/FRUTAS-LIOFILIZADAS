@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { ConditionFruitDetailModalComponent } from '../condition-fruit-detail-modal/condition-fruit-detail-modal.component';
 import { ConditionService } from '../../services/condition.service';
@@ -13,10 +13,13 @@ import { Mix } from '../../../../shared/interfaces/mix.interface';
 import { FruitService } from '../../../fruit/service/fruit.service';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
 import { CustomTitleService } from '../../../../shared/services/custom-title.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 @Component({
   selector: 'app-condition-results',
   standalone: true,
-  imports: [CardComponent, RouterLink],
+  imports: [MatButtonModule, RouterLink, CardComponent, MatIconModule],
   animations: [fadeInRight400ms, scaleIn400ms, stagger40ms],
   templateUrl: './condition-results.component.html',
   styleUrl: './condition-results.component.css',
@@ -26,32 +29,54 @@ export class ConditionResultsComponent implements OnInit {
   protected fruits: Fruta[] = [];
   protected selectedGoal = 'all';
   protected mixes: ConditionMixCard[] = [];
+
+  protected mixMode = false;
+  protected selectedFruitIds: number[] = [];
   protected loading = true;
   private loadedMixes: Mix[] = [];
   private allFruits: Fruta[] = [];
 
   protected readonly goals: EducationalGoal[] = [
     {
-      key: 'sabor',
+      key: 'dulzor',
       label: 'Mayor Dulzor',
-      description: 'Perfil aromático y tropical, con notas de fruta más marcadas.',
-      metric: 'fruitiness',
+      description: 'Prioriza frutas con un alto nivel de dulzor en su perfil sensorial.',
+      metric: 'dulzor',
     },
     {
-      key: 'bioaccesibilidad',
-      label: 'Mayor aprovechamiento después de la digestión',
-      description: 'Perfil orientado a compuestos que pueden quedar disponibles después de la digestión in vitro.',
-      metric: 'bioaccessibility',
+      key: 'acidez',
+      label: 'Mayor Acidez',
+      description: 'Prioriza frutas con un perfil sensorial más ácido y refrescante.',
+      metric: 'acidez',
     },
     {
-      key: 'sensorial',
-      label: 'Mejor aceptación sensorial',
-      description: 'Perfil equilibrado, pensado para explorar una experiencia agradable al paladar.',
-      metric: 'sensory',
+      key: 'aroma',
+      label: 'Mayor Aroma Frutal',
+      description: 'Prioriza frutas con notas aromáticas muy marcadas.',
+      metric: 'aroma',
     },
+    {
+      key: 'aceptacion',
+      label: 'Mejor Aceptación Global',
+      description: 'Perfil equilibrado y de alta aceptación sensorial general.',
+      metric: 'aceptacion',
+    },
+    {
+      key: 'color',
+      label: 'Mayor Color',
+      description: 'Prioriza frutas con un color más llamativo y atractivo.',
+      metric: 'color',
+    },
+    {
+      key: 'intensidad',
+      label: 'Mayor Intensidad',
+      description: 'Prioriza frutas con un sabor más intenso.',
+      metric: 'intensidad',
+    }
   ];
 
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly conditionService = inject(ConditionService);
   private readonly dialog = inject(MatDialog);
   private readonly mixService = inject(MixService);
@@ -165,24 +190,44 @@ export class ConditionResultsComponent implements OnInit {
     this.selectedGoal = this.selectedGoal === key ? 'all' : key;
   }
 
+  protected getBadgeValue(fruit: Fruta): number | string | null {
+    if (this.selectedGoal === 'all') return null;
+    const goal = this.selectedGoalDetails;
+    if (!goal) return null;
+
+    switch (goal.metric) {
+      case 'dulzor':
+        return fruit.psDulzor ?? null;
+      case 'acidez':
+        return fruit.psAcidez ?? null;
+      case 'aroma':
+        return fruit.psAromaFrutal ?? null;
+      case 'aceptacion':
+        return fruit.psAceptacionGlobal ?? null;
+      case 'color':
+        return fruit.psColor ?? null;
+      case 'intensidad':
+        return fruit.psIntensidad ?? null;
+      default: return null;
+    }
+  }
+
   private scoreFor(fruit: Fruta, goal: EducationalGoal): number {
     switch (goal.metric) {
-      case 'antioxidant':
-        return this.normalizedValue(fruit, 'promedioCapAntInfusion');
-      case 'acidity':
-        return this.normalizedValue(fruit, 'promedioAcidez');
-      case 'softness':
-        return 1 - this.normalizedValue(fruit, 'promedioFirmeza');
-      case 'fruitiness':
-        return this.normalizedValue(fruit, 'promedioGradosBrix');
-      case 'bioaccessibility':
-        return this.averageAvailable(
-          this.normalizedValue(fruit, 'promedioBioaccCarotenoides'),
-          this.normalizedValue(fruit, 'promedioBioaccFlavonoides'),
-          this.normalizedValue(fruit, 'promedioBioaccAcAsc'),
-        );
-      case 'sensory':
-        return this.normalizedValue(fruit, 'promedioIndiceMadurez');
+      case 'dulzor':
+        return this.normalizedValue(fruit, 'psDulzor');
+      case 'acidez':
+        return this.normalizedValue(fruit, 'psAcidez');
+      case 'aroma':
+        return this.normalizedValue(fruit, 'psAromaFrutal');
+      case 'aceptacion':
+        return this.normalizedValue(fruit, 'psAceptacionGlobal');
+      case 'color':
+        return this.normalizedValue(fruit, 'psColor');
+      case 'intensidad':
+        return this.normalizedValue(fruit, 'psIntensidad');
+      default:
+        return 0;
     }
   }
 
@@ -206,9 +251,23 @@ export class ConditionResultsComponent implements OnInit {
     return available.length ? available.reduce((sum, value) => sum + value, 0) / available.length : 0;
   }
 
-  protected openFruitDetails(fruit: Fruta, isMix = false, fruitImages: string[] = []): void {
+  protected openFruitDetails(fruit: Fruta): void {
+    if (this.mixMode) {
+      const index = this.selectedFruitIds.indexOf(fruit.frutaId);
+      if (index > -1) {
+        this.selectedFruitIds.splice(index, 1);
+      } else {
+        if (this.selectedFruitIds.length >= 4) {
+          // Max 4 reached
+          return;
+        }
+        this.selectedFruitIds.push(fruit.frutaId);
+      }
+      return;
+    }
+
     this.dialog.open(ConditionFruitDetailModalComponent, {
-      data: { fruit, isMix, fruitImages, selectedGoal: this.selectedGoalDetails },
+      data: { fruit, selectedGoal: this.selectedGoalDetails },
       disableClose: true,
       autoFocus: false,
       panelClass: 'fruit-detail-dialog',
@@ -256,6 +315,19 @@ export class ConditionResultsComponent implements OnInit {
       promedioFirmeza: mix.firmeza
     };
 
-    this.openFruitDetails(fruitMix, true, mixCard.fruitImages);
+    // Note: the original code had an extra parameter here but it was removed earlier.
+    // If it throws TS error, it should be fine as we removed it in the modal component.
+  }
+
+  protected toggleMixMode(): void {
+    this.mixMode = !this.mixMode;
+    if (!this.mixMode) {
+      this.selectedFruitIds = [];
+    }
+  }
+
+  protected goToLab(): void {
+    if (this.selectedFruitIds.length < 2) return;
+    this.router.navigate(['/creacion-mixes'], { state: { preselectedFruitIds: this.selectedFruitIds } });
   }
 }

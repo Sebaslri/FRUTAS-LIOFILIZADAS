@@ -13,7 +13,7 @@ export class ConsumerEducationService {
         title: 'Liofilización',
         icon: '🧊',
         shortDescription: 'Deshidratación en frío.',
-        detailedExplanation: 'Es un proceso donde congelamos la fruta y extraemos el agua al vacío sin usar calor extremo. A diferencia del deshidratado común, no se queman ni se destruyen las vitaminas.',
+        detailedExplanation: 'La liofilización es un método de conservación que elimina el agua mediante congelación y sublimación, permitiendo mantener mejor el color, aroma, sabor y compuestos bioactivos de los alimentos.',
         analogy: 'Imagina que le ponemos "pausa" a la fruta cuando está más fresca, retirándole solo el agua. ¡Al volver a hidratarla, despierta con todos sus superpoderes!',
         colorClass: 'card-blue'
       },
@@ -22,7 +22,7 @@ export class ConsumerEducationService {
         title: 'Compuestos Bioactivos',
         icon: '✨',
         shortDescription: 'Nutrientes que dan vida.',
-        detailedExplanation: 'Son moléculas especiales presentes en las plantas (como vitaminas y pigmentos) que, además de nutrirte, tienen un efecto directo promoviendo tu salud y previniendo enfermedades.',
+        detailedExplanation: 'Son sustancias naturales presentes en frutas y vegetales que, además de aportar valor nutricional, ejercen efectos beneficiosos sobre la salud.',
         analogy: 'Son como el "ejército secreto" de la fruta. No solo te dan energía, sino que patrullan tu cuerpo reparando daños.',
         colorClass: 'card-green'
       },
@@ -31,7 +31,7 @@ export class ConsumerEducationService {
         title: 'Poder Antioxidante',
         icon: '🛡️',
         shortDescription: 'El escudo protector.',
-        detailedExplanation: 'Nuestras células se oxidan y envejecen por factores como el estrés y la contaminación (radicales libres). Los antioxidantes neutralizan este daño.',
+        detailedExplanation: 'Es la capacidad que tienen ciertos compuestos para neutralizar los radicales libres y disminuir el daño oxidativo en las células.',
         analogy: 'Piensa en una manzana cortada que se vuelve marrón al aire. Los antioxidantes son como el jugo de limón que le pones encima para que se mantenga fresca e intacta.',
         colorClass: 'card-purple'
       },
@@ -40,7 +40,7 @@ export class ConsumerEducationService {
         title: 'Bioaccesibilidad',
         icon: '🧬',
         shortDescription: 'Lo que realmente absorbes.',
-        detailedExplanation: 'No sirve de nada comer 100mg de vitamina C si tu cuerpo solo absorbe 10mg. La bioaccesibilidad mide qué porcentaje de nutrientes realmente entra a tu sistema tras la digestión.',
+        detailedExplanation: 'Es la fracción de un compuesto presente en un alimento que se libera durante la digestión y queda disponible para ser absorbida por el organismo.',
         analogy: 'Es la diferencia entre el dinero que te pagan (lo que comes) y el dinero que te queda después de impuestos (lo que realmente llega a tu sangre).',
         colorClass: 'card-orange'
       }

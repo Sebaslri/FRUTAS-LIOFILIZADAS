@@ -19,9 +19,7 @@
     <aside class="sensory-note">
       <mat-icon fontSet="material-symbols-outlined">lightbulb</mat-icon>
       <p>
-        Las barras muestran una escala relativa de 0 a 100 entre las frutas disponibles. Aroma, intensidad y
-        aceptación son indicadores orientativos calculados desde las mediciones fisicoquímicas; no sustituyen una
-        prueba de consumidores.
+        Las barras muestran una escala del 1 al 10 obtenida de las evaluaciones del perfil sensorial de cada fruta. Los datos son de carácter orientativo.
       </p>
     </aside>
 
@@ -65,22 +63,6 @@
         } @empty {
           <p class="empty-state">No hay frutas disponibles para construir el perfil.</p>
         }
-        @for (mix of mixes; track mix.mixId) {
-          <button
-            type="button"
-            class="fruit-option mix-option"
-            [class.fruit-option-active]="selectedFruit?.frutaId === mix.mixId && selectedIsMix"
-            [attr.aria-pressed]="selectedFruit?.frutaId === mix.mixId && selectedIsMix"
-            (click)="selectMix(mix)"
-          >
-            <div class="sensory-mix-circle">
-              @for (img of mix.fruitImages; track img; let i = $index) {
-                <img [src]="img" alt="" class="sensory-circle-img" [class]="'img-' + i" />
-              }
-            </div>
-            <span>{{ mix.frutas }}</span>
-          </button>
-        }
       </div>
     </section>
     }
@@ -89,20 +71,12 @@
       <section class="profile-section" aria-labelledby="profile-title" aria-live="polite">
         <header class="profile-selected-header">
           <div class="selected-fruit-identity">
-            @if (selectedIsMix) {
-              <div class="mix-images-circle-large">
-                @for (img of selectedMixImages; track img; let i = $index) {
-                  <img [src]="img" alt="" class="mix-circle-img-large" [class]="'img-' + i" />
-                }
-              </div>
-            } @else {
-              <img
-                [src]="profile.fruit.imagen || '/images/fruit-hero.png'"
-                [alt]="'Imagen de ' + profile.fruit.nombreComun"
-              />
-            }
+            <img
+              [src]="profile.fruit.imagen || '/images/fruit-hero.png'"
+              [alt]="'Imagen de ' + profile.fruit.nombreComun"
+            />
             <div>
-              <p class="eyebrow">2 · {{ selectedIsMix ? 'Perfil del mix' : 'Perfil de la fruta' }}</p>
+              <p class="eyebrow">2 · Perfil de la fruta</p>
               <h2 id="profile-title">{{ profile.fruit.nombreComun }}</h2>
               <p>{{ profile.fruit.nombreCientifico }}</p>
             </div>
@@ -122,10 +96,10 @@
                 <p class="eyebrow">Comparación rápida</p>
                 <h3>Así se percibe el perfil</h3>
               </div>
-              <span class="scale-label">0 · bajo&nbsp;&nbsp; 100 · alto</span>
+              <span class="scale-label">0 · bajo&nbsp;&nbsp; 10 · alto</span>
             </div>
 
-            <div class="bar-list" role="list" aria-label="Indicadores sensoriales en escala de cero a cien">
+            <div class="bar-list" role="list" aria-label="Indicadores sensoriales en escala de cero a diez">
               @for (metric of profile.metrics; track metric.key) {
                 <div class="bar-row" [class.bar-row-empty]="metric.value === null">
                   <div class="bar-label">
@@ -138,7 +112,7 @@
                     [attr.aria-label]="metric.label"
                     [attr.aria-valuenow]="roundedScore(metric.value)"
                     aria-valuemin="0"
-                    aria-valuemax="100"
+                    aria-valuemax="10"
                   >
                     <span class="bar-fill" [style.width.%]="scoreWidth(metric.value)" [style.background]="metric.color"></span>
                   </div>
@@ -180,10 +154,6 @@
           </article>
         </div>
 
-        <button type="button" class="sensory-info-button" (click)="openInfo()">
-          <mat-icon fontSet="material-symbols-outlined">info</mat-icon>
-          <span>¿Cómo se calcula este promedio?</span>
-        </button>
       </section>
     }
 

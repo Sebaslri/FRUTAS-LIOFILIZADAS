@@ -1,19 +1,35 @@
 <mat-card
   class="fruit-card"
+  [class.fruit-card-selected]="isSelected"
+  [class.fruit-card-selectable]="mixMode"
   appearance="outlined"
   [style.--fruit-color]="accentColor"
   [attr.aria-label]="'Ver detalles de ' + fruit.nombreComun"
   (click)="requestDetails()"
 >
-  <img
-    class="fruit-image"
-    [src]="fruit.imagen || '/images/fruit-hero.png'"
-    [alt]="'Imagen de ' + fruit.nombreComun"
-  />
+  <div class="fruit-image-container">
+    <img
+      class="fruit-image"
+      [src]="fruit.imagen || '/images/fruit-hero.png'"
+      [alt]="'Imagen de ' + fruit.nombreComun"
+    />
+    @if (isSelected) {
+      <div class="selection-overlay">
+        <mat-icon fontSet="material-symbols-outlined">check_circle</mat-icon>
+      </div>
+    }
+  </div>
 
   <mat-card-header>
-    <mat-card-title>{{ fruit.nombreComun }}</mat-card-title>
-    <mat-card-subtitle>{{ fruit.nombreCientifico }}</mat-card-subtitle>
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+      <div style="flex: 1;">
+        <mat-card-title>{{ fruit.nombreComun }}</mat-card-title>
+        <mat-card-subtitle>{{ fruit.nombreCientifico }}</mat-card-subtitle>
+      </div>
+      @if (badgeValue) {
+        <span class="card-badge">{{ badgeValue }}</span>
+      }
+    </div>
   </mat-card-header>
 
   <mat-card-content>

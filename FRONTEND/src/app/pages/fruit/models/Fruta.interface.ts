@@ -38,4 +38,10 @@ export interface Fruta {
     promedioActAntioxDpphInf90?: number | null;
     promedioFenolesTotalesInf22?: number | null;
     promedioFenolesTotalesInf90?: number | null;
+    psDulzor?: number | null;
+    psAcidez?: number | null;
+    psAromaFrutal?: number | null;
+    psColor?: number | null;
+    psIntensidad?: number | null;
+    psAceptacionGlobal?: number | null;
 }

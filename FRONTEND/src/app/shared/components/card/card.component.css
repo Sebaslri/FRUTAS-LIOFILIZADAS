@@ -28,16 +28,56 @@
   content: '';
 }
 
-.fruit-image {
+.fruit-card:hover {
+  transform: translateY(-0.35rem);
+  box-shadow: 0 26px 60px rgba(63, 72, 42, 0.18);
+}
+
+.fruit-card-selectable {
+  border-width: 2px;
+}
+
+.fruit-card-selected {
+  border-color: #4caf50;
+  background-color: #f1f8e9;
+  box-shadow: 0 0 0 2px #4caf50, 0 12px 30px rgba(76, 175, 80, 0.2);
+}
+
+.fruit-card-selected::before {
+  background: #4caf50;
+}
+
+.fruit-image-container {
+  position: relative;
   width: 100%;
   height: 12rem;
+}
+
+.fruit-image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   background: #f6efdf;
 }
 
-.fruit-card:hover {
-  transform: translateY(-0.35rem);
-  box-shadow: 0 26px 60px rgba(63, 72, 42, 0.18);
+.selection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(76, 175, 80, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selection-overlay mat-icon {
+  font-size: 4rem;
+  width: 4rem;
+  height: 4rem;
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
 }
 
 mat-card-header {
@@ -56,6 +96,21 @@ mat-card-subtitle {
   color: #6b774f;
   font-style: italic;
   font-weight: 600;
+}
+
+.card-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.5rem;
+  border-radius: 999px;
+  background: #ffecb3;
+  color: #a36100;
+  font-size: 0.9rem;
+  font-weight: 900;
+  box-shadow: 0 2px 4px rgba(163, 97, 0, 0.15);
 }
 
 mat-card-content {

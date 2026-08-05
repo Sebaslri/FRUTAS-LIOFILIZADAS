@@ -29,7 +29,7 @@ export class FruitComparisonTableModalComponent {
     }
 
     const formatted = new Intl.NumberFormat('es-EC', { maximumFractionDigits: 2 }).format(value);
-    return unit ? `${formatted} ${unit}` : formatted;
+    return unit ? (unit.startsWith('/') ? `${formatted}${unit}` : `${formatted} ${unit}`) : formatted;
   }
 
   protected formatPercentage(value: number | null): string {

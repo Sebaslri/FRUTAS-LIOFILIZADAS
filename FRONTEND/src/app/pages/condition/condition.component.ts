@@ -27,12 +27,12 @@ export class Condition implements OnInit {
   protected loading = true;
 
   protected readonly educationalGoals = [
-    { title: 'Más antioxidante', text: 'Explora frutas con perfiles ricos en compuestos bioactivos.' },
-    { title: 'Más ácida', text: 'Encuentra opciones de sabor intenso y refrescante.' },
-    { title: 'Más suave', text: 'Prioriza perfiles delicados para una infusión ligera.' },
-    { title: 'Más frutal', text: 'Busca aromas tropicales y notas marcadas de fruta.' },
-    { title: 'Mayor bioaccesibilidad', text: 'Compara opciones para estudiar compuestos disponibles tras la digestión in vitro.' },
-    { title: 'Mejor aceptación sensorial', text: 'Orienta la exploración hacia perfiles agradables y equilibrados.' },
+    { title: 'Mayor Dulzor', text: 'Prioriza frutas con un alto nivel de dulzor en su perfil sensorial.' },
+    { title: 'Mayor Acidez', text: 'Prioriza frutas con un perfil sensorial más ácido y refrescante.' },
+    { title: 'Mayor Aroma Frutal', text: 'Prioriza frutas con notas aromáticas muy marcadas.' },
+    { title: 'Mejor Aceptación Global', text: 'Perfil equilibrado y de alta aceptación sensorial general.' },
+    { title: 'Mayor Color', text: 'Prioriza frutas con un color más llamativo y atractivo.' },
+    { title: 'Mayor Intensidad', text: 'Prioriza frutas con un sabor más intenso.' }
   ];
 
   ngOnInit(): void {

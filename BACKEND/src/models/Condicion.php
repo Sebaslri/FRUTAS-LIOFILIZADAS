@@ -26,6 +26,12 @@ class Condicion
         $query = "SELECT f.frutaId, f.nombreComun, f.nombreCientifico, f.descripcion, f.imagen,
                          GROUP_CONCAT(DISTINCT r.descripcion ORDER BY r.regionId SEPARATOR ', ') AS region,
                          GROUP_CONCAT(DISTINCT p.descripcion ORDER BY p.provinciaId SEPARATOR '||') AS provincias,
+                         ps.dulzor as psDulzor,
+                         ps.acidez as psAcidez,
+                         ps.aromaFrutal as psAromaFrutal,
+                         ps.color as psColor,
+                         ps.intensidad as psIntensidad,
+                         ps.aceptacionGlobal as psAceptacionGlobal,
                          propertyAverages.promedioAcidez,
                          propertyAverages.promedioFirmeza,
                          propertyAverages.promedioGradosBrix,
@@ -57,6 +63,7 @@ class Condicion
                   LEFT JOIN frutaprovincia fp ON fp.frutaId = f.frutaId
                   LEFT JOIN provincia p ON p.provinciaId = fp.provinciaId
                   LEFT JOIN region r ON r.regionId = p.regionId
+                  LEFT JOIN perfilsensorial ps ON ps.frutaId = f.frutaId
                   LEFT JOIN (
                     SELECT fp2.frutaId,
                            AVG(prop.acidez) AS promedioAcidez,
@@ -91,6 +98,7 @@ class Condicion
                   ) propertyAverages ON propertyAverages.frutaId = f.frutaId
                   WHERE fc.condicionId = :condicionId
                   GROUP BY f.frutaId, f.nombreComun, f.nombreCientifico, f.descripcion, f.imagen,
+                           ps.dulzor, ps.acidez, ps.aromaFrutal, ps.color, ps.intensidad, ps.aceptacionGlobal,
                            propertyAverages.promedioAcidez, propertyAverages.promedioFirmeza,
                            propertyAverages.promedioGradosBrix, propertyAverages.promedioIndiceMadurez,
                            propertyAverages.promedioCapAntInfusion, propertyAverages.promedioCapAntDigerido,

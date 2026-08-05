@@ -39,9 +39,17 @@ export class MixCreationComponent implements OnInit {
   }
 
   loadFruits() {
+    const state = window.history.state;
+    const preselectedIds: number[] = state?.preselectedFruitIds || [];
+
     this._fruitService.getAll().subscribe({
       next: (frutas) => {
-        this.availableFruits = frutas;
+        if (preselectedIds.length > 0) {
+          this.availableFruits = frutas.filter(f => !preselectedIds.includes(f.frutaId));
+          this.mixerFruits = frutas.filter(f => preselectedIds.includes(f.frutaId));
+        } else {
+          this.availableFruits = frutas;
+        }
       },
       error: (err) => {
         console.error('Error cargando frutas:', err);
@@ -158,27 +166,27 @@ export class MixCreationComponent implements OnInit {
         title: '🌟 Excelente Consistencia',
         text: 'La diferencia entre MAE y RMSE es mínima. Esto significa que el modelo de IA es sumamente estable y sus errores son uniformes; rara vez se desvía drásticamente al calcular la interacción de tu mezcla.',
         bgColor: 'bg-green-50',
-        borderColor: 'border-green-200',
+        borderColor: 'border-green-400',
         textColor: 'text-green-800',
-        icon: 'verified'
+        icon: 'check_circle'
       };
     } else if (diff > (this.modelMetrics.mae * 0.6)) {
       return {
         title: '⚠️ Variaciones Atípicas Detectadas',
         text: 'El RMSE es notablemente mayor que el MAE. Esto sugiere que, aunque el modelo suele ser preciso, esta combinación particular de frutas genera una predicción con posibles errores más grandes de lo normal (outliers).',
-        bgColor: 'bg-orange-50',
-        borderColor: 'border-orange-200',
-        textColor: 'text-orange-800',
-        icon: 'warning'
+        bgColor: 'bg-red-50',
+        borderColor: 'border-red-400',
+        textColor: 'text-red-800',
+        icon: 'error'
       };
     } else {
       return {
         title: '📊 Consistencia Moderada',
         text: 'Existe una diferencia normal entre el MAE y RMSE. El modelo tiene una exactitud sólida, presentando solo variaciones naturales y esperadas al evaluar la compleja interacción bioquímica de estas frutas.',
-        bgColor: 'bg-blue-50',
-        borderColor: 'border-blue-200',
-        textColor: 'text-blue-800',
-        icon: 'info'
+        bgColor: 'bg-yellow-50',
+        borderColor: 'border-yellow-400',
+        textColor: 'text-yellow-800',
+        icon: 'warning'
       };
     }
   }

@@ -1,3 +1,8 @@
+# Comando para levantar el servidor de ML localmente:
+# Asegúrate de estar en la carpeta ML_BACKEND en la terminal:
+# cd ML_BACKEND
+# uvicorn main:app --reload --port 8000
+
 fastapi
 uvicorn
 pydantic

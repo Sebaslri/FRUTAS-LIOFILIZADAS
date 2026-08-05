@@ -35,45 +35,63 @@
       <span>{{ data.fruit.region }}</span>
     </div>
 
-    @if (data.selectedGoal) {
-      <div class="profile-heading">
-        <div>
-          <p class="fruit-eyebrow">Resultados del perfil seleccionado</p>
-          <h3>{{ data.selectedGoal.label }}</h3>
-        </div>
-      </div>
-
-      <section class="profile-panel">
-        <div class="profile-panel-heading">
-          <div class="profile-panel-icon" aria-hidden="true">
-            <mat-icon fontSet="material-symbols-outlined">analytics</mat-icon>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" style="margin-top: 1.5rem;">
+      @if (bioactiveCompounds.length > 0) {
+        <mat-tab label="Salud y Nutrición">
+          <div style="padding-top: 1.5rem;">
+            <mat-accordion class="compounds-accordion" multi>
+              @for (compound of bioactiveCompounds; track compound.name) {
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title style="display: flex; align-items: center; font-weight: 600; color: #26351f;">
+                      <mat-icon fontSet="material-symbols-outlined" style="font-size: 20px; width: 20px; height: 20px; margin-right: 8px; color: #77a642;">healing</mat-icon>
+                      {{ compound.name }}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <p style="color: #58634d; line-height: 1.6; margin: 0;">{{ compound.benefits }}</p>
+                </mat-expansion-panel>
+              }
+            </mat-accordion>
           </div>
-          <div>
-            <h3>Valores obtenidos</h3>
-            <p>{{ getExplanation(data.selectedGoal.metric) }}</p>
-          </div>
-        </div>
+        </mat-tab>
+      }
 
-        <div class="metric-grid">
-          @for (metric of getMetricsForGoal(data.selectedGoal.metric); track metric.key) {
-            <article class="metric-card" [class.metric-card-empty]="metricValue(metric) === 'Sin datos'">
-              <span>{{ metric.label }}</span>
-              <strong>{{ metricValue(metric) }}</strong>
-            </article>
+      <mat-tab label="Resultados del perfil seleccionado">
+        <div style="padding-top: 1.5rem;">
+          @if (data.selectedGoal) {
+            <section class="profile-panel" style="margin-top: 0;">
+              <div class="profile-panel-heading">
+                <div class="profile-panel-icon" aria-hidden="true">
+                  <mat-icon fontSet="material-symbols-outlined">analytics</mat-icon>
+                </div>
+                <div>
+                  <h3>{{ data.selectedGoal.label }}</h3>
+                  <p>{{ getExplanation(data.selectedGoal.metric) }}</p>
+                </div>
+              </div>
+
+              <div class="metric-grid">
+                @for (metric of getMetricsForGoal(data.selectedGoal.metric); track metric.key) {
+                  <article class="metric-card" [class.metric-card-empty]="metricValue(metric) === 'Sin datos'">
+                    <span>{{ metric.label }}</span>
+                    <strong>{{ metricValue(metric) }}</strong>
+                  </article>
+                }
+              </div>
+            </section>
+            <p class="data-note">
+              Los valores corresponden a promedios de los registros experimentales disponibles y son de carácter informativo.
+            </p>
+          } @else {
+            <div class="profile-heading" style="margin-bottom: 2rem;">
+              <div>
+                <p class="fruit-eyebrow">Nota</p>
+                <h3>Selecciona un perfil de infusión en la página anterior para ver los valores sensoriales específicos de esta fruta.</h3>
+              </div>
+            </div>
           }
         </div>
-      </section>
-
-      <p class="data-note">
-        Los valores corresponden a promedios de los registros experimentales disponibles y son de carácter informativo.
-      </p>
-    } @else {
-      <div class="profile-heading" style="margin-bottom: 2rem;">
-        <div>
-          <p class="fruit-eyebrow">Nota</p>
-          <h3>Selecciona un perfil de infusión para ver más detalles técnicos y entender sus valores.</h3>
-        </div>
-      </div>
-    }
+      </mat-tab>
+    </mat-tab-group>
   </section>
 </mat-dialog-content>

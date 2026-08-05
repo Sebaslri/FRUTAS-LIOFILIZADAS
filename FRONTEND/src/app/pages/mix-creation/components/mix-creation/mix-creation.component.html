@@ -11,41 +11,39 @@
         </div>
       </div>
       <p class="comparison-lead" data-stagger @fadeInRight400ms>
-        Arrastra las frutas a la licuadora y descubre el potencial antioxidante de tu mezcla con nuestro algoritmo de Inteligencia Artificial.
+        Arrastra las frutas a la licuadora y descubre el potencial antioxidante de tu mezcla con nuestro algoritmo de
+        Inteligencia Artificial.
       </p>
     </div>
 
     <!-- MAIN LAB WORKSPACE -->
     <div class="lab-grid" cdkDropListGroup>
-      
+
       <!-- LEFT: AVAILABLE FRUITS -->
       <section class="fruit-gallery" aria-labelledby="gallery-title" @fadeInRight400ms>
         <div class="section-heading">
           <h2 id="gallery-title">Ingredientes Disponibles</h2>
           <span class="gallery-hint">Arrastra hacia la licuadora</span>
         </div>
-        
+
         <div class="fruit-scroll-area custom-scrollbar">
-          <div
-            id="availableList"
-            cdkDropList
-            [cdkDropListData]="availableFruits"
-            [cdkDropListConnectedTo]="['mixerList']"
-            class="fruit-gallery-grid pb-4"
+          <div id="availableList" cdkDropList [cdkDropListData]="availableFruits"
+            [cdkDropListConnectedTo]="['mixerList']" class="fruit-gallery-grid pb-4"
             (cdkDropListDropped)="drop($event)">
-            
-            <article class="fruit-tile" 
-                *ngFor="let item of availableFruits" 
-                cdkDrag>
-              
+
+            <article class="fruit-tile" *ngFor="let item of availableFruits" cdkDrag>
+
               <img [src]="item.imagen || '/images/fruit-hero.png'" [alt]="item.nombreComun" draggable="false">
               <span>{{item.nombreComun}}</span>
               <small>Arrastrar</small>
-              
+
             </article>
-            
-            <div *ngIf="availableFruits.length === 0" class="col-span-full flex flex-col items-center justify-center text-gray-400 py-12" style="grid-column: 1 / -1;">
-              <mat-icon fontSet="material-symbols-outlined" class="text-5xl opacity-30 mb-2">remove_shopping_cart</mat-icon>
+
+            <div *ngIf="availableFruits.length === 0"
+              class="col-span-full flex flex-col items-center justify-center text-gray-400 py-12"
+              style="grid-column: 1 / -1;">
+              <mat-icon fontSet="material-symbols-outlined"
+                class="text-5xl opacity-30 mb-2">remove_shopping_cart</mat-icon>
               <p>No hay más frutas disponibles.</p>
             </div>
           </div>
@@ -56,40 +54,32 @@
       <section class="blender-section" aria-labelledby="blender-title" @fadeInRight400ms>
         <div class="section-heading">
           <h2 id="blender-title">Licuadora</h2>
-          <span class="gallery-hint" [class.text-red-500]="mixerFruits.length >= 4">{{mixerFruits.length}}/4 Ingredientes</span>
+          <span class="gallery-hint" [class.text-red-500]="mixerFruits.length >= 4">{{mixerFruits.length}}/4
+            Ingredientes</span>
         </div>
 
         <div class="blender-wrapper" [class.shake-animation]="isMixing">
           <!-- Tapa de la licuadora -->
           <div class="blender-lid"></div>
-          
-          <!-- Vaso de la licuadora (Drop Area) -->
-          <div
-            id="mixerList"
-            cdkDropList
-            [cdkDropListData]="mixerFruits"
-            [cdkDropListConnectedTo]="['availableList']"
-            class="blender-jar"
-            [class.spin-mixing]="isMixing"
-            (cdkDropListDropped)="drop($event)">
-            
-            <!-- Frutas arrastradas dentro de la licuadora -->
-            <img *ngFor="let item of mixerFruits" 
-                 [src]="item.imagen || '/images/fruit-hero.png'" 
-                 class="blender-fruit-item"
-                 cdkDrag>
 
-            <div *ngIf="mixerFruits.length === 0" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
-              <mat-icon fontSet="material-symbols-outlined" style="font-size: 64px; width: 64px; height: 64px; color: #fff;">blender</mat-icon>
+          <!-- Vaso de la licuadora (Drop Area) -->
+          <div id="mixerList" cdkDropList [cdkDropListData]="mixerFruits" [cdkDropListConnectedTo]="['availableList']"
+            class="blender-jar" [class.spin-mixing]="isMixing" (cdkDropListDropped)="drop($event)">
+
+            <!-- Frutas arrastradas dentro de la licuadora -->
+            <img *ngFor="let item of mixerFruits" [src]="item.imagen || '/images/fruit-hero.png'"
+              class="blender-fruit-item" cdkDrag>
+
+            <div *ngIf="mixerFruits.length === 0"
+              class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
+              <mat-icon fontSet="material-symbols-outlined"
+                style="font-size: 64px; width: 64px; height: 64px; color: #fff;">blender</mat-icon>
             </div>
           </div>
-          
+
           <!-- Base de la licuadora y Botón Mix -->
           <div class="blender-base">
-            <button 
-              class="blender-button" 
-              (click)="mix()"
-              [disabled]="isMixing || mixerFruits.length < 2"
+            <button class="blender-button" (click)="mix()" [disabled]="isMixing || mixerFruits.length < 2"
               [title]="mixerFruits.length < 2 ? 'Añade al menos 2 frutas' : 'Licuar!'">
               <mat-icon fontSet="material-symbols-outlined" [class.spin-icon]="isMixing">cyclone</mat-icon>
             </button>
@@ -100,75 +90,97 @@
     </div>
 
     <!-- MODEL METRICS SECTION -->
-    <div id="metrics-section" *ngIf="modelMetrics" class="max-w-7xl mx-auto mt-12 bg-white/90 backdrop-blur-md rounded-2xl shadow-xl border border-blue-100 p-8 animate-fade-in-up">
+    <div id="metrics-section" *ngIf="modelMetrics"
+      class="max-w-7xl mx-auto mt-12 bg-white/90 backdrop-blur-md rounded-2xl shadow-xl border border-blue-100 p-8 animate-fade-in-up">
       <div class="flex items-center mb-6">
         <mat-icon fontSet="material-symbols-outlined" class="text-blue-500 mr-3 text-3xl">psychology</mat-icon>
         <h2 class="text-2xl font-extrabold text-gray-800 m-0">Rendimiento del Modelo Predictivo (IA)</h2>
       </div>
-      
+
       <p class="text-gray-600 mb-8 max-w-4xl text-lg">
-        Las predicciones anteriores fueron generadas por nuestro algoritmo de redes neuronales. 
-        A continuación, te mostramos las métricas de exactitud que determinan la veracidad de nuestro modelo al predecir estos beneficios tras la digestión:
+        Las predicciones anteriores fueron generadas por nuestro algoritmo de redes neuronales.
+        A continuación, te mostramos las métricas de exactitud que determinan la veracidad de nuestro modelo al predecir
+        estos beneficios tras la digestión:
       </p>
-  
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- MAE Card -->
-        <div class="bg-gradient-to-br from-blue-50 to-blue-100/50 p-6 rounded-xl border border-blue-100 hover:shadow-md transition-shadow flex flex-col justify-between">
+        <div
+          class="bg-gradient-to-br from-amber-50 to-amber-100/50 p-6 rounded-xl border border-amber-200 hover:shadow-md transition-shadow flex flex-col justify-between">
           <div>
             <div class="flex justify-between items-start mb-2">
-              <h3 class="text-blue-800 font-bold text-lg m-0">MAE</h3>
+              <h3 class="text-amber-800 font-bold text-lg m-0">MAE</h3>
             </div>
-            <div class="text-5xl font-black text-blue-600 mb-4">{{ modelMetrics.mae }}</div>
-            <p class="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-2">Error Absoluto Medio</p>
+            <div class="text-5xl font-black text-amber-600 mb-4">{{ modelMetrics.mae }}</div>
+            <p class="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-2">Error Absoluto Medio</p>
           </div>
           <p class="text-sm text-gray-700 m-0">
-            Mide el promedio de los errores en las predicciones sin considerar su dirección. <strong>Un MAE más cercano a 0</strong> indica que las predicciones de bioaccesibilidad están muy cerca de los valores reales medidos en laboratorio.
+            Mide el promedio de los errores en las predicciones sin considerar su dirección. <strong>Un MAE más cercano
+              a 0</strong> indica que las predicciones de bioaccesibilidad están muy cerca de los valores reales medidos
+            en laboratorio.
           </p>
         </div>
-  
+
         <!-- RMSE Card -->
-        <div class="bg-gradient-to-br from-indigo-50 to-indigo-100/50 p-6 rounded-xl border border-indigo-100 hover:shadow-md transition-shadow flex flex-col justify-between">
+        <div
+          class="bg-gradient-to-br from-fuchsia-50 to-fuchsia-100/50 p-6 rounded-xl border border-fuchsia-200 hover:shadow-md transition-shadow flex flex-col justify-between">
           <div>
             <div class="flex justify-between items-start mb-2">
-              <h3 class="text-indigo-800 font-bold text-lg m-0">RMSE</h3>
+              <h3 class="text-fuchsia-800 font-bold text-lg m-0">RMSE</h3>
             </div>
-            <div class="text-5xl font-black text-indigo-600 mb-4">{{ modelMetrics.rmse }}</div>
-            <p class="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-2">Raíz del Error Cuadrático Medio</p>
+            <div class="text-5xl font-black text-fuchsia-600 mb-4">{{ modelMetrics.rmse }}</div>
+            <p class="text-xs font-semibold text-fuchsia-600 uppercase tracking-wider mb-2">Raíz del Error Cuadrático
+              Medio</p>
           </div>
           <p class="text-sm text-gray-700 m-0">
-            Similar al MAE, pero penaliza fuertemente los errores grandes. <strong>Un valor bajo</strong> asegura que el modelo no comete fallas extremas al calcular los flavonoides o la capacidad antioxidante de tu mix.
+            Similar al MAE, pero penaliza fuertemente los errores grandes. <strong>Un valor bajo</strong> asegura que el
+            modelo no comete fallas extremas al calcular los flavonoides o la capacidad antioxidante de tu mix.
           </p>
         </div>
-  
+
         <!-- R2 Card -->
-        <div class="bg-gradient-to-br from-emerald-50 to-emerald-100/50 p-6 rounded-xl border border-emerald-100 hover:shadow-md transition-shadow flex flex-col justify-between">
+        <div
+          class="bg-gradient-to-br from-cyan-50 to-cyan-100/50 p-6 rounded-xl border border-cyan-200 hover:shadow-md transition-shadow flex flex-col justify-between">
           <div>
             <div class="flex justify-between items-start mb-2">
-              <h3 class="text-emerald-800 font-bold text-lg m-0">R² Score</h3>
+              <h3 class="text-cyan-800 font-bold text-lg m-0">R² Score</h3>
             </div>
-            <div class="text-5xl font-black text-emerald-600 mb-4">{{ modelMetrics.r2 }}</div>
-            <p class="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-2">Coeficiente de Determinación</p>
+            <div class="text-5xl font-black text-cyan-600 mb-4">{{ modelMetrics.r2 }}</div>
+            <p class="text-xs font-semibold text-cyan-600 uppercase tracking-wider mb-2">Coeficiente de Determinación
+            </p>
           </div>
           <p class="text-sm text-gray-700 m-0">
-            Representa el porcentaje de varianza explicada por el modelo (de 0 a 1). <strong>Un valor de {{ modelMetrics.r2 }}</strong> significa que el algoritmo es altamente confiable y entiende perfectamente cómo interactúan estas frutas juntas.
+            Representa el porcentaje de varianza explicada por el modelo (de 0 a 1). <strong>Un valor de {{
+              modelMetrics.r2 }}</strong> significa que el algoritmo es altamente confiable y entiende perfectamente
+            cómo interactúan estas frutas juntas.
           </p>
         </div>
       </div>
-  
+
       <!-- Dynamic Metrics Comparison Message -->
-      <div class="mt-8 p-6 rounded-xl border-l-4 shadow-sm" *ngIf="getMetricsComparisonMessage() as msg" 
-           [ngClass]="msg.bgColor + ' ' + msg.borderColor">
-        <div class="flex items-start">
-          <mat-icon fontSet="material-symbols-outlined" class="mr-3 text-3xl" [ngClass]="msg.textColor">{{ msg.icon }}</mat-icon>
-          <div>
-            <h3 class="text-xl font-bold mb-2" [ngClass]="msg.textColor">{{ msg.title }}</h3>
+      <div class="mt-8 p-6 rounded-xl border-l-4 shadow-sm" *ngIf="getMetricsComparisonMessage() as msg"
+        [ngClass]="msg.bgColor + ' ' + msg.borderColor">
+
+        <!-- Usamos grid con dos columnas y aplicamos un gap para la separación -->
+        <div class="grid grid-cols-[auto_1fr] gap-4">
+
+          <!-- Contenedor del icono: height 100%, flex, align-items (items-center) y justify-content (justify-center) -->
+          <div class="h-full flex items-center justify-center">
+            <mat-icon fontSet="material-symbols-outlined" style="font-size: 32px; width: 32px; height: 32px;"
+              [ngClass]="msg.textColor">{{ msg.icon }}</mat-icon>
+          </div>
+
+          <!-- Contenedor de texto: Opcionalmente puedes usar flex aquí para centrar el texto verticalmente si lo deseas -->
+          <div class="flex flex-col justify-center">
+            <h3 class="text-xl font-bold mb-1" [ngClass]="msg.textColor">{{ msg.title }}</h3>
             <p class="text-base m-0 text-gray-700 font-medium">
               {{ msg.text }}
             </p>
           </div>
+
         </div>
       </div>
     </div>
-  
+
   </div>
 </main>

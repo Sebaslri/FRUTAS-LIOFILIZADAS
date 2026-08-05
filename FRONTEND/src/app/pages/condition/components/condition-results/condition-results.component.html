@@ -60,35 +60,37 @@
 
       <div class="results-grid">
         @for (fruit of visibleFruits; track fruit.frutaId) {
-          <app-card [fruit]="fruit" (detailsRequested)="openFruitDetails($event)" />
+          <app-card [fruit]="fruit" [badgeValue]="getBadgeValue(fruit)" 
+            [mixMode]="mixMode"
+            [isSelected]="selectedFruitIds.includes(fruit.frutaId)"
+            (detailsRequested)="openFruitDetails($event)" />
         } @empty {
           <p class="empty-results">No hay frutas asociadas todavía a esta condición.</p>
         }
       </div>
     </section>
 
-    @if (!loading && mixes.length) {
-      <section class="mix-recommendations" aria-labelledby="mix-title" @fadeInRight400ms>
-        <div class="results-section-heading">
-          <div>
-            <p class="eyebrow">Recomendación experimental</p>
-            <h2 id="mix-title">También puedes probar estos mixes</h2>
+    @if (!loading && visibleFruits.length > 0) {
+      <section class="mix-creation-banner" aria-labelledby="mix-creation-title" @fadeInRight400ms>
+        <div class="mix-banner-content">
+          <div class="mix-banner-text">
+            <h2 id="mix-creation-title">¿Deseas hacer un mix en el laboratorio con estas frutas?</h2>
+            <p>Selecciona hasta 4 frutas y pon a prueba tu propia infusión.</p>
           </div>
-          <span class="results-count">{{ mixes.length }} disponibles</span>
-        </div>
-        <div class="mix-grid">
-          @for (mix of mixes; track mix.mixId) {
-            <article class="mix-card mix-card-clickable" (click)="openMixDetails(mix)" tabindex="0" role="button" (keydown.enter)="openMixDetails(mix)">
-              <div class="mix-images-circle">
-                @for (img of mix.fruitImages; track img; let i = $index) {
-                  <img [src]="img" [alt]="'Imagen de fruta en ' + mix.frutas" class="mix-circle-img" [class]="'img-' + i" />
-                }
-              </div>
-              <div>
-                <h3>{{ mix.frutas }}</h3>
-              </div>
-            </article>
-          }
+          <div class="mix-banner-actions">
+            @if (mixMode) {
+              <button mat-stroked-button class="cancel-mix-btn" (click)="toggleMixMode()">Cancelar</button>
+              <button class="lab-action-button" [disabled]="selectedFruitIds.length < 2" (click)="goToLab()">
+                <span>Ir al laboratorio ({{ selectedFruitIds.length }}/4)</span>
+                <mat-icon fontSet="material-symbols-outlined">science</mat-icon>
+              </button>
+            } @else {
+              <button class="lab-action-button pulse-animation" (click)="toggleMixMode()">
+                <span>¡Sí, crear mi mix!</span>
+                <mat-icon fontSet="material-symbols-outlined">blender</mat-icon>
+              </button>
+            }
+          </div>
         </div>
       </section>
     }

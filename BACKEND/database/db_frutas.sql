@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-07-2026 a las 01:53:01
+-- Tiempo de generación: 04-08-2026 a las 22:37:47
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -379,6 +379,44 @@ INSERT INTO `frutaprovincia` (`frutaProvinciaId`, `frutaId`, `provinciaId`) VALU
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `perfilsensorial`
+--
+
+CREATE TABLE `perfilsensorial` (
+  `perfilId` int(10) NOT NULL,
+  `dulzor` int(10) NOT NULL,
+  `acidez` int(10) NOT NULL,
+  `aromaFrutal` int(10) NOT NULL,
+  `color` int(10) NOT NULL,
+  `intensidad` int(10) NOT NULL,
+  `aceptacionGlobal` int(10) NOT NULL,
+  `frutaId` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `perfilsensorial`
+--
+
+INSERT INTO `perfilsensorial` (`perfilId`, `dulzor`, `acidez`, `aromaFrutal`, `color`, `intensidad`, `aceptacionGlobal`, `frutaId`) VALUES
+(1, 5, 8, 7, 6, 8, 7, 1),
+(2, 4, 9, 6, 5, 7, 6, 2),
+(3, 8, 5, 8, 6, 7, 8, 3),
+(4, 7, 6, 7, 6, 7, 8, 4),
+(5, 7, 6, 7, 6, 7, 8, 5),
+(6, 8, 6, 9, 7, 8, 9, 6),
+(7, 8, 5, 8, 8, 8, 9, 7),
+(8, 7, 9, 8, 8, 9, 8, 8),
+(9, 6, 8, 7, 7, 8, 7, 9),
+(10, 5, 9, 7, 7, 9, 7, 10),
+(11, 9, 7, 8, 9, 9, 9, 11),
+(12, 7, 5, 7, 8, 7, 8, 12),
+(13, 6, 8, 8, 6, 8, 7, 13),
+(14, 5, 8, 7, 7, 8, 7, 14),
+(15, 7, 7, 7, 7, 8, 8, 15);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `propiedades`
 --
 
@@ -603,20 +641,8 @@ INSERT INTO `usuario` (`usuarioId`, `rolId`, `nombre`, `apellido`, `email`, `pas
 (4, 1, 'Juan', 'Maldonado', 'jmaldonado@gmail.com', '$2y$10$eGmK8I4YG/fOtTw8Dzqy7O8vBlkuOssS.Xjh2d0VmfZ3lUh6Kpo5W', NULL),
 (5, 1, 'Ariel', 'Loor', 'ar123@gmail.com', '$2y$10$B.1xIQnRiuhGxrUiDZ4Wj.nUT8wKViAJ.mgDkBpiIc6Vb4.YwxyWu', NULL),
 (6, 1, 'Britany', 'Torres', 'b@gmail.com', '$2y$10$HvF7s1kkB0x00PKRHfqE0.VtoNkU8xUi/GY1pWf2YccB3JwEIY2pS', NULL),
-(7, 1, 'Ariel', 'Loor', 'd123@gmail.com', '$2y$10$8dzcmjdq888Gxge.2SIv2.5M2SvO8Q1O2hhnwZ47pYzATrtL8eReK', 'uploads/avatars/avatar_6a621ee7187f3.jpeg'),
+(7, 1, 'Ariel', 'Loor', 'd123@gmail.com', '$2y$10$8dzcmjdq888Gxge.2SIv2.5M2SvO8Q1O2hhnwZ47pYzATrtL8eReK', 'uploads/avatars/avatar_6a67c388f3bdb.png'),
 (8, 1, 'asd', 'ad', 'asd@gmail.com', '$2y$10$E8d3KynsKTnh/.hV5tB8JOD.UyJmJWYEpby5db8bVPSyabS0zeVW2', 'uploads/avatars/avatar_6a5ee1c958509.png');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuariocondicion`
---
-
-CREATE TABLE `usuariocondicion` (
-  `usuarioCondicionId` int(11) NOT NULL,
-  `usuarioId` int(11) NOT NULL,
-  `condicionId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tablas volcadas
@@ -657,6 +683,13 @@ ALTER TABLE `frutaprovincia`
   ADD PRIMARY KEY (`frutaProvinciaId`) USING BTREE;
 
 --
+-- Indices de la tabla `perfilsensorial`
+--
+ALTER TABLE `perfilsensorial`
+  ADD PRIMARY KEY (`perfilId`),
+  ADD KEY `frutaId` (`frutaId`);
+
+--
 -- Indices de la tabla `propiedades`
 --
 ALTER TABLE `propiedades`
@@ -688,14 +721,6 @@ ALTER TABLE `usuario`
   ADD PRIMARY KEY (`usuarioId`),
   ADD UNIQUE KEY `correo` (`email`),
   ADD KEY `fk_usuario_rol` (`rolId`);
-
---
--- Indices de la tabla `usuariocondicion`
---
-ALTER TABLE `usuariocondicion`
-  ADD PRIMARY KEY (`usuarioCondicionId`),
-  ADD UNIQUE KEY `uq_usuario_condicion` (`usuarioId`,`condicionId`),
-  ADD KEY `fk_usuariocondicion_condicion` (`condicionId`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -732,6 +757,12 @@ ALTER TABLE `frutaprovincia`
   MODIFY `frutaProvinciaId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
+-- AUTO_INCREMENT de la tabla `perfilsensorial`
+--
+ALTER TABLE `perfilsensorial`
+  MODIFY `perfilId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT de la tabla `propiedades`
 --
 ALTER TABLE `propiedades`
@@ -754,12 +785,6 @@ ALTER TABLE `rol`
 --
 ALTER TABLE `usuario`
   MODIFY `usuarioId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de la tabla `usuariocondicion`
---
-ALTER TABLE `usuariocondicion`
-  MODIFY `usuarioCondicionId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -787,6 +812,12 @@ ALTER TABLE `frutaprovincia`
   ADD CONSTRAINT `fk_frutacanton_fruta` FOREIGN KEY (`frutaId`) REFERENCES `fruta` (`frutaId`);
 
 --
+-- Filtros para la tabla `perfilsensorial`
+--
+ALTER TABLE `perfilsensorial`
+  ADD CONSTRAINT `perfilsensorial_ibfk_1` FOREIGN KEY (`frutaId`) REFERENCES `fruta` (`frutaId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `provincia`
 --
 ALTER TABLE `provincia`
@@ -797,13 +828,6 @@ ALTER TABLE `provincia`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `fk_usuario_rol` FOREIGN KEY (`rolId`) REFERENCES `rol` (`rolId`);
-
---
--- Filtros para la tabla `usuariocondicion`
---
-ALTER TABLE `usuariocondicion`
-  ADD CONSTRAINT `fk_usuariocondicion_condicion` FOREIGN KEY (`condicionId`) REFERENCES `condicion` (`condicionId`),
-  ADD CONSTRAINT `fk_usuariocondicion_usuario` FOREIGN KEY (`usuarioId`) REFERENCES `usuario` (`usuarioId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

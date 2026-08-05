@@ -54,6 +54,12 @@ class Fruta
         $query = "SELECT f.frutaId, f.nombreComun, f.nombreCientifico, f.descripcion, f.imagen,
                          GROUP_CONCAT(DISTINCT r.descripcion ORDER BY r.regionId SEPARATOR ', ') AS region,
                          GROUP_CONCAT(DISTINCT p.descripcion ORDER BY p.provinciaId SEPARATOR '||') AS provincias,
+                         ps.dulzor as psDulzor,
+                         ps.acidez as psAcidez,
+                         ps.aromaFrutal as psAromaFrutal,
+                         ps.color as psColor,
+                         ps.intensidad as psIntensidad,
+                         ps.aceptacionGlobal as psAceptacionGlobal,
                          propertyAverages.promedioAntocianinasFF,
                          propertyAverages.promedioAntocianinasFL,
                          propertyAverages.promedioCarotenoides,
@@ -88,6 +94,7 @@ class Fruta
                   LEFT JOIN frutaprovincia fp ON fp.frutaId = f.frutaId
                   LEFT JOIN provincia p ON p.provinciaId = fp.provinciaId
                   LEFT JOIN region r ON r.regionId = p.regionId
+                  LEFT JOIN perfilsensorial ps ON ps.frutaId = f.frutaId
                   LEFT JOIN (
                     SELECT fp2.frutaId,
                            AVG(prop.antocianinas_FF) AS promedioAntocianinasFF,
@@ -125,6 +132,7 @@ class Fruta
                     GROUP BY fp2.frutaId
                   ) propertyAverages ON propertyAverages.frutaId = f.frutaId
                   GROUP BY f.frutaId, f.nombreComun, f.nombreCientifico, f.descripcion, f.imagen,
+                           ps.dulzor, ps.acidez, ps.aromaFrutal, ps.color, ps.intensidad, ps.aceptacionGlobal,
                            propertyAverages.promedioAntocianinasFF, propertyAverages.promedioAntocianinasFL,
                            propertyAverages.promedioCarotenoides, propertyAverages.promedioFenolesFF,
                            propertyAverages.promedioFenolesFL, propertyAverages.promedioVitaminaC,

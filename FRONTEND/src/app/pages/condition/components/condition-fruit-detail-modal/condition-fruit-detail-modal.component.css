@@ -98,6 +98,20 @@ h2 {
   line-height: 1;
 }
 
+.fruit-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: #ffecb3;
+  color: #a36100;
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(163, 97, 0, 0.15);
+}
+
 .fruit-scientific-name {
   margin: 0.35rem 0 0;
   color: #6b774f;
@@ -143,6 +157,24 @@ h2 {
   color: #58634d;
   font-size: 0.9rem;
   line-height: 1.55;
+}
+
+.compounds-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Material overrides for cleaner look */
+::ng-deep .compounds-accordion .mat-expansion-panel {
+  border: 1px solid rgba(120, 165, 73, 0.2);
+  border-radius: 0.75rem !important;
+  box-shadow: 0 4px 12px rgba(49, 69, 34, 0.05) !important;
+  background: #ffffff;
+}
+
+::ng-deep .compounds-accordion .mat-expansion-panel-header {
+  padding: 0 1.25rem;
 }
 
 .fruit-summary span {

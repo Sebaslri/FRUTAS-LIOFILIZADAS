@@ -51,15 +51,16 @@ export class FruitComparisonComponent implements OnInit {
       group: 'Bioaccesibilidad',
     },
     {
-      key: 'promedioAcidez',
+      key: 'psAcidez',
       label: 'Acidez',
-      group: 'Perfil fisicoquímico',
+      group: 'Perfil sensorial',
+      unit: '/10',
     },
     {
-      key: 'promedioGradosBrix',
+      key: 'psDulzor',
       label: 'Dulzor',
-      group: 'Perfil fisicoquímico',
-      unit: '°Brix',
+      group: 'Perfil sensorial',
+      unit: '/10',
     },
   ];
 

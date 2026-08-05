@@ -6,9 +6,7 @@ import { Fruta } from '../../../fruit/models/Fruta.interface';
 import { SensoryProfileService } from '../../services/sensory-profile.service';
 import { SensoryProfileInfoModalComponent } from './sensory-profile-info-modal.component';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
-import { MixService } from '../../../../shared/services/mix.service';
 import { CustomTitleService } from '../../../../shared/services/custom-title.service';
-import { Mix } from '../../../../shared/interfaces/mix.interface';
 import {
   SensoryMetric,
   SensoryMetricConfig,
@@ -30,56 +28,52 @@ export class SensoryProfileComponent implements OnInit {
       key: 'sweetness',
       label: 'Dulzor',
       shortLabel: 'Dulzor',
-      explanation: 'Se estima a partir de los sólidos solubles (°Brix).',
+      explanation: 'Nivel de dulzor percibido en evaluaciones sensoriales.',
       color: '#e5a52d',
     },
     {
       key: 'acidity',
       label: 'Acidez',
       shortLabel: 'Acidez',
-      explanation: 'Representa la intensidad relativa de la acidez titulable.',
+      explanation: 'Intensidad de acidez y notas cítricas o refrescantes.',
       color: '#d87955',
     },
     {
       key: 'fruitiness',
       label: 'Aroma frutal',
       shortLabel: 'Aroma frutal',
-      explanation: 'Indicador orientativo basado en el índice de madurez.',
+      explanation: 'Intensidad de las notas aromáticas características.',
       color: '#77a642',
     },
     {
       key: 'color',
       label: 'Color',
       shortLabel: 'Color',
-      explanation: 'Intensidad cromática estimada desde las coordenadas CIELAB.',
+      explanation: 'Atractivo visual e intensidad cromática.',
       color: '#8b6bb1',
     },
     {
       key: 'intensity',
       label: 'Intensidad',
       shortLabel: 'Intensidad',
-      explanation: 'Lectura conjunta de acidez, aroma frutal y color.',
+      explanation: 'Fuerza global del sabor de la fruta.',
       color: '#477b9b',
     },
     {
       key: 'acceptance',
       label: 'Aceptación global',
       shortLabel: 'Aceptación',
-      explanation: 'Estimación de equilibrio entre dulzor, acidez, aroma y color.',
+      explanation: 'Equilibrio y aceptación general del consumidor.',
       color: '#c46c83',
     },
   ];
 
   protected fruits: Fruta[] = [];
   protected selectedFruit: Fruta | null = null;
-  protected selectedIsMix = false;
-  protected selectedMixImages: string[] = [];
   protected loading = true;
-  protected mixes: (Mix & { fruitImages?: string[] })[] = [];
 
   private readonly sensoryProfileService = inject(SensoryProfileService);
   private readonly dialog = inject(MatDialog);
-  private readonly mixService = inject(MixService);
   private readonly customTitle = inject(CustomTitleService);
 
   ngOnInit(): void {
@@ -96,18 +90,6 @@ export class SensoryProfileComponent implements OnInit {
       complete: () => {
         this.loading = false;
       },
-    });
-    this.mixService.getAll().subscribe({
-      next: (mixes) => {
-        this.mixes = mixes.map(mix => {
-          const fruitImages = mix.frutaIds.map(id => {
-            const fruit = this.fruits.find(f => f.frutaId === id);
-            return fruit?.imagen || '/images/fruit-hero.png';
-          });
-          return { ...mix, fruitImages };
-        });
-      },
-      error: () => undefined,
     });
   }
 
@@ -134,48 +116,10 @@ export class SensoryProfileComponent implements OnInit {
 
   protected selectFruit(fruit: Fruta): void {
     this.selectedFruit = fruit;
-    this.selectedIsMix = false;
-    this.selectedMixImages = [];
-  }
-
-  protected selectMix(mix: Mix & { fruitImages?: string[] }): void {
-    const fruitMix: Fruta = {
-      frutaId: mix.mixId,
-      nombreComun: mix.frutas,
-      nombreCientifico: 'Mezcla experimental de frutas.',
-      descripcion: 'Mezcla experimental de frutas.',
-      imagen: mix.imagen,
-      region: '',
-      provincias: [],
-      promedioAcidez: mix.acidez,
-      promedioGradosBrix: mix.gradosBrix,
-      promedioIndiceMadurez: mix.indiceMadurez,
-      promedioPh: mix.pH,
-      promedioColorL: mix.L,
-      promedioColorA: mix.a,
-      promedioColorB: mix.b,
-      promedioHumedad: mix.humedad,
-      promedioCenizas: mix.cenizas,
-      promedioFirmeza: mix.firmeza
-    };
-    
-    this.selectedFruit = fruitMix;
-    this.selectedIsMix = true;
-    this.selectedMixImages = mix.fruitImages || [];
-  }
-
-  protected openInfo(): void {
-    this.dialog.open(SensoryProfileInfoModalComponent, {
-      data: { fruitName: this.selectedFruit?.nombreComun },
-      autoFocus: false,
-      width: 'min(580px, calc(100vw - 2rem))',
-      maxWidth: '580px',
-      maxHeight: '88vh',
-    });
   }
 
   protected formatScore(value: number | null): string {
-    return value === null ? 'Sin dato' : `${Math.round(value)}/100`;
+    return value === null ? 'Sin dato' : `${Math.round(value)}/10`;
   }
 
   protected roundedScore(value: number | null): number | null {
@@ -183,11 +127,10 @@ export class SensoryProfileComponent implements OnInit {
   }
 
   protected scoreWidth(value: number | null): number {
-    return value ?? 0;
+    return value === null ? 0 : (value / 10) * 100;
   }
 
   private fruitColor(fruit: Fruta): string {
-    if (this.selectedIsMix) return '#b3824f';
     return FRUIT_COLORS[fruit.nombreComun] ?? '#8b6bb1';
   }
 
@@ -219,62 +162,18 @@ export class SensoryProfileComponent implements OnInit {
   }
 
   private metricValue(fruit: Fruta, key: SensoryMetricKey): number | null {
-    const directScores: Record<'sweetness' | 'acidity' | 'fruitiness' | 'color', number | null> = {
-      sweetness: this.normalized(fruit, (item) => this.numberValue(item.promedioGradosBrix)),
-      acidity: this.normalized(fruit, (item) => this.numberValue(item.promedioAcidez)),
-      fruitiness: this.normalized(fruit, (item) => this.numberValue(item.promedioIndiceMadurez)),
-      color: this.normalized(fruit, (item) => this.colorIntensity(item)),
-    };
-
-    if (key in directScores) {
-      return directScores[key as keyof typeof directScores];
+    switch (key) {
+      case 'sweetness': return fruit.psDulzor ?? null;
+      case 'acidity': return fruit.psAcidez ?? null;
+      case 'fruitiness': return fruit.psAromaFrutal ?? null;
+      case 'color': return fruit.psColor ?? null;
+      case 'intensity': return fruit.psIntensidad ?? null;
+      case 'acceptance': return fruit.psAceptacionGlobal ?? null;
+      default: return null;
     }
-
-    const acidity = directScores.acidity;
-    const fruitiness = directScores.fruitiness;
-    const color = directScores.color;
-    const available = [acidity, fruitiness, color].filter((value): value is number => value !== null);
-
-    if (key === 'intensity') {
-      return available.length ? this.average(available) : null;
-    }
-
-    const sweetness = directScores.sweetness;
-    const balance = sweetness !== null && acidity !== null ? 100 - Math.abs(sweetness - (100 - acidity)) : null;
-    const acceptanceValues = [balance, fruitiness, color].filter((value): value is number => value !== null);
-
-    return acceptanceValues.length ? this.average(acceptanceValues) : null;
-  }
-
-  private normalized(fruit: Fruta, valueOf: (item: Fruta) => number | null): number | null {
-    const values = this.fruits.map(valueOf).filter((value): value is number => value !== null);
-    const value = valueOf(fruit);
-
-    if (value === null || !values.length) {
-      return null;
-    }
-
-    const minimum = Math.min(...values);
-    const maximum = Math.max(...values);
-    return minimum === maximum ? 50 : ((value - minimum) / (maximum - minimum)) * 100;
-  }
-
-  private colorIntensity(fruit: Fruta): number | null {
-    const colorA = this.numberValue(fruit.promedioColorA);
-    const colorB = this.numberValue(fruit.promedioColorB);
-    return colorA === null || colorB === null ? null : Math.sqrt(colorA ** 2 + colorB ** 2);
-  }
-
-  private numberValue(value: number | null | undefined): number | null {
-    if (value === null || value === undefined) {
-      return null;
-    }
-
-    const parsed = Number(value);
-    return Number.isFinite(parsed) ? parsed : null;
   }
 
   private average(values: number[]): number {
-    return values.reduce((sum, value) => sum + value, 0) / values.length;
+    return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0;
   }
 }
