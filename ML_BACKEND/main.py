@@ -23,6 +23,8 @@ model_path = os.path.join(os.path.dirname(__file__), 'model.pkl')
 if os.path.exists(model_path):
     model_data = joblib.load(model_path)
     model = model_data['model']
+    scaler_X = model_data.get('scaler_X')
+    scaler_y = model_data.get('scaler_y')
     input_features = model_data['input_features']
     target_features = model_data['target_features']
     metrics = model_data['metrics']
@@ -32,10 +34,21 @@ else:
 class MixRequest(BaseModel):
     fruit_ids: List[int]
 
-class ModelMetrics(BaseModel):
+class MetricValues(BaseModel):
     mae: float
     rmse: float
     r2: float
+    nrmse: float
+
+class TargetMetrics(BaseModel):
+    cap_ant_digerido: MetricValues
+    bioacc_carotenoides: MetricValues
+    bioacc_flavonoides: MetricValues
+    bioacc_acAsc: MetricValues
+
+class ModelMetrics(BaseModel):
+    global_metrics: MetricValues
+    per_target: TargetMetrics
 
 class PredictionResponse(BaseModel):
     capacidad_antioxidante: float
@@ -66,6 +79,17 @@ def get_fruit_properties_from_db(fruit_ids: List[int]):
         print(f"Error DB: {e}")
         return []
 
+from fastapi.responses import FileResponse
+
+@app.get("/model-plot")
+def get_model_plot():
+    """Devuelve la gráfica de evaluación del modelo."""
+    plot_path = os.path.join(os.path.dirname(__file__), 'evaluation_plot.png')
+    if os.path.exists(plot_path):
+        return FileResponse(plot_path, media_type="image/png")
+    else:
+        raise HTTPException(status_code=404, detail="El gráfico no ha sido generado aún.")
+
 @app.post("/predict-mix", response_model=PredictionResponse)
 def predict_mix(request: MixRequest):
     """
@@ -91,20 +115,29 @@ def predict_mix(request: MixRequest):
     # El vector de entrada para la red neuronal será el promedio de las frutas
     avg_inputs = np.mean(inputs_matrix, axis=0)
     
-    # Hacer la inferencia (predicción)
-    prediction = model.predict([avg_inputs])[0]
+    # Hacer la inferencia (predicción) con soporte para scalers
+    if scaler_X and scaler_y:
+        avg_inputs_scaled = scaler_X.transform([avg_inputs])
+        prediction_scaled = model.predict(avg_inputs_scaled)
+        prediction = scaler_y.inverse_transform(prediction_scaled)[0]
+    else:
+        # Fallback para modelos antiguos sin scaler (por si acaso)
+        prediction = model.predict([avg_inputs])[0]
     
     # Mapear los resultados a las salidas esperadas
-    # target_features = ['cap_ant_digerido', 'bioacc_carotenoides', 'bioacc_flavonoides', 'bioacc_acAsc']
     return PredictionResponse(
         capacidad_antioxidante=round(float(prediction[0]), 2),
         carotenoides=round(float(prediction[1]), 2),
         flavonoides=round(float(prediction[2]), 2),
         acido_ascorbico=round(float(prediction[3]), 2),
         metrics=ModelMetrics(
-            mae=metrics['mae'],
-            rmse=metrics['rmse'],
-            r2=metrics['r2']
+            global_metrics=MetricValues(**metrics['global']),
+            per_target=TargetMetrics(
+                cap_ant_digerido=MetricValues(**metrics['per_target']['cap_ant_digerido']),
+                bioacc_carotenoides=MetricValues(**metrics['per_target']['bioacc_carotenoides']),
+                bioacc_flavonoides=MetricValues(**metrics['per_target']['bioacc_flavonoides']),
+                bioacc_acAsc=MetricValues(**metrics['per_target']['bioacc_acAsc'])
+            )
         )
     )
 

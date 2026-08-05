@@ -1,0 +1,56 @@
+# Explicación del Modelo de Inteligencia Artificial (Redes Neuronales)
+
+Este documento es una guía sencilla para entender cómo funciona la Inteligencia Artificial detrás de la aplicación, qué procesos se aplican a los datos y cómo interpretar los resultados que arroja el sistema.
+
+> [!NOTE]
+> **Modelo Utilizado:** Se utiliza una red neuronal llamada **Perceptrón Multicapa (MLPRegressor)**, una arquitectura de inteligencia artificial diseñada para "aprender" relaciones complejas (no lineales) entre las características físicas de una fruta y sus propiedades químicas finales.
+
+---
+
+## 1. ¿Qué se hace con los datos? (Pre-procesamiento)
+
+Antes de que la red neuronal pueda aprender o predecir, los datos originales pasan por un proceso matemático crucial:
+
+1. **Generación Sintética:** Partiendo de los datos de laboratorio de frutas individuales, el sistema genera matemáticamente **15,000 ejemplos de mezclas teóricas** simulando combinaciones de 2 a 4 frutas (promediando sus propiedades físicas e introduciendo factores de sinergia química aleatorios).
+2. **Escalado (StandardScaler):** Las variables tienen escalas muy distintas (ej. pH va de 3 a 7, mientras que la Vitamina C puede llegar a 1500). Si le entregamos esto a la IA tal cual, esta le daría más importancia a los números grandes. Para evitarlo, usamos un **escalador estándar** que convierte todas las variables a un formato neutral (donde todas pesan lo mismo matemáticamente).
+
+## 2. Validación Cruzada (Evaluación Científica)
+
+Para asegurar que el modelo no dependa de la "suerte" al momento de memorizar los datos, implementamos una **Validación Cruzada de 5 pliegues (5-Fold Cross Validation)**.
+
+- **¿Qué significa?** En lugar de entrenar a la IA una sola vez, dividimos los 15,000 datos en 5 bloques. 
+- La IA se entrena 5 veces distintas, usando 4 bloques para aprender y 1 bloque distinto cada vez para examinarse. 
+- Al final, promediamos las notas (métricas) de los 5 exámenes. Esto nos garantiza científicamente que el modelo es robusto y que las métricas reportadas son reales, sin importar qué frutas se mezclen en el futuro.
+
+## 3. ¿Cómo se hace una predicción en la licuadora?
+
+Cuando el usuario selecciona frutas y le da al botón "Licuar":
+1. El sistema toma las propiedades físicas originales de esas frutas y las promedia.
+2. Pasa esos promedios por el mismo **escalador** matemático utilizado en el entrenamiento.
+3. La red neuronal recibe los datos y "adivina" los resultados de las variables objetivo basándose en sus 15,000 entrenamientos previos.
+4. El sistema toma la adivinanza de la IA y le aplica una **transformación inversa**, regresando los números a las unidades reales de laboratorio (mg, µg, etc.) para que el usuario pueda entenderlos.
+
+---
+
+## 4. ¿Qué significa cada métrica estadística?
+
+El sistema reporta 4 métricas para explicar qué tan buena es la IA prediciendo la Capacidad Antioxidante, los Carotenoides, Flavonoides y Ácido Ascórbico.
+
+> [!TIP]
+> **Para entender de forma rápida:** MAE y RMSE te dicen *cuántas unidades numéricas se equivocó* (mientras más bajo, mejor). R² y NRMSE te dan un *porcentaje de exactitud* (R² más alto es mejor, NRMSE más bajo es mejor).
+
+### MAE (Error Absoluto Medio)
+- **Significado:** Es el promedio simple de las veces que la IA se equivocó.
+- **Ejemplo:** Si el MAE de los Flavonoides es de 146, significa que, en promedio, cuando el modelo intenta adivinar cuántos flavonoides hay en una mezcla, su respuesta suele estar alejada por 146 unidades (hacia arriba o hacia abajo) del valor real.
+
+### RMSE (Raíz del Error Cuadrático Medio)
+- **Significado:** Es parecido al MAE, pero *castiga muy fuerte los errores grandes*. 
+- **Ejemplo:** Si la IA casi siempre se equivoca por 10 unidades, pero a veces se equivoca por 500, el RMSE será mucho más alto que el MAE. Si el RMSE está cerca del MAE, significa que el modelo es estable y rara vez comete errores garrafales.
+
+### R² Score (Coeficiente de Determinación)
+- **Significado:** Representa qué porcentaje de los cambios en los químicos logra entender y explicar la red neuronal. 
+- **Ejemplo:** Un R² de `0.68` significa que el modelo es capaz de entender y predecir correctamente el **68%** de las variaciones o comportamientos del químico; el otro 32% es caos impredecible de la naturaleza que la red neuronal no pudo descifrar. El valor máximo perfecto es 1.0.
+
+### NRMSE (Error Normalizado por Rango)
+- **Significado:** Es el error RMSE traducido a un **porcentaje** comprensible, evaluado sobre todo el "rango" posible de valores que puede tomar ese químico (Valor Máximo - Valor Mínimo).
+- **Ejemplo:** Si el NRMSE del Ácido Ascórbico es del **12%**, significa que, estadísticamente, la red neuronal tiene un margen de error del 12% a lo largo de todo el espectro posible de mediciones de ese nutriente.

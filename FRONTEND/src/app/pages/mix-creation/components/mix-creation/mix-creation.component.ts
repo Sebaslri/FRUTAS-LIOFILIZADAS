@@ -8,6 +8,7 @@ import { endpoint } from '../../../../shared/apis/endpoints';
 import { environment as env } from '../../../../environments/environment';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 import { FruitService } from '../../../fruit/service/fruit.service';
 import { Fruta } from '../../../fruit/models/Fruta.interface';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
@@ -16,7 +17,7 @@ import { CustomTitleService } from '../../../../shared/services/custom-title.ser
 @Component({
   selector: 'app-mix-creation',
   standalone: true,
-  imports: [CommonModule, DragDropModule, HttpClientModule, SweetAlert2Module, MatIconModule, MatButtonModule],
+  imports: [CommonModule, DragDropModule, HttpClientModule, SweetAlert2Module, MatIconModule, MatButtonModule, MatTableModule],
   templateUrl: './mix-creation.component.html',
   styleUrls: ['./mix-creation.component.css'],
   animations: [fadeInRight400ms, scaleIn400ms, stagger40ms]
@@ -31,6 +32,9 @@ export class MixCreationComponent implements OnInit {
   mixerFruits: Fruta[] = [];
   isMixing = false;
   modelMetrics: any = null;
+  predictions: any = null;
+  displayedColumns: string[] = ['variable', 'mae', 'rmse', 'nrmse', 'r2', 'estado'];
+  metricsDataSource: any[] = [];
   envApi = env.api; // Para acceder a las imágenes si es necesario construir URL
 
   ngOnInit(): void {
@@ -97,56 +101,27 @@ export class MixCreationComponent implements OnInit {
         
         if (response.metrics) {
           this.modelMetrics = response.metrics;
+          this.metricsDataSource = ['cap_ant_digerido', 'bioacc_carotenoides', 'bioacc_flavonoides', 'bioacc_acAsc'].map(key => {
+            return {
+              id: key,
+              targetName: this.getTargetDisplayName(key),
+              mae: this.modelMetrics.per_target[key].mae,
+              rmse: this.modelMetrics.per_target[key].rmse,
+              nrmse: this.modelMetrics.per_target[key].nrmse,
+              r2: this.modelMetrics.per_target[key].r2,
+              quality: this.getScoreQuality(this.modelMetrics.per_target[key].r2)
+            };
+          });
         }
 
-        const imagesHtml = this.mixerFruits.map(f => {
-          const imgUrl = f.imagen || '/images/fruit-hero.png';
-          return `<img src="${imgUrl}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid #ccc; margin: 0 5px;" alt="${f.nombreComun}">`;
-        }).join('<span style="font-size: 24px; font-weight: bold; color: #888;">+</span>');
-
-        Swal.fire({
-          title: '¡Tu Mix de Bioactivos!',
-          html: `
-            <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
-              ${imagesHtml}
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4 text-left p-4 bg-gray-50 rounded-lg shadow-inner mb-4">
-              <div class="flex flex-col p-2 bg-white rounded-md shadow-sm border-l-4 border-red-500">
-                <span class="text-[10px] text-gray-500 font-bold uppercase leading-tight">Cap. Antioxidante</span>
-                <span class="text-xl font-extrabold text-red-500">${response.capacidad_antioxidante}</span>
-              </div>
-              <div class="flex flex-col p-2 bg-white rounded-md shadow-sm border-l-4 border-orange-500">
-                <span class="text-[10px] text-gray-500 font-bold uppercase leading-tight">Carotenoides</span>
-                <span class="text-xl font-extrabold text-orange-500">${response.carotenoides}</span>
-              </div>
-              <div class="flex flex-col p-2 bg-white rounded-md shadow-sm border-l-4 border-purple-500">
-                <span class="text-[10px] text-gray-500 font-bold uppercase leading-tight">Flavonoides</span>
-                <span class="text-xl font-extrabold text-purple-500">${response.flavonoides}</span>
-              </div>
-              <div class="flex flex-col p-2 bg-white rounded-md shadow-sm border-l-4 border-yellow-500">
-                <span class="text-[10px] text-gray-500 font-bold uppercase leading-tight">Ác. Ascórbico</span>
-                <span class="text-xl font-extrabold text-yellow-500">${response.acido_ascorbico}</span>
-              </div>
-            </div>
-          `,
-          width: '600px',
-          confirmButtonColor: '#3b82f6',
-          confirmButtonText: 'Experimentar con otra mezcla',
-          showCancelButton: true,
-          cancelButtonText: '<i class="material-symbols-outlined" style="vertical-align: middle; font-size: 18px; margin-right: 4px;">insights</i> Ver detalles de IA',
-          cancelButtonColor: '#10b981',
-          reverseButtons: true
-        }).then((result) => {
-          this.availableFruits.push(...this.mixerFruits);
-          this.mixerFruits = [];
-          
-          if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
-            setTimeout(() => {
-              document.getElementById('metrics-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 300);
-          }
-        });
+        this.predictions = response;
+        
+        this.availableFruits.push(...this.mixerFruits);
+        this.mixerFruits = [];
+        
+        setTimeout(() => {
+          document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
       },
       error: (error) => {
         this.isMixing = false;
@@ -156,39 +131,43 @@ export class MixCreationComponent implements OnInit {
     });
   }
 
-  getMetricsComparisonMessage(): { title: string, text: string, bgColor: string, borderColor: string, textColor: string, icon: string } | null {
-    if (!this.modelMetrics) return null;
+  getBestAndWorstTargets() {
+    if (!this.modelMetrics || !this.modelMetrics.per_target) return null;
+    const targets = this.modelMetrics.per_target;
     
-    const diff = this.modelMetrics.rmse - this.modelMetrics.mae;
+    let bestTarget = '';
+    let bestR2 = -Infinity;
+    let worstTarget = '';
+    let worstR2 = Infinity;
     
-    if (diff < (this.modelMetrics.mae * 0.3)) {
-      return {
-        title: '🌟 Excelente Consistencia',
-        text: 'La diferencia entre MAE y RMSE es mínima. Esto significa que el modelo de IA es sumamente estable y sus errores son uniformes; rara vez se desvía drásticamente al calcular la interacción de tu mezcla.',
-        bgColor: 'bg-green-50',
-        borderColor: 'border-green-400',
-        textColor: 'text-green-800',
-        icon: 'check_circle'
-      };
-    } else if (diff > (this.modelMetrics.mae * 0.6)) {
-      return {
-        title: '⚠️ Variaciones Atípicas Detectadas',
-        text: 'El RMSE es notablemente mayor que el MAE. Esto sugiere que, aunque el modelo suele ser preciso, esta combinación particular de frutas genera una predicción con posibles errores más grandes de lo normal (outliers).',
-        bgColor: 'bg-red-50',
-        borderColor: 'border-red-400',
-        textColor: 'text-red-800',
-        icon: 'error'
-      };
-    } else {
-      return {
-        title: '📊 Consistencia Moderada',
-        text: 'Existe una diferencia normal entre el MAE y RMSE. El modelo tiene una exactitud sólida, presentando solo variaciones naturales y esperadas al evaluar la compleja interacción bioquímica de estas frutas.',
-        bgColor: 'bg-yellow-50',
-        borderColor: 'border-yellow-400',
-        textColor: 'text-yellow-800',
-        icon: 'warning'
-      };
+    for (const key of Object.keys(targets)) {
+      if (targets[key].r2 > bestR2) {
+        bestR2 = targets[key].r2;
+        bestTarget = key;
+      }
+      if (targets[key].r2 < worstR2) {
+        worstR2 = targets[key].r2;
+        worstTarget = key;
+      }
     }
+    
+    return { bestTarget, worstTarget };
+  }
+
+  getTargetDisplayName(key: string): string {
+    const map: any = {
+      'cap_ant_digerido': 'Cap. Antioxidante',
+      'bioacc_carotenoides': 'Carotenoides',
+      'bioacc_flavonoides': 'Flavonoides',
+      'bioacc_acAsc': 'Ácido Ascórbico'
+    };
+    return map[key] || key;
+  }
+
+  getScoreQuality(r2: number) {
+    if (r2 >= 0.60) return { label: 'Excelente predictibilidad', class: 'text-green-600', border: 'border-green-200', bg: 'bg-green-50', icon: 'verified' };
+    if (r2 >= 0.45) return { label: 'Predictibilidad moderada', class: 'text-yellow-600', border: 'border-yellow-200', bg: 'bg-yellow-50', icon: 'moving' };
+    return { label: 'Predictibilidad baja', class: 'text-red-600', border: 'border-red-200', bg: 'bg-red-50', icon: 'error_outline' };
   }
 
 }

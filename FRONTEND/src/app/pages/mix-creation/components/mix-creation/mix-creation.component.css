@@ -80,7 +80,8 @@ h1 {
 }
 
 .fruit-gallery,
-.blender-section {
+.blender-section,
+.lab-results-section {
   padding: clamp(1rem, 3vw, 1.6rem);
   border: 1px solid rgba(120, 165, 73, 0.22);
   border-radius: 0.9rem;
