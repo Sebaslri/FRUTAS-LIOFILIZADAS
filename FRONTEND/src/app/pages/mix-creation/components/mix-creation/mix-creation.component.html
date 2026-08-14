@@ -117,24 +117,28 @@
         <div
           class="flex flex-col p-5 bg-red-50 rounded-xl shadow-sm border border-red-100 border-l-4 border-l-red-500 hover:shadow-md transition-shadow">
           <span class="text-xs text-red-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Cap.
-            Antioxidante</span>
-          <span class="text-3xl font-extrabold text-red-600">{{ predictions.capacidad_antioxidante }}%</span>
+            Antioxidante despúes de digestión</span>
+          <span class="text-3xl font-extrabold text-red-600">{{ predictions.capacidad_antioxidante }}</span>
         </div>
         <div
           class="flex flex-col p-5 bg-orange-50 rounded-xl shadow-sm border border-orange-100 border-l-4 border-l-orange-500 hover:shadow-md transition-shadow">
           <span
-            class="text-xs text-orange-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Carotenoides</span>
+            class="text-xs text-orange-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Bioaccecibilidad
+            Carotenoides</span>
           <span class="text-3xl font-extrabold text-orange-600">{{ predictions.carotenoides }}%</span>
         </div>
         <div
           class="flex flex-col p-5 bg-purple-50 rounded-xl shadow-sm border border-purple-100 border-l-4 border-l-purple-500 hover:shadow-md transition-shadow">
           <span
-            class="text-xs text-purple-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Flavonoides</span>
+            class="text-xs text-purple-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Bioaccecibilidad
+            Flavonoides</span>
           <span class="text-3xl font-extrabold text-purple-600">{{ predictions.flavonoides }}%</span>
         </div>
         <div
           class="flex flex-col p-5 bg-yellow-50 rounded-xl shadow-sm border border-yellow-100 border-l-4 border-l-yellow-500 hover:shadow-md transition-shadow">
-          <span class="text-xs text-yellow-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Ác.
+          <span
+            class="text-xs text-yellow-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Bioaccecibilidad
+            Ác.
             Ascórbico</span>
           <span class="text-3xl font-extrabold text-yellow-600">{{ predictions.acido_ascorbico }}%</span>
         </div>
@@ -165,17 +169,20 @@
         <div
           class="flex flex-col justify-center items-center py-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
           <span class="block text-xs font-bold text-[#899572] uppercase tracking-widest mb-2">Global RMSE</span>
-          <span class="text-4xl font-black text-[#26351f]">{{ modelMetrics.global_metrics.rmse | number:'1.2-2' }}</span>
+          <span class="text-4xl font-black text-[#26351f]">{{ modelMetrics.global_metrics.rmse | number:'1.2-2'
+            }}</span>
         </div>
         <div
           class="flex flex-col justify-center items-center py-6 bg-purple-50/50 rounded-xl shadow-sm border border-purple-100 hover:shadow-md transition-shadow">
           <span class="block text-xs font-bold text-purple-500 uppercase tracking-widest mb-2">Global NRMSE</span>
-          <span class="text-4xl font-black text-purple-600">{{ modelMetrics.global_metrics.nrmse | number:'1.2-2' }}%</span>
+          <span class="text-4xl font-black text-purple-600">{{ modelMetrics.global_metrics.nrmse | number:'1.2-2'
+            }}%</span>
         </div>
         <div
           class="flex flex-col justify-center items-center py-6 bg-[#f1f5e7] rounded-xl shadow-sm border border-[rgba(120,165,73,0.3)] hover:shadow-md transition-shadow">
           <span class="block text-xs font-bold text-[#58634d] uppercase tracking-widest mb-2">Global R² Score</span>
-          <span class="text-5xl font-black text-[#26351f] drop-shadow-sm">{{ modelMetrics.global_metrics.r2 | number:'1.2-2' }}</span>
+          <span class="text-5xl font-black text-[#26351f] drop-shadow-sm">{{ modelMetrics.global_metrics.r2 |
+            number:'1.2-2' }}</span>
         </div>
       </div>
 

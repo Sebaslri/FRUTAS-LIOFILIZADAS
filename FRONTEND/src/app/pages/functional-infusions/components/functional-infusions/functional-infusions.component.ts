@@ -56,20 +56,20 @@ export class FunctionalInfusionsComponent implements OnInit {
     return 'nombreComun' in source ? 'Fruta' : 'Mix';
   }
 
-  // --- Table 1: Fresca vs Liofilizada ---
+  // --- Table 1: Antes vs Después de la Digestión ---
   protected get table1Row() {
     if (!this.selected) return null;
     return {
-      dpph_ff: this.valueFor('dpph_FF', 'promedioDpphFF'),
-      fenoles_ff: this.valueFor('fenolesTotales_FF', 'promedioFenolesFF'),
-      frap_ff: this.valueFor('frap_FF', 'promedioFrapFF'),
-      flavonoides_ff: this.valueFor('flavonoides_FF', 'promedioFlavonoidesFF'),
-      antocianinas_ff: this.valueFor('antocianinas_FF', 'promedioAntocianinasFF'),
-      dpph_fl: this.valueFor('dpph_FL', 'promedioDpphFL'),
-      frap_fl: this.valueFor('frap_FL', 'promedioFrapFL'),
-      fenoles_fl: this.valueFor('fenolesTotales_FL', 'promedioFenolesFL'),
-      flavonoides_fl: this.valueFor('flavonoides_FL', 'promedioFlavonoidesFL'),
-      antocianinas_fl: this.valueFor('antocianinas_FL', 'promedioAntocianinasFL'),
+      // Antes (Infusión)
+      cap_ant_infusion: this.valueFor('cap_ant_infusion', 'promedioCapAntInfusion'),
+      carotenoides_infusion: this.valueFor('carotenoides_infusion', 'promedioCarotenoidesInfusion'),
+      flavonoides_infusion: this.valueFor('flavonoides_infusion', 'promedioFlavonoidesInfusion'),
+      acido_asc_infusion: this.valueFor('acido_asc_infusion', 'promedioAcidoAscInfusion'),
+      // Después (Digerido)
+      cap_ant_digerido: this.valueFor('cap_ant_digerido', 'promedioCapAntDigerido'),
+      carotenoides_digerido: this.valueFor('carotenoides_digerido', 'promedioCarotenoidesDigerido'),
+      flavonoides_digerido: this.valueFor('flavonoides_digerido', 'promedioFlavonoidesDigerido'),
+      acido_asc_digerido: this.valueFor('acido_asc_digerido', 'promedioAcidoAscDigerido'),
     };
   }
 
@@ -77,8 +77,6 @@ export class FunctionalInfusionsComponent implements OnInit {
   protected get table2Row() {
     if (!this.selected) return null;
     return {
-      cap_ant_infusion: this.valueFor('cap_ant_infusion', 'promedioCapAntInfusion'),
-      cap_ant_digerido: this.valueFor('cap_ant_digerido', 'promedioCapAntDigerido'),
       bioacc_carotenoides: this.valueFor('bioacc_carotenoides', 'promedioBioaccCarotenoides'),
       bioacc_flavonoides: this.valueFor('bioacc_flavonoides', 'promedioBioaccFlavonoides'),
       bioacc_acAsc: this.valueFor('bioacc_acAsc', 'promedioBioaccAcAsc'),

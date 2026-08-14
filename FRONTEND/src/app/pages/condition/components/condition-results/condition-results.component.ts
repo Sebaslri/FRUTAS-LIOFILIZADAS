@@ -190,26 +190,28 @@ export class ConditionResultsComponent implements OnInit {
     this.selectedGoal = this.selectedGoal === key ? 'all' : key;
   }
 
-  protected getBadgeValue(fruit: Fruta): number | string | null {
+  protected getBadgeValue(fruit: Fruta): string | null {
     if (this.selectedGoal === 'all') return null;
     const goal = this.selectedGoalDetails;
     if (!goal) return null;
 
+    let value: number | null = null;
     switch (goal.metric) {
       case 'dulzor':
-        return fruit.psDulzor ?? null;
+        value = fruit.psDulzor ?? null; break;
       case 'acidez':
-        return fruit.psAcidez ?? null;
+        value = fruit.psAcidez ?? null; break;
       case 'aroma':
-        return fruit.psAromaFrutal ?? null;
+        value = fruit.psAromaFrutal ?? null; break;
       case 'aceptacion':
-        return fruit.psAceptacionGlobal ?? null;
+        value = fruit.psAceptacionGlobal ?? null; break;
       case 'color':
-        return fruit.psColor ?? null;
+        value = fruit.psColor ?? null; break;
       case 'intensidad':
-        return fruit.psIntensidad ?? null;
-      default: return null;
+        value = fruit.psIntensidad ?? null; break;
     }
+    
+    return value !== null ? `${goal.label.replace('Mayor ', '').replace('Mejor ', '')}: ${value}/10` : null;
   }
 
   private scoreFor(fruit: Fruta, goal: EducationalGoal): number {

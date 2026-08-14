@@ -27,6 +27,12 @@ export interface Mix {
   antocianinas_FL?: number | null;
   cap_ant_infusion?: number | null;
   cap_ant_digerido?: number | null;
+  carotenoides_infusion?: number | null;
+  carotenoides_digerido?: number | null;
+  flavonoides_infusion?: number | null;
+  flavonoides_digerido?: number | null;
+  acido_asc_infusion?: number | null;
+  acido_asc_digerido?: number | null;
   bioacc_carotenoides?: number | null;
   bioacc_flavonoides?: number | null;
   bioacc_acAsc?: number | null;

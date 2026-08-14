@@ -28,7 +28,7 @@
         <p class="eyebrow">Personaliza la exploración</p>
         <h2 id="goal-title">¿Qué perfil de infusión buscas?</h2>
         @if (selectedGoalDetails) {
-          <p>{{ selectedGoalDetails.description }}</p>
+          <p>{{ selectedGoalDetails.description }} <br> <span style="font-size: 0.85em; opacity: 0.8; margin-top: 0.25rem; display: inline-block;">* Los valores mostrados están en una escala del 1 al 10.</span></p>
         } @else {
           <p>Selecciona una intención para ordenar las frutas relacionadas.</p>
         }

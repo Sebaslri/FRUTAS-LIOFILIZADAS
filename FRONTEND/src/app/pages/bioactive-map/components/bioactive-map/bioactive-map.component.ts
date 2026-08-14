@@ -224,15 +224,15 @@ export class BioactiveMapComponent implements AfterViewInit, OnDestroy {
   }
 
   private extractCarotenoids(fruit: Fruta): number | null {
-    return this.selectedState === 'antes' ? null : this.numberOrNull(fruit.promedioBioaccCarotenoides);
+    return this.selectedState === 'antes' ? this.numberOrNull(fruit.promedioCarotenoidesInfusion) : this.numberOrNull(fruit.promedioCarotenoidesDigerido);
   }
 
   private extractFlavonoids(fruit: Fruta): number | null {
-    return this.selectedState === 'antes' ? null : this.numberOrNull(fruit.promedioBioaccFlavonoides);
+    return this.selectedState === 'antes' ? this.numberOrNull(fruit.promedioFlavonoidesInfusion) : this.numberOrNull(fruit.promedioFlavonoidesDigerido);
   }
 
   private extractAscorbic(fruit: Fruta): number | null {
-    return this.selectedState === 'antes' ? null : this.numberOrNull(fruit.promedioBioaccAcAsc);
+    return this.selectedState === 'antes' ? this.numberOrNull(fruit.promedioAcidoAscInfusion) : this.numberOrNull(fruit.promedioAcidoAscDigerido);
   }
 
   // Helpers

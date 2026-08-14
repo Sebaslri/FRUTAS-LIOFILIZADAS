@@ -21,13 +21,15 @@
   </div>
 
   <mat-card-header>
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
-      <div style="flex: 1;">
+    <div style="display: flex; flex-direction: column; align-items: flex-start; width: 100%; gap: 0.25rem;">
+      <div>
         <mat-card-title>{{ fruit.nombreComun }}</mat-card-title>
         <mat-card-subtitle>{{ fruit.nombreCientifico }}</mat-card-subtitle>
       </div>
       @if (badgeValue) {
-        <span class="card-badge">{{ badgeValue }}</span>
+        <span class="card-badge" style="margin-top: 0.25rem; font-size: 0.8rem; padding: 0.2rem 0.5rem; background: var(--fruit-color, #e0e0e0); color: #fff; border-radius: 4px; font-weight: 500;">
+          {{ badgeValue }}
+        </span>
       }
     </div>
   </mat-card-header>
