@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 class Database
 {
-    private string $host = 'localhost';
-    private string $database = 'db_frutas';
-    private string $username = 'root';
-    private string $password = '';
+    private string $host = 'sql309.infinityfree.com';
+    private string $database = 'if0_42657101_db_frutas'; // ¡Revisa este nombre en tu cPanel!
+    private string $username = 'if0_42657101';
+    private string $password = 'xbBWV5AviMp6';
 
     public function getConnection(): PDO
     {
