@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-08-2026 a las 17:19:21
+-- Tiempo de generación: 14-08-2026 a las 07:53:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,7 +42,7 @@ INSERT INTO `condicion` (`condicionId`, `nombre`, `descripcion`) VALUES
 (2, 'Inflamación', 'Es una respuesta del organismo que puede sentirse como dolor, hinchazón, calor o cansancio.'),
 (3, 'Alta presión arterial', 'A menudo no presenta síntomas; algunas personas pueden sentir dolor de cabeza, mareo o visión borrosa.'),
 (4, 'Glucemia elevada', 'Puede manifestarse con sed excesiva, cansancio, más hambre o ganas frecuentes de orinar.'),
-(5, 'Sistema inmunologico debilitado', 'Puede aumentar la susceptibilidad a infecciones y hacer más lenta la recuperación del organismo.'),
+(5, 'Sistema inmunológico debilitado', 'Puede aumentar la susceptibilidad a infecciones y hacer más lenta la recuperación del organismo.'),
 (6, 'Estreñimiento', 'Incluye evacuaciones poco frecuentes o dificultad para evacuar, a veces con heces duras, gases o malestar.'),
 (7, 'Anemia', 'Puede causar cansancio, palidez, mareo o falta de aire cuando disminuyen los glóbulos rojos o la hemoglobina.');
 
@@ -68,9 +68,9 @@ INSERT INTO `fruta` (`frutaId`, `nombreComun`, `nombreCientifico`, `descripcion`
 (1, 'Arazá', 'Eugenia stipitata', 'Fruta amazónica de aroma intenso y sabor ácido, con potencial para el desarrollo de infusiones, bebidas e ingredientes liofilizados. Su perfil puede analizarse por contenido de compuestos bioactivos, capacidad antioxidante, acidez, color y aceptación sensorial.', '/images/araza.png'),
 (2, 'Borojó', 'Alibertia patinoi', 'Fruta tropical de pulpa densa y sabor característico, apreciada en bebidas y formulaciones funcionales. Su estudio permite valorar su composición, compuestos bioactivos y posible aprovechamiento como ingrediente liofilizado de origen ecuatoriano.', '/images/borojo.png'),
 (3, 'Cacao', 'Theobroma cacao', 'Fruto de gran importancia agroindustrial, reconocido por su contenido de compuestos fenólicos. Además de sus semillas, su pulpa puede aprovecharse en bebidas, infusiones y productos con valor agregado, evaluando su capacidad antioxidante y características sensoriales.', '/images/cacao.png'),
-(4, 'Granadilla', 'Passiflora ligularis', 'Fruta de sabor dulce, aroma suave y acidez moderada. Su versión liofilizada puede utilizarse en infusiones y mezclas frutales, aportando características sensoriales agradables y compuestos bioactivos que pueden estudiarse antes y después de la digestión <i>in vitro</i>.', '/images/granadilla.png'),
+(4, 'Granadilla', 'Passiflora ligularis', 'Fruta de sabor dulce, aroma suave y acidez moderada. Su versión liofilizada puede utilizarse en infusiones y mezclas frutales, aportando características sensoriales agradables y compuestos bioactivos que pueden estudiarse antes y después de la digestión in vitro.', '/images/granadilla.png'),
 (5, 'Guanábana', 'Annona muricata', 'Fruta tropical de pulpa cremosa, aroma delicado y sabor ligeramente ácido. Presenta potencial para infusiones, bebidas y alimentos funcionales, donde pueden evaluarse su composición, aceptación sensorial y bioaccesibilidad de compuestos después de una digestión simulada.', '/images/guanabana.png'),
-(6, 'Guayaba', 'Psidium guajava', 'Fruta aromática asociada a un contenido importante de vitamina C y otros compuestos bioactivos. Puede aprovecharse liofilizada en infusiones, snacks y bebidas, comparando su actividad antioxidante, color, acidez y potencial bioactivo disponible tras digestión <i>in vitro</i>.', '/images/guayaba.png'),
+(6, 'Guayaba', 'Psidium guajava', 'Fruta aromática asociada a un contenido importante de vitamina C y otros compuestos bioactivos. Puede aprovecharse liofilizada en infusiones, snacks y bebidas, comparando su actividad antioxidante, color, acidez y potencial bioactivo disponible tras digestión in vitro.', '/images/guayaba.png'),
 (7, 'Mango', 'Mangifera indica', 'Fruta de sabor dulce y aroma tropical, fuente natural de carotenoides y otros compuestos bioactivos. Su formato liofilizado puede emplearse en infusiones y mezclas, aportando color, dulzor y valor funcional sin atribuir efectos médicos.', '/images/mango.png'),
 (8, 'Maracuyá', 'Passiflora edulis', 'Fruta de aroma intenso y acidez marcada, ideal para formulaciones refrescantes e infusiones frutales. Su perfil científico puede incluir sólidos solubles, acidez, color, fenoles, capacidad antioxidante y aceptación sensorial.', '/images/maracuya.png'),
 (9, 'Mora', 'Rubus glaucus', 'Fruta andina de color intenso, sabor agridulce y presencia de antocianinas y compuestos fenólicos. Es de especial interés para comparar capacidad antioxidante, estabilidad del color y bioaccesibilidad de compuestos antes y después de la digestión simulada.', '/images/mora.png'),
@@ -79,7 +79,7 @@ INSERT INTO `fruta` (`frutaId`, `nombreComun`, `nombreCientifico`, `descripcion`
 (12, 'Pitahaya', 'Selenicereus megalanthus', 'Fruta de sabor suave, pulpa delicada y semillas comestibles. Su perfil sensorial la convierte en una opción adecuada para mezclas e infusiones menos ácidas, mientras sus compuestos bioactivos y bioaccesibilidad pueden analizarse científicamente.', '/images/pitahaya.png'),
 (13, 'Taxo', 'Passiflora tripartita', 'Fruta andina de aroma intenso y sabor ácido, también conocida como curuba. Tiene potencial para infusiones y bebidas funcionales, especialmente en formulaciones donde se busca mayor intensidad frutal, acidez y contenido de compuestos bioactivos.', '/images/taxo.png'),
 (14, 'Tomate de árbol', 'Solanum betaceum', 'Fruta andina de sabor agridulce, color atractivo y aroma característico. Puede ser valorizada como ingrediente liofilizado para infusiones, bebidas y alimentos, evaluando carotenoides, fenoles, capacidad antioxidante y aceptación sensorial.', '/images/tomate-arbol.png'),
-(15, 'Uvilla', 'Physalis peruviana', 'Fruta pequeña de sabor agridulce y color amarillo intenso, asociada a carotenoides, vitamina C y otros compuestos bioactivos. Su uso liofilizado puede aportar valor a infusiones, snacks y mezclas, estudiando también su bioaccesibilidad tras digestión <i>in vitro</i>.', '/images/uvilla.png');
+(15, 'Uvilla', 'Physalis peruviana', 'Fruta pequeña de sabor agridulce y color amarillo intenso, asociada a carotenoides, vitamina C y otros compuestos bioactivos. Su uso liofilizado puede aportar valor a infusiones, snacks y mezclas, estudiando también su bioaccesibilidad tras digestión in vitro.', '/images/uvilla.png');
 
 -- --------------------------------------------------------
 
@@ -150,7 +150,8 @@ INSERT INTO `frutacondicion` (`frutaCondicionId`, `frutaId`, `condicionId`) VALU
 (50, 15, 2),
 (51, 15, 4),
 (52, 15, 5),
-(53, 15, 7);
+(53, 15, 7),
+(54, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -764,7 +765,7 @@ ALTER TABLE `fruta`
 -- AUTO_INCREMENT de la tabla `frutacondicion`
 --
 ALTER TABLE `frutacondicion`
-  MODIFY `frutaCondicionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `frutaCondicionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `frutapropiedad`
