@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProfileService } from '../../services/profile.service';
-import { UserProfile } from '../../models/profile.model';
+import { UserProfile } from '../../models/profile.interface';
 import { AuthService } from '../../../auth-pages/services/auth.service';
 import { AlertService } from '../../../../shared/services/alert.service';
 import { MaterialModule } from '../../../../shared/material.module';

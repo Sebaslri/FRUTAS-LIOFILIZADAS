@@ -9,8 +9,8 @@ import { environment as env } from '../../../../environments/environment';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
-import { FruitService } from '../../../fruit/service/fruit.service';
-import { Fruta } from '../../../fruit/models/Fruta.interface';
+import { FruitService } from '../../../../shared/services/fruit.service';
+import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
 import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 
@@ -23,7 +23,7 @@ import { CustomTitleService } from '../../../../shared/services/custom-title.ser
   animations: [fadeInRight400ms, scaleIn400ms, stagger40ms]
 })
 export class MixCreationComponent implements OnInit {
-  
+
   private readonly _fruitService = inject(FruitService);
   private readonly _http = inject(HttpClient);
   private readonly customTitle = inject(CustomTitleService);
@@ -78,7 +78,7 @@ export class MixCreationComponent implements OnInit {
       );
     }
   }
-  
+
   async mix() {
     if (this.mixerFruits.length < 2) {
       Swal.fire('Faltan ingredientes', 'Debes añadir al menos 2 frutas a la mezcladora', 'info');
@@ -86,19 +86,19 @@ export class MixCreationComponent implements OnInit {
     }
 
     this.isMixing = true;
-    
+
     setTimeout(() => {
       this.predictMix();
-    }, 1500); 
+    }, 3500);
   }
-  
+
   predictMix() {
     const fruitIds = this.mixerFruits.map(f => f.frutaId);
-    
+
     this._http.post<any>(endpoint.PREDICT_MIX, { fruit_ids: fruitIds }).subscribe({
       next: (response) => {
         this.isMixing = false;
-        
+
         if (response.metrics) {
           this.modelMetrics = response.metrics;
           this.metricsDataSource = ['cap_ant_digerido', 'bioacc_carotenoides', 'bioacc_flavonoides', 'bioacc_acAsc'].map(key => {
@@ -115,10 +115,10 @@ export class MixCreationComponent implements OnInit {
         }
 
         this.predictions = response;
-        
+
         this.availableFruits.push(...this.mixerFruits);
         this.mixerFruits = [];
-        
+
         setTimeout(() => {
           document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 300);
@@ -134,12 +134,12 @@ export class MixCreationComponent implements OnInit {
   getBestAndWorstTargets() {
     if (!this.modelMetrics || !this.modelMetrics.per_target) return null;
     const targets = this.modelMetrics.per_target;
-    
+
     let bestTarget = '';
     let bestR2 = -Infinity;
     let worstTarget = '';
     let worstR2 = Infinity;
-    
+
     for (const key of Object.keys(targets)) {
       if (targets[key].r2 > bestR2) {
         bestR2 = targets[key].r2;
@@ -150,7 +150,7 @@ export class MixCreationComponent implements OnInit {
         worstTarget = key;
       }
     }
-    
+
     return { bestTarget, worstTarget };
   }
 

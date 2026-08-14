@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MaterialModule } from '../../../../shared/material.module';
-import { Fruta } from '../../../fruit/models/Fruta.interface';
+import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
 import { MetricItem } from './configuration.interface';
 import { EducationalGoal } from '../condition-results/configuration.interface';
 import { PdfDataService, BioactiveCompound } from '../../services/pdf-data.service';

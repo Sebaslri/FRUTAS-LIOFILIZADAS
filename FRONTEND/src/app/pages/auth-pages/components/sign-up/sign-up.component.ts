@@ -2,11 +2,11 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { MaterialModule } from '../../../shared/material.module';
+import { AuthService } from '../../services/auth.service';
+import { MaterialModule } from '../../../../shared/material.module';
 import Swal from 'sweetalert2';
-import { CustomTitleService } from '../../../shared/services/custom-title.service';
-import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../shared/animations/page.animations';
+import { CustomTitleService } from '../../../../shared/services/custom-title.service';
+import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
 
 @Component({
   selector: 'app-sign-up',
@@ -73,7 +73,7 @@ export class SignUpComponent implements OnInit {
       formData.append('foto', this.selectedFile);
     }
 
-    this._authService.register(formData).pipe(finalize(() => this.isLoading = false)).subscribe((resp) => {
+    this._authService.register(formData).pipe(finalize(() => this.isLoading = false)).subscribe((resp: any) => {
       if (resp.success) {
         Swal.fire({
           icon: 'success',

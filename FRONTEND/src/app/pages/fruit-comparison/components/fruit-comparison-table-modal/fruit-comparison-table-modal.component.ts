@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MaterialModule } from '../../../../shared/material.module';
 import { FRUIT_COLORS } from '../../../../shared/functions/variables.interface';
-import { ComparisonTableRow, FruitComparisonDialogData } from './configuration.interface';
+import { ComparisonTableRow, FruitComparisonDialogData } from '../../model/fruit-comparison.interface';
 
 @Component({
   selector: 'app-fruit-comparison-table-modal',

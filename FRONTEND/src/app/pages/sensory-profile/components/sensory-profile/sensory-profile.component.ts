@@ -2,9 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MaterialModule } from '../../../../shared/material.module';
 import { FRUIT_COLORS } from '../../../../shared/functions/variables.interface';
-import { Fruta } from '../../../fruit/models/Fruta.interface';
+import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
 import { SensoryProfileService } from '../../services/sensory-profile.service';
-import { SensoryProfileInfoModalComponent } from './sensory-profile-info-modal.component';
+
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
 import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 import {
@@ -12,7 +12,7 @@ import {
   SensoryMetricConfig,
   SensoryMetricKey,
   SensoryProfileSelection,
-} from './configuration.interface';
+} from '../../models/sensory-profile.interface';
 
 @Component({
   selector: 'app-sensory-profile',

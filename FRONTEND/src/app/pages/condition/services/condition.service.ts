@@ -5,7 +5,7 @@ import { environment as env } from '../../../environments/environment';
 import { endpoint } from '../../../shared/apis/endpoints';
 import { BaseResponse } from '../../../shared/interfaces/BaseResponse.intrerface';
 import { ConditionItem } from '../models/condition.interface';
-import { Fruta } from '../../fruit/models/Fruta.interface';
+import { Fruta } from '../../../shared/interfaces/Fruta.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ConditionService {

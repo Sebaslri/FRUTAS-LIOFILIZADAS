@@ -80,7 +80,6 @@ h1 {
 }
 
 .fruit-gallery,
-.blender-section,
 .lab-results-section {
   padding: clamp(1rem, 3vw, 1.6rem);
   border: 1px solid rgba(120, 165, 73, 0.22);
@@ -89,6 +88,16 @@ h1 {
   box-shadow: 0 18px 44px rgba(49, 69, 34, 0.08);
   display: flex;
   flex-direction: column;
+}
+
+.blender-section {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .section-heading {
@@ -197,167 +206,385 @@ h1 {
   font-weight: 800;
 }
 
-/* BLENDER CSS */
-.blender-wrapper {
+/* CUP CSS */
+.cup-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  height: 400px;
   position: relative;
-  margin-top: 2rem;
+  margin-top: 2.5rem; /* Ajuste para bajar un poco más la taza y cuchara */
+  perspective: 1000px;
+  transform-origin: center center; /* Scale to center to avoid layout gaps */
 }
 
-.blender-lid {
-  width: 190px;
-  height: 25px;
-  background: #4a5c3a;
-  border-radius: 12px 12px 0 0;
-  margin-bottom: 0px;
-  z-index: 5;
-  box-shadow: inset 0 -3px 5px rgba(0,0,0,0.2);
+.cup-assembly {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
 }
 
-.blender-jar {
-  width: 220px;
-  height: 250px;
-  border: 4px solid rgba(255, 255, 255, 0.8);
+.cup-body {
+  box-sizing: border-box; /* Asegurar que el width y height sean exactos */
+  width: 340px; /* Taza mucho más grande */
+  height: 250px; /* Taza más profunda */
+  background: rgba(255, 255, 255, 0.4); /* Más opaco para resaltar el borde oscuro */
+  backdrop-filter: blur(12px);
+  border: 4px solid #4e342e; /* Color café oscuro */
   border-top: none;
-  border-radius: 0 0 35px 35px;
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(5px);
+  border-radius: 5px 5px 170px 170px; /* Forma original redondeada */
   position: relative;
+  box-shadow: 
+    inset 0 -20px 30px rgba(255,255,255,0.6),
+    0 25px 35px rgba(0,0,0,0.15);
+  z-index: 2;
+  margin-top: 30px;
+  overflow: visible !important; /* Evitar que CDK oculte el óvalo superior al hacer clip */
+}
+
+/* Nuevo contenedor interno para enjaular a las frutas de la animación spin */
+.cup-fruits-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 0 166px 166px; /* Forma original */
+  overflow: hidden; /* CORTA frutas que salgan al revolver */
+  z-index: 2; /* Sobre el líquido */
   display: flex;
   flex-wrap: wrap-reverse;
   align-content: flex-start;
   justify-content: center;
-  gap: 5px;
-  padding: 15px;
-  z-index: 2;
-  box-shadow: inset 0 0 20px rgba(255,255,255,0.5), 0 10px 20px rgba(0,0,0,0.05);
-  transition: background-color 0.3s ease;
-  overflow: hidden;
+  align-items: flex-end; /* Alinear abajo */
+  gap: 8px;
+  padding: 30px 40px;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+  transform: translateZ(0); /* Forzar recorte por hardware en webkit */
+  isolation: isolate;
 }
 
-.blender-jar.cdk-drop-list-dragging {
-  background: rgba(200, 235, 200, 0.5);
-  border-color: #78a549;
-}
-
-/* Markings */
-.blender-jar::before {
+/* El óvalo superior (la boca de la taza) */
+.cup-body::before {
   content: '';
   position: absolute;
-  left: 10px;
-  bottom: 30px;
-  height: 70%;
-  width: 10px;
-  border-left: 2px solid rgba(255,255,255,0.7);
-  border-bottom: 2px solid rgba(255,255,255,0.7);
-  border-top: 2px solid rgba(255,255,255,0.7);
-  opacity: 0.6;
-}
-
-.blender-base {
-  width: 240px;
-  height: 90px;
-  background: linear-gradient(145deg, #3f6528, #2a4519);
-  border-radius: 12px 12px 25px 25px;
-  margin-top: -5px;
-  z-index: 3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 15px 30px rgba(42, 69, 25, 0.4);
-  position: relative;
-}
-
-/* Botón Mix */
-.blender-button {
-  width: 50px;
-  height: 50px;
-  background: #d9890f;
+  top: -25px; /* Mitad de nueva altura */
+  left: -4px; /* para alinear con el borde de 4px */
+  width: 340px; /* Nuevo ancho */
+  height: 50px; /* Óvalo más grande */
   border-radius: 50%;
-  border: 3px solid rgba(255,255,255,0.9);
-  cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: inset 0 2px 5px rgba(255,255,255,0.4), 0 4px 10px rgba(0,0,0,0.3);
+  border: 4px solid #4e342e; /* Color café oscuro */
+  background: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.6));
+  z-index: 10;
+  pointer-events: none;
 }
 
-.blender-button mat-icon {
-  font-size: 28px;
-  width: 28px;
-  height: 28px;
+.cup-body.cdk-drop-list-dragging {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px rgba(255,255,255,0.8);
+}
+.cup-body.cdk-drop-list-dragging::before {
+  border-color: rgba(255, 255, 255, 1);
 }
 
-.blender-button:hover:not(:disabled) {
-  transform: scale(1.05);
-  background: #f0a020;
-}
-.blender-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  background: #888;
+.cup-handle {
+  position: absolute;
+  right: -65px; /* Se ajusta para penetrar solo unos milímetros y evitar la mancha grande */
+  top: 40px; /* Más arriba para evitar la curva profunda */
+  width: 78px; 
+  height: 95px; /* Más pequeña para encajar en la zona casi recta */
+  border: 15px solid #4e342e; /* Grosor balanceado */
+  border-left: none;
+  border-radius: 0 60px 60px 0; 
+  z-index: 0; 
 }
 
-/* Frutas en la licuadora */
-.blender-fruit-item {
-  width: 60px;
-  height: 60px;
+.cup-saucer {
+  width: 440px; 
+  height: 60px; /* Un poco más grueso */
+  background: radial-gradient(ellipse at center, #ffffff 40%, #dcdcdc 80%, #b0b0b0 100%); /* Efecto más 3D */
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  position: absolute;
+  top: 250px; /* Se posiciona siempre bajo el cup-body de 250px + 30px margin = 280. Top 250 se solapa bonito. */
+  z-index: 1;
+  box-shadow: 
+    inset 0 10px 15px rgba(0,0,0,0.05),
+    0 25px 35px rgba(0,0,0,0.4), /* Sombra exterior mucho más oscura y realista */
+    0 10px 15px rgba(0,0,0,0.3);
+}
+
+.cup-liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Toma todo el alto para que el border-radius no se deforme */
+  border-radius: 0 0 166px 166px; /* Ajustado perfectamente al radio interior original */
+  overflow: hidden; /* Esto recorta cualquier cosa que se salga del radio perfecto */
+  z-index: 0;
+}
+
+/* El cuerpo del líquido animado */
+.cup-liquid::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(180deg, rgba(225, 215, 60, 0.6) 0%, rgba(180, 170, 30, 0.8) 100%); /* Más amarillo que verde */
+  z-index: 1;
+}
+
+/* Superficie del líquido (óvalo) */
+.cup-liquid::before {
+  content: '';
+  position: absolute;
+  top: 40%; /* Baja al nivel del 60% de altura */
+  transform: translateY(-50%);
+  left: 0;
+  width: 100%;
+  height: 40px; /* Óvalo del líquido más grande */
+  border-radius: 50%;
+  background-color: rgba(215, 205, 50, 0.9); /* Más amarillo que verde */
+  background-image: repeating-radial-gradient(ellipse at center, transparent 0%, rgba(160, 150, 20, 0.4) 10%, transparent 20%);
+  background-position: center;
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+/* Animación de líquido revolviéndose como remolino real */
+@keyframes whirlpoolSurface {
+  0% { background-size: 100% 100%; }
+  50% { background-size: 30% 30%; }
+  100% { background-size: 100% 100%; }
+}
+
+@keyframes whirlpoolBody {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+.is-stirring .cup-liquid::after {
+  animation: whirlpoolBody 0.8s linear infinite;
+  background-size: 100% 200%;
+}
+
+.is-stirring .cup-liquid::before {
+  animation: whirlpoolSurface 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Wrapper de frutas para separar arrastre de rotación */
+.cup-fruit-wrapper {
+  width: 55px;
+  height: 55px;
   z-index: 10;
   cursor: grab;
-  background: white;
 }
 
-.blender-fruit-item:active {
+.cup-fruit-wrapper:active {
   cursor: grabbing;
 }
 
-/* Animaciones */
-@keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
-}
-.shake-animation {
-  animation: shake 0.4s infinite;
+/* Frutas en la taza (imagen visual) */
+.cup-fruit-item {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4); /* Sombra más fuerte dentro del líquido */
+  background: white;
+  transition: transform 0.3s ease;
+  pointer-events: none;
 }
 
-@keyframes mixSpin {
-  0% { transform: rotate(0deg) scale(1); filter: blur(0px); }
-  50% { transform: rotate(180deg) scale(0.8); filter: blur(3px); }
-  100% { transform: rotate(360deg) scale(1); filter: blur(0px); }
+/* Efecto rotatorio de frutas al revolver */
+@keyframes spinFruitPath {
+  0% { transform: rotate(0deg) translateX(15px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(15px) rotate(-360deg); }
 }
-.spin-mixing .blender-fruit-item {
-  animation: mixSpin 0.3s ease-in-out infinite;
+
+.is-stirring .cup-fruit-item {
+  animation: spinFruitPath 2s linear infinite;
+  animation-delay: calc(var(--delay) * 0.2s);
+}
+
+/* Contenedor de la cuchara y tooltip, para que mantengan la altura siempre */
+.spoon-area {
+  position: relative;
+  width: 180px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Spoon at the top */
+  margin-top: 70px; /* Aún más espacio bajo el plato */
+  z-index: 20;
+}
+
+/* Botón Cucharita (Horizontal y centrado) */
+.spoon-button {
+  position: relative;
+  width: 100%;
+  height: 45px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+@keyframes pulseSpoon {
+  0% { filter: drop-shadow(0 0 2px rgba(255,215,0,0.2)); }
+  50% { filter: drop-shadow(0 0 12px rgba(255,215,0,0.9)); transform: scale(1.05); }
+  100% { filter: drop-shadow(0 0 2px rgba(255,215,0,0.2)); }
+}
+
+.spoon-ready {
+  animation: pulseSpoon 1.5s infinite ease-in-out;
+}
+
+.spoon-button:hover:not(:disabled) {
+  filter: brightness(1.2);
+  transform: scale(1.05);
+}
+
+.spoon-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  animation: none;
+}
+
+.spoon-stem {
+  width: 120px; /* Mango más largo */
+  height: 14px; /* Más grueso */
+  background: linear-gradient(to bottom, #8a8a8a, #5a5a5a); /* Color más oscuro / metal fuerte */
+  border-radius: 15px 0 0 15px;
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.4);
+}
+
+.spoon-bowl {
+  width: 60px; /* Más ancha */
+  height: 38px; /* Más alta */
+  background: linear-gradient(135deg, #a0a0a0, #707070); /* Color más oscuro / metal fuerte */
+  border-radius: 50% 50% 50% 50%;
+  box-shadow: inset -2px -2px 6px rgba(0,0,0,0.4), 2px 4px 8px rgba(0,0,0,0.4);
+  margin-left: -12px; /* traslape con el mango */
+}
+
+/* Hint Bubble (Centrado debajo de la cuchara) */
+.spoon-hint-bubble {
+  position: absolute;
+  bottom: 0; /* Colocado en la parte inferior */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2c769;
+  color: #26351f;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  animation: bounceHint 2s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.spoon-hint-bubble.invisible {
+  opacity: 0;
+  visibility: hidden;
+}
+.spoon-hint-bubble .bubble-arrow {
+  display: block;
+  position: absolute;
+  top: -6px; /* Flecha apuntando hacia ARRIBA a la cuchara */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent #f2c769 transparent;
+}
+@keyframes bounceHint {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 5px); }
+}
+
+/* Animación de la cucharita revolviendo (entra por abajo) */
+@keyframes stirSpoonAnim {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  
+  /* Sube e ingresa a la taza hasta arriba del líquido */
+  15% { transform: translate(0, -280px) rotate(90deg); }
+  
+  /* Movimiento de revolver en la parte superior */
+  35% { transform: translate(-30px, -260px) rotate(70deg); }
+  50% { transform: translate(30px, -240px) rotate(110deg); }
+  65% { transform: translate(-30px, -260px) rotate(70deg); }
+  80% { transform: translate(30px, -240px) rotate(110deg); }
+
+  /* Sale */
+  90% { transform: translate(0, -280px) rotate(90deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.is-stirring .spoon-button {
+  animation: stirSpoonAnim 3.5s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+
+.is-stirring .spoon-button:disabled {
+  opacity: 1; /* Mantener el color 100% visible durante la animación */
 }
 
 /* CDK Drag Drop */
 .cdk-drag-preview {
   box-sizing: border-box;
-  opacity: 0.8 !important;
+  opacity: 0.9 !important;
   z-index: 1000 !important;
   pointer-events: none;
 }
+.fruit-tile.cdk-drag-preview {
+  width: 120px !important; /* Fijar el ancho durante el arrastre para que no se deforme */
+  background: white;
+  border: 2px solid #78a549;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+.fruit-tile.cdk-drag-preview img {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+/* El placeholder normal (en la lista de frutas) */
 .cdk-drag-placeholder {
   opacity: 0.2;
 }
+
+/* Ocultar totalmente el placeholder cuando la fruta se arrastra SOBRE LA TAZA
+   para que no modifique ni empuje el diseño interno de la taza */
+.cup-body .cdk-drag-placeholder {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  position: absolute !important;
+}
+
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
@@ -389,8 +616,45 @@ h1 {
   }
 }
 
+.cup-scale-container {
+  width: 100%;
+  flex: 1; /* Stretch to fill parent in desktop */
+  min-height: 420px; /* Base height for unscaled cup */
+  overflow: visible; 
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically center the cup to lower it naturally */
+}
+
+@media (max-width: 768px) {
+  .cup-scale-container {
+    min-height: auto;
+    height: 350px; /* Match visual scaled height */
+  }
+  .cup-wrapper {
+    transform: scale(0.85);
+  }
+}
+
 @media (max-width: 560px) {
   .fruit-gallery-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .cup-scale-container {
+    min-height: auto;
+    height: 290px; /* Match visual scaled height */
+  }
+  .cup-wrapper {
+    transform: scale(0.70);
+  }
+}
+
+@media (max-width: 450px) {
+  .cup-scale-container {
+    min-height: auto;
+    height: 230px; /* Match visual scaled height */
+  }
+  .cup-wrapper {
+    transform: scale(0.55);
   }
 }

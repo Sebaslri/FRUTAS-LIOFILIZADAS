@@ -163,7 +163,7 @@
           @for (item of featuredModules[0].highlights; track item) {
           <li>
             <mat-icon fontSet="material-symbols-outlined">check_circle</mat-icon>
-            {{ item }}
+            <span [innerHTML]="item"></span>
           </li>
           }
         </ul>
@@ -200,7 +200,7 @@
           @for (item of featuredModules[1].highlights; track item) {
           <li>
             <mat-icon fontSet="material-symbols-outlined">check_circle</mat-icon>
-            {{ item }}
+            <span [innerHTML]="item"></span>
           </li>
           }
         </ul>
@@ -236,7 +236,7 @@
           @for (item of featuredModules[2].highlights; track item) {
           <li>
             <mat-icon fontSet="material-symbols-outlined">check_circle</mat-icon>
-            {{ item }}
+            <span [innerHTML]="item"></span>
           </li>
           }
         </ul>

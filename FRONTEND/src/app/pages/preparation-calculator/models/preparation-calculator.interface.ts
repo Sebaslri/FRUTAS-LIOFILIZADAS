@@ -1,5 +1,5 @@
-import { Fruta } from '../../../fruit/models/Fruta.interface';
-import { Mix } from '../../../../shared/interfaces/mix.interface';
+import { Fruta } from '../../../shared/interfaces/Fruta.interface';
+import { Mix } from '../../../shared/interfaces/mix.interface';
 
 export type PreparationSource = Fruta | (Mix & { fruitImages?: string[] });
 

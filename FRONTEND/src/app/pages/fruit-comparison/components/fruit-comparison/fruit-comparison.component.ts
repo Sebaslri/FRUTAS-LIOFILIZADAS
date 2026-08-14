@@ -1,9 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Fruta } from '../../../fruit/models/Fruta.interface';
+import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
 import { MaterialModule } from '../../../../shared/material.module';
 import { FruitComparisonService } from '../../services/fruit-comparison.service';
-import { FruitComparisonTableModalComponent } from './fruit-comparison-table-modal.component';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
 import { MixService } from '../../../../shared/services/mix.service';
 import { CustomTitleService } from '../../../../shared/services/custom-title.service';
@@ -13,7 +12,8 @@ import {
   ComparisonSlot,
   ComparisonTableRow,
   FruitComparisonDialogData,
-} from './configuration.interface';
+} from '../../model/fruit-comparison.interface';
+import { FruitComparisonTableModalComponent } from '../fruit-comparison-table-modal/fruit-comparison-table-modal.component';
 
 @Component({
   selector: 'app-fruit-comparison',

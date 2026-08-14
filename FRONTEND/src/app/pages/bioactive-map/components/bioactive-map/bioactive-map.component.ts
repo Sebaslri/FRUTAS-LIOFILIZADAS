@@ -5,8 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import * as L from 'leaflet';
 import { BioactiveMapService } from '../../services/bioactive-map.service';
-import { Fruta } from '../../../fruit/models/Fruta.interface';
-import { StateFilter, MapState, ProvincePoint } from './configuration.interface';
+import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
+import { StateFilter, MapState, ProvincePoint } from '../../models/bioactive-map.interface';
 
 export interface FruitDetailScore {
   label: string;
@@ -161,7 +161,7 @@ export class BioactiveMapComponent implements AfterViewInit, OnDestroy {
 
         provinceCounts[province] = (provinceCounts[province] || 0) + 1;
         const count = provinceCounts[province];
-        
+
         // Add a small spiral offset to prevent markers from exactly overlapping
         const angle = count * 0.5 * Math.PI;
         const radius = count > 1 ? 0.15 + (count * 0.05) : 0;
@@ -271,7 +271,7 @@ export class BioactiveMapComponent implements AfterViewInit, OnDestroy {
     this.selectedFruit = fruit;
     this.updateSelectedFruitScores();
     this.renderMarkers();
-    
+
     // Encontrar el marcador correspondiente en el mapa y centrar
     // Para simplificar, buscamos los puntos de las provincias de esta fruta
     if (fruit.provincias && fruit.provincias.length > 0) {
@@ -282,7 +282,7 @@ export class BioactiveMapComponent implements AfterViewInit, OnDestroy {
           bounds.extend([point.lat, point.lng]);
         }
       }
-      
+
       if (bounds.isValid() && this.map) {
         // Centrar con un poco de padding
         this.map.flyToBounds(bounds, { maxZoom: 8, padding: [50, 50], duration: 1.5 });
@@ -372,6 +372,6 @@ import { MatButtonModule } from '@angular/material/button';
     </mat-dialog-actions>
   `
 })
-export class BioactiveMapInfoModalComponent {}
+export class BioactiveMapInfoModalComponent { }
 
 

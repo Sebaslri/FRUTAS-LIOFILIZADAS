@@ -5,12 +5,12 @@ import { CardComponent } from '../../../../shared/components/card/card.component
 import { ConditionFruitDetailModalComponent } from '../condition-fruit-detail-modal/condition-fruit-detail-modal.component';
 import { ConditionService } from '../../services/condition.service';
 import { ConditionItem } from '../../models/condition.interface';
-import { Fruta } from '../../../fruit/models/Fruta.interface';
+import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
 import { EducationalGoal } from './configuration.interface';
 import { ConditionMixCard } from './configuration.interface';
 import { MixService } from '../../../../shared/services/mix.service';
 import { Mix } from '../../../../shared/interfaces/mix.interface';
-import { FruitService } from '../../../fruit/service/fruit.service';
+import { FruitService } from '../../../../shared/services/fruit.service';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
 import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -96,7 +96,7 @@ export class ConditionResultsComponent implements OnInit {
     };
 
     this.conditionService.getAll().subscribe({
-      next: (conditions) => { 
+      next: (conditions) => {
         this.condition = conditions.find((item) => item.condicionId === conditionId);
         if (this.condition) {
           setTimeout(() => this.customTitle.set(this.condition!.nombre));

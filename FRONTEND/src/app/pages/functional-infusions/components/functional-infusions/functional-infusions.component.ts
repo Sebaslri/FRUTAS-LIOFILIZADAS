@@ -2,8 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../../../../shared/material.module';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
-import { Fruta } from '../../../fruit/models/Fruta.interface';
-import { FunctionalInfusionSource, Table1Row, Table2Row } from '../../models/functional-infusions.model';
+import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
+import { FunctionalInfusionSource, Table1Row, Table2Row } from '../../models/functional-infusions.interface';
 import { FunctionalInfusionsService } from '../../services/functional-infusions.service';
 import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 

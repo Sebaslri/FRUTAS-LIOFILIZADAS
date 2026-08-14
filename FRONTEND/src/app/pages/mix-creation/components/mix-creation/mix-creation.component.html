@@ -11,7 +11,8 @@
         </div>
       </div>
       <p class="comparison-lead" data-stagger @fadeInRight400ms>
-        Arrastra las frutas a la licuadora y descubre el potencial antioxidante de tu mezcla con nuestro algoritmo de
+        Arrastra las frutas a la taza de infusión y descubre el potencial antioxidante de tu mezcla con nuestro
+        algoritmo de
         Inteligencia Artificial.
       </p>
     </div>
@@ -23,7 +24,7 @@
       <section class="fruit-gallery" aria-labelledby="gallery-title" @fadeInRight400ms>
         <div class="section-heading">
           <h2 id="gallery-title">Ingredientes Disponibles</h2>
-          <span class="gallery-hint">Arrastra hacia la licuadora</span>
+          <span class="gallery-hint">Arrastra hacia la taza</span>
         </div>
 
         <div class="fruit-scroll-area custom-scrollbar">
@@ -53,36 +54,51 @@
       <!-- RIGHT: BLENDER (MIXER) -->
       <section class="blender-section" aria-labelledby="blender-title" @fadeInRight400ms>
         <div class="section-heading">
-          <h2 id="blender-title">Licuadora</h2>
+          <h2 id="blender-title">Taza de Infusión</h2>
           <span class="gallery-hint" [class.text-red-500]="mixerFruits.length >= 4">{{mixerFruits.length}}/4
             Ingredientes</span>
         </div>
 
-        <div class="blender-wrapper" [class.shake-animation]="isMixing">
-          <!-- Tapa de la licuadora -->
-          <div class="blender-lid"></div>
+        <div class="cup-scale-container">
+          <div class="cup-wrapper" [class.is-stirring]="isMixing">
 
-          <!-- Vaso de la licuadora (Drop Area) -->
-          <div id="mixerList" cdkDropList [cdkDropListData]="mixerFruits" [cdkDropListConnectedTo]="['availableList']"
-            class="blender-jar" [class.spin-mixing]="isMixing" (cdkDropListDropped)="drop($event)">
+            <div class="cup-assembly">
+              <div class="cup-handle"></div>
 
-            <!-- Frutas arrastradas dentro de la licuadora -->
-            <img *ngFor="let item of mixerFruits" [src]="item.imagen || '/images/fruit-hero.png'"
-              class="blender-fruit-item" cdkDrag>
+              <!-- Taza (Drop Area) -->
+              <div id="mixerList" cdkDropList [cdkDropListData]="mixerFruits"
+                [cdkDropListConnectedTo]="['availableList']" class="cup-body" (cdkDropListDropped)="drop($event)">
 
-            <div *ngIf="mixerFruits.length === 0"
-              class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
-              <mat-icon fontSet="material-symbols-outlined"
-                style="font-size: 64px; width: 64px; height: 64px; color: #fff;">blender</mat-icon>
+                <div class="cup-liquid"></div>
+
+                <!-- Contenedor interno para evitar que las frutas se salgan de la taza -->
+                <div class="cup-fruits-inner">
+                  <!-- Frutas arrastradas dentro de la taza -->
+                  <div *ngFor="let item of mixerFruits; let i = index" class="cup-fruit-wrapper" cdkDrag>
+                    <img [src]="item.imagen || '/images/fruit-hero.png'" class="cup-fruit-item"
+                      [ngStyle]="{'--delay': i}" draggable="false">
+                  </div>
+                </div>
+              </div>
+
+              <div class="cup-saucer"></div>
             </div>
-          </div>
 
-          <!-- Base de la licuadora y Botón Mix -->
-          <div class="blender-base">
-            <button class="blender-button" (click)="mix()" [disabled]="isMixing || mixerFruits.length < 2"
-              [title]="mixerFruits.length < 2 ? 'Añade al menos 2 frutas' : 'Licuar!'">
-              <mat-icon fontSet="material-symbols-outlined" [class.spin-icon]="isMixing">cyclone</mat-icon>
-            </button>
+            <div class="spoon-area">
+              <!-- Botón Cucharita / Hint Bubble movido fuera del botón para que no gire -->
+              <div class="spoon-hint-bubble" [class.invisible]="mixerFruits.length < 2 || isMixing">
+                <span class="bubble-text">¡Haz clic para revolver!</span>
+                <div class="bubble-arrow"></div>
+              </div>
+
+              <!-- Botón Cucharita -->
+              <button class="spoon-button" [class.spoon-ready]="mixerFruits.length >= 2 && !isMixing" (click)="mix()"
+                [disabled]="isMixing || mixerFruits.length < 2"
+                [title]="mixerFruits.length < 2 ? 'Añade al menos 2 frutas' : 'Revolver infusión!'">
+                <div class="spoon-stem"></div>
+                <div class="spoon-bowl"></div>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -98,21 +114,29 @@
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left mb-6">
-        <div class="flex flex-col p-5 bg-red-50 rounded-xl shadow-sm border border-red-100 border-l-4 border-l-red-500 hover:shadow-md transition-shadow">
-          <span class="text-xs text-red-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Cap. Antioxidante</span>
-          <span class="text-3xl font-extrabold text-red-600">{{ predictions.capacidad_antioxidante }}</span>
+        <div
+          class="flex flex-col p-5 bg-red-50 rounded-xl shadow-sm border border-red-100 border-l-4 border-l-red-500 hover:shadow-md transition-shadow">
+          <span class="text-xs text-red-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Cap.
+            Antioxidante</span>
+          <span class="text-3xl font-extrabold text-red-600">{{ predictions.capacidad_antioxidante }}%</span>
         </div>
-        <div class="flex flex-col p-5 bg-orange-50 rounded-xl shadow-sm border border-orange-100 border-l-4 border-l-orange-500 hover:shadow-md transition-shadow">
-          <span class="text-xs text-orange-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Carotenoides</span>
-          <span class="text-3xl font-extrabold text-orange-600">{{ predictions.carotenoides }}</span>
+        <div
+          class="flex flex-col p-5 bg-orange-50 rounded-xl shadow-sm border border-orange-100 border-l-4 border-l-orange-500 hover:shadow-md transition-shadow">
+          <span
+            class="text-xs text-orange-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Carotenoides</span>
+          <span class="text-3xl font-extrabold text-orange-600">{{ predictions.carotenoides }}%</span>
         </div>
-        <div class="flex flex-col p-5 bg-purple-50 rounded-xl shadow-sm border border-purple-100 border-l-4 border-l-purple-500 hover:shadow-md transition-shadow">
-          <span class="text-xs text-purple-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Flavonoides</span>
-          <span class="text-3xl font-extrabold text-purple-600">{{ predictions.flavonoides }}</span>
+        <div
+          class="flex flex-col p-5 bg-purple-50 rounded-xl shadow-sm border border-purple-100 border-l-4 border-l-purple-500 hover:shadow-md transition-shadow">
+          <span
+            class="text-xs text-purple-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Flavonoides</span>
+          <span class="text-3xl font-extrabold text-purple-600">{{ predictions.flavonoides }}%</span>
         </div>
-        <div class="flex flex-col p-5 bg-yellow-50 rounded-xl shadow-sm border border-yellow-100 border-l-4 border-l-yellow-500 hover:shadow-md transition-shadow">
-          <span class="text-xs text-yellow-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Ác. Ascórbico</span>
-          <span class="text-3xl font-extrabold text-yellow-600">{{ predictions.acido_ascorbico }}</span>
+        <div
+          class="flex flex-col p-5 bg-yellow-50 rounded-xl shadow-sm border border-yellow-100 border-l-4 border-l-yellow-500 hover:shadow-md transition-shadow">
+          <span class="text-xs text-yellow-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Ác.
+            Ascórbico</span>
+          <span class="text-3xl font-extrabold text-yellow-600">{{ predictions.acido_ascorbico }}%</span>
         </div>
       </div>
     </div>
@@ -133,35 +157,43 @@
       <!-- GLOBAL METRICS -->
       <h3 class="text-xl font-bold mb-6" style="color: #3f6528">Desempeño general global:</h3>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-        <div class="flex flex-col justify-center items-center py-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div
+          class="flex flex-col justify-center items-center py-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
           <span class="block text-xs font-bold text-[#899572] uppercase tracking-widest mb-2">Global MAE</span>
-          <span class="text-4xl font-black text-[#26351f]">{{ modelMetrics.global_metrics.mae }}</span>
+          <span class="text-4xl font-black text-[#26351f]">{{ modelMetrics.global_metrics.mae | number:'1.2-2' }}</span>
         </div>
-        <div class="flex flex-col justify-center items-center py-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div
+          class="flex flex-col justify-center items-center py-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
           <span class="block text-xs font-bold text-[#899572] uppercase tracking-widest mb-2">Global RMSE</span>
-          <span class="text-4xl font-black text-[#26351f]">{{ modelMetrics.global_metrics.rmse }}</span>
+          <span class="text-4xl font-black text-[#26351f]">{{ modelMetrics.global_metrics.rmse | number:'1.2-2' }}</span>
         </div>
-        <div class="flex flex-col justify-center items-center py-6 bg-purple-50/50 rounded-xl shadow-sm border border-purple-100 hover:shadow-md transition-shadow">
+        <div
+          class="flex flex-col justify-center items-center py-6 bg-purple-50/50 rounded-xl shadow-sm border border-purple-100 hover:shadow-md transition-shadow">
           <span class="block text-xs font-bold text-purple-500 uppercase tracking-widest mb-2">Global NRMSE</span>
-          <span class="text-4xl font-black text-purple-600">{{ modelMetrics.global_metrics.nrmse }}%</span>
+          <span class="text-4xl font-black text-purple-600">{{ modelMetrics.global_metrics.nrmse | number:'1.2-2' }}%</span>
         </div>
-        <div class="flex flex-col justify-center items-center py-6 bg-[#f1f5e7] rounded-xl shadow-sm border border-[rgba(120,165,73,0.3)] hover:shadow-md transition-shadow">
+        <div
+          class="flex flex-col justify-center items-center py-6 bg-[#f1f5e7] rounded-xl shadow-sm border border-[rgba(120,165,73,0.3)] hover:shadow-md transition-shadow">
           <span class="block text-xs font-bold text-[#58634d] uppercase tracking-widest mb-2">Global R² Score</span>
-          <span class="text-5xl font-black text-[#26351f] drop-shadow-sm">{{ modelMetrics.global_metrics.r2 }}</span>
+          <span class="text-5xl font-black text-[#26351f] drop-shadow-sm">{{ modelMetrics.global_metrics.r2 | number:'1.2-2' }}</span>
         </div>
       </div>
 
       <!-- PER TARGET METRICS (TABLE) -->
       <ng-container *ngIf="getBestAndWorstTargets() as bw">
         <h3 class="text-xl font-bold mb-6" style="color: #3f6528">Desempeño específico por cada variable:</h3>
-        
+
         <div class="bg-white rounded-xl shadow-sm border border-gray-100 mb-12 overflow-x-auto custom-scrollbar">
           <table mat-table [dataSource]="metricsDataSource" class="w-full min-w-[750px]">
-            
+
             <!-- Variable Column -->
             <ng-container matColumnDef="variable">
-              <th mat-header-cell *matHeaderCellDef class="!font-black !text-[#26351f] uppercase tracking-wider text-xs sticky left-0 z-10 shadow-[1px_0_0_rgba(0,0,0,0.1)]" style="background-color: #e2ecca !important;"> Variable Objetivo </th>
-              <td mat-cell *matCellDef="let element" class="py-4 font-bold text-[#26351f] sticky left-0 z-10 shadow-[1px_0_0_rgba(0,0,0,0.1)]" style="background-color: white !important;">
+              <th mat-header-cell *matHeaderCellDef
+                class="!font-black !text-[#26351f] uppercase tracking-wider text-xs sticky left-0 z-10 shadow-[1px_0_0_rgba(0,0,0,0.1)]"
+                style="background-color: #e2ecca !important;"> Variable Objetivo </th>
+              <td mat-cell *matCellDef="let element"
+                class="py-4 font-bold text-[#26351f] sticky left-0 z-10 shadow-[1px_0_0_rgba(0,0,0,0.1)]"
+                style="background-color: white !important;">
                 <div class="flex items-center">
                   {{element.targetName}}
                 </div>
@@ -170,65 +202,90 @@
 
             <!-- MAE Column -->
             <ng-container matColumnDef="mae">
-              <th mat-header-cell *matHeaderCellDef class="!font-black !text-[#26351f] uppercase tracking-wider text-xs text-center" style="background-color: #e2ecca !important;"> MAE </th>
-              <td mat-cell *matCellDef="let element" class="py-4 text-center font-medium text-[#58634d]"> {{element.mae}} </td>
+              <th mat-header-cell *matHeaderCellDef
+                class="!font-black !text-[#26351f] uppercase tracking-wider text-xs text-center"
+                style="background-color: #e2ecca !important;"> MAE </th>
+              <td mat-cell *matCellDef="let element" class="py-4 text-center font-medium text-[#58634d]">
+                {{element.mae | number:'1.2-2'}} </td>
             </ng-container>
 
             <!-- RMSE Column -->
             <ng-container matColumnDef="rmse">
-              <th mat-header-cell *matHeaderCellDef class="!font-black !text-[#26351f] uppercase tracking-wider text-xs text-center" style="background-color: #e2ecca !important;"> RMSE </th>
-              <td mat-cell *matCellDef="let element" class="py-4 text-center font-medium text-[#58634d]"> {{element.rmse}} </td>
+              <th mat-header-cell *matHeaderCellDef
+                class="!font-black !text-[#26351f] uppercase tracking-wider text-xs text-center"
+                style="background-color: #e2ecca !important;"> RMSE </th>
+              <td mat-cell *matCellDef="let element" class="py-4 text-center font-medium text-[#58634d]">
+                {{element.rmse | number:'1.2-2'}} </td>
             </ng-container>
 
             <!-- NRMSE Column (Badge) -->
             <ng-container matColumnDef="nrmse">
-              <th mat-header-cell *matHeaderCellDef class="!font-black !text-[#26351f] uppercase tracking-wider text-xs text-center" style="background-color: #e2ecca !important;"> NRMSE </th>
+              <th mat-header-cell *matHeaderCellDef
+                class="!font-black !text-[#26351f] uppercase tracking-wider text-xs text-center"
+                style="background-color: #e2ecca !important;"> NRMSE </th>
               <td mat-cell *matCellDef="let element" class="py-4 text-center">
-                <span class="inline-flex items-center justify-center px-3 py-1 text-sm font-bold text-purple-700 bg-purple-100 rounded-full">
-                  {{element.nrmse}}%
+                <span
+                  class="inline-flex items-center justify-center px-3 py-1 text-sm font-bold text-purple-700 bg-purple-100 rounded-full">
+                  {{element.nrmse | number:'1.2-2'}}%
                 </span>
               </td>
             </ng-container>
 
             <!-- R2 Score Column (Badge) -->
             <ng-container matColumnDef="r2">
-              <th mat-header-cell *matHeaderCellDef class="!font-black !text-[#26351f] uppercase tracking-wider text-xs text-center" style="background-color: #e2ecca !important;"> R² Score </th>
+              <th mat-header-cell *matHeaderCellDef
+                class="!font-black !text-[#26351f] uppercase tracking-wider text-xs text-center"
+                style="background-color: #e2ecca !important;"> R² Score </th>
               <td mat-cell *matCellDef="let element" class="py-4 text-center">
-                <span class="inline-flex items-center justify-center px-3 py-1 text-sm font-bold rounded-full border shadow-sm" [ngClass]="element.quality.bg + ' ' + element.quality.border + ' ' + element.quality.class">
-                  {{element.r2}}
+                <span
+                  class="inline-flex items-center justify-center px-3 py-1 text-sm font-bold rounded-full border shadow-sm"
+                  [ngClass]="element.quality.bg + ' ' + element.quality.border + ' ' + element.quality.class">
+                  {{element.r2 | number:'1.2-2'}}
                 </span>
               </td>
             </ng-container>
 
             <!-- Estado Column -->
             <ng-container matColumnDef="estado">
-              <th mat-header-cell *matHeaderCellDef class="!font-black !text-[#26351f] uppercase tracking-wider text-xs text-center" style="background-color: #e2ecca !important;"> Estado </th>
+              <th mat-header-cell *matHeaderCellDef
+                class="!font-black !text-[#26351f] uppercase tracking-wider text-xs text-center"
+                style="background-color: #e2ecca !important;"> Estado </th>
               <td mat-cell *matCellDef="let element" class="py-4 text-center">
-                <div class="inline-flex items-center text-xs font-bold whitespace-nowrap" [ngClass]="element.quality.class">
-                  <mat-icon fontSet="material-symbols-outlined" class="mr-1 text-[16px] shrink-0">{{element.quality.icon}}</mat-icon>
+                <div class="inline-flex items-center text-xs font-bold whitespace-nowrap"
+                  [ngClass]="element.quality.class">
+                  <mat-icon fontSet="material-symbols-outlined"
+                    class="mr-1 text-[16px] shrink-0">{{element.quality.icon}}</mat-icon>
                   {{element.quality.label}}
                 </div>
               </td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="border-b border-[rgba(120,165,73,0.3)]" style="background-color: #e2ecca !important;"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover:bg-gray-50/50 transition-colors animate-fade-in-up"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="border-b border-[rgba(120,165,73,0.3)]"
+              style="background-color: #e2ecca !important;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              class="hover:bg-gray-50/50 transition-colors animate-fade-in-up"></tr>
           </table>
         </div>
       </ng-container>
 
       <!-- SCATTER PLOT SECTION -->
       <h3 class="text-xl font-bold mb-6" style="color: #3f6528">Análisis Visual: Valor Predicho vs Valor Real</h3>
-      <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-center mb-12 animate-fade-in-up">
-        <img src="http://localhost:8000/model-plot" alt="Gráfico Predicho vs Real" class="max-w-full h-auto rounded-lg" onerror="this.style.display='none'">
+      <div
+        class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-center mb-12 animate-fade-in-up">
+        <img src="http://localhost:8000/model-plot" alt="Gráfico Predicho vs Real" class="max-w-full h-auto rounded-lg"
+          onerror="this.style.display='none'">
       </div>
 
       <!-- GENERALIZATION DISCLAIMER -->
       <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl shadow-sm animate-fade-in-up">
         <div class="grid grid-cols-[auto_1fr] items-center gap-4">
-          <mat-icon fontSet="material-symbols-outlined" class="text-blue-500 text-3xl h-full flex items-center">info</mat-icon>
+          <mat-icon fontSet="material-symbols-outlined"
+            class="text-blue-500 text-3xl h-full flex items-center">info</mat-icon>
           <p class="text-blue-900 text-sm leading-relaxed text-justify m-0">
-            <strong>Nota Científica:</strong> El modelo fue entrenado utilizando un conjunto de datos sintético generado a partir de reglas de promedio y un factor de sinergia asumido. Por tanto, aunque las métricas de validación muestran un desempeño consistente dentro de ese marco, la capacidad de generalización a mezclas reales debe confirmarse mediante un conjunto independiente de mezclas obtenidas experimentalmente.
+            <strong>Nota Científica:</strong> El modelo fue entrenado utilizando un conjunto de datos sintético generado
+            a partir de reglas de promedio y un factor de sinergia asumido. Por tanto, aunque las métricas de validación
+            muestran un desempeño consistente dentro de ese marco, la capacidad de generalización a mezclas reales debe
+            confirmarse mediante un conjunto independiente de mezclas obtenidas experimentalmente.
           </p>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { map, Observable } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
 import { endpoint } from '../../../shared/apis/endpoints';
 import { BaseResponse } from '../../../shared/interfaces/BaseResponse.intrerface';
-import { Fruta } from '../../fruit/models/Fruta.interface';
+import { Fruta } from '../../../shared/interfaces/Fruta.interface';
 
 @Injectable({ providedIn: 'root' })
 export class BioactiveMapService {

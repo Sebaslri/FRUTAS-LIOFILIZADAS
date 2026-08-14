@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Fruta } from '../../../pages/fruit/models/Fruta.interface';
+import { Fruta } from '../../interfaces/Fruta.interface';
 import { FRUIT_COLORS } from '../../functions/variables.interface';
 
 @Component({
@@ -20,7 +20,7 @@ export class CardComponent {
   @Output() detailsRequested = new EventEmitter<Fruta>();
 
   protected requestDetails(): void {
-    this.detailsRequested.emit(this.fruit);    
+    this.detailsRequested.emit(this.fruit);
   }
 
   protected get accentColor(): string {

@@ -1,5 +1,5 @@
 import { Mix } from '../../../shared/interfaces/mix.interface';
-import { Fruta } from '../../fruit/models/Fruta.interface';
+import { Fruta } from '../../../shared/interfaces/Fruta.interface';
 
 export type FunctionalInfusionSource = Fruta | (Mix & { fruitImages?: string[] });
 

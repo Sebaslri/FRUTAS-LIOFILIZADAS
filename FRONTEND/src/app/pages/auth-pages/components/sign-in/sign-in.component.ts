@@ -3,11 +3,11 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { MaterialModule } from '../../../shared/material.module';
-import { CustomTitleService } from '../../../shared/services/custom-title.service';
-import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../shared/animations/page.animations';
-import { AlertService } from '../../../shared/services/alert.service';
+import { AuthService } from '../../services/auth.service';
+import { MaterialModule } from '../../../../shared/material.module';
+import { CustomTitleService } from '../../../../shared/services/custom-title.service';
+import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
+import { AlertService } from '../../../../shared/services/alert.service';
 
 @Component({
   selector: 'app-sign-in',

@@ -1,4 +1,4 @@
-import { Fruta } from '../../../fruit/models/Fruta.interface';
+import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
 
 export type FruitMetricKey = keyof Fruta;
 

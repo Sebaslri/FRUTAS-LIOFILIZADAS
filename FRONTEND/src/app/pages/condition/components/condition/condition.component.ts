@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MaterialModule } from '../../shared/material.module';
-import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../shared/animations/page.animations';
-import { ConditionService } from './services/condition.service';
-import { ConditionItem } from './models/condition.interface';
-import { CustomTitleService } from '../../shared/services/custom-title.service';
+import { MaterialModule } from '../../../../shared/material.module';
+import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
+import { ConditionService } from '../../services/condition.service';
+import { ConditionItem } from '../../models/condition.interface';
+import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 
 @Component({
   selector: 'app-condition',

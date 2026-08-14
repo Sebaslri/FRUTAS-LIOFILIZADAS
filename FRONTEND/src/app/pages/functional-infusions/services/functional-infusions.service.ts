@@ -2,8 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, forkJoin, map } from 'rxjs';
 import { MixService } from '../../../shared/services/mix.service';
 import { FruitComparisonService } from '../../fruit-comparison/services/fruit-comparison.service';
-import { Fruta } from '../../fruit/models/Fruta.interface';
-import { FunctionalInfusionSource } from '../models/functional-infusions.model';
+import { Fruta } from '../../../shared/interfaces/Fruta.interface';
+import { FunctionalInfusionSource } from '../models/functional-infusions.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class FunctionalInfusionsService {
           });
           return { ...mix, fruitImages };
         });
-        
+
         return { fruits, mixes: enhancedMixes };
       })
     );

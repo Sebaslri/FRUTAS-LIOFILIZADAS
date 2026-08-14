@@ -4,10 +4,10 @@ import { MaterialModule } from '../../../../shared/material.module';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
 import { Mix } from '../../../../shared/interfaces/mix.interface';
 import { MixService } from '../../../../shared/services/mix.service';
-import { Fruta } from '../../../fruit/models/Fruta.interface';
+import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
 import { FruitComparisonService } from '../../../fruit-comparison/services/fruit-comparison.service';
 import { CustomTitleService } from '../../../../shared/services/custom-title.service';
-import { PreparationSource } from './configuration.interface';
+import { PreparationSource } from '../../models/preparation-calculator.interface';
 
 @Component({
   selector: 'app-preparation-calculator',
@@ -70,7 +70,7 @@ export class PreparationCalculatorComponent implements OnInit {
     if (!this.selected) return null;
     let v22 = null;
     let v90 = null;
-    
+
     if ('nombreComun' in this.selected) {
       v22 = this.selected.promedioActAntioxDpphInf22;
       v90 = this.selected.promedioActAntioxDpphInf90;
@@ -78,7 +78,7 @@ export class PreparationCalculatorComponent implements OnInit {
       v22 = this.selected.ActAntiox_dpph_inf22;
       v90 = this.selected.ActAntiox_dpph_inf90;
     }
-    
+
     return this.interpolate(v22, v90);
   }
 
@@ -101,9 +101,9 @@ export class PreparationCalculatorComponent implements OnInit {
   private interpolate(v22: number | null | undefined, v90: number | null | undefined): number | null {
     const val22 = Number(v22);
     const val90 = Number(v90);
-    
+
     if (!Number.isFinite(val22) || !Number.isFinite(val90)) {
-      return null; 
+      return null;
     }
 
     const ratio = (this.temperature - 22) / (90 - 22);
@@ -122,7 +122,7 @@ export class PreparationCalculatorComponent implements OnInit {
   protected getInterpolated(source: PreparationSource, key: 'dpph' | 'fenoles'): number | null {
     let v22 = null;
     let v90 = null;
-    
+
     if ('nombreComun' in source) {
       v22 = key === 'dpph' ? source.promedioActAntioxDpphInf22 : source.promedioFenolesTotalesInf22;
       v90 = key === 'dpph' ? source.promedioActAntioxDpphInf90 : source.promedioFenolesTotalesInf90;
@@ -130,7 +130,7 @@ export class PreparationCalculatorComponent implements OnInit {
       v22 = key === 'dpph' ? source.ActAntiox_dpph_inf22 : source.fenolesTotales_inf22;
       v90 = key === 'dpph' ? source.ActAntiox_dpph_inf90 : source.fenolesTotales_inf90;
     }
-    
+
     return this.interpolate(v22, v90);
   }
 

@@ -3,19 +3,19 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
-import { CardComponent } from '../../shared/components/card/card.component';
-import { MaterialModule } from '../../shared/material.module';
-import { CustomTitleService } from '../../shared/services/custom-title.service';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { MaterialModule } from '../../../../shared/material.module';
+import { CustomTitleService } from '../../../../shared/services/custom-title.service';
 import {
   fadeInRight400ms,
   scaleIn400ms,
   stagger40ms,
-} from '../../shared/animations/page.animations';
-import { FruitDetailModalComponent } from './components/fruit-detail-modal/fruit-detail-modal.component';
-import { LoginPromptModalComponent } from './components/login-prompt-modal/login-prompt-modal.component';
-import { HomeTopbarComponent } from './components/home-topbar/home-topbar.component';
-import { Fruta } from '../fruit/models/Fruta.interface';
-import { FruitService } from '../fruit/service/fruit.service';
+} from '../../../../shared/animations/page.animations';
+import { FruitDetailModalComponent } from '../fruit-detail-modal/fruit-detail-modal.component';
+import { LoginPromptModalComponent } from '../login-prompt-modal/login-prompt-modal.component';
+import { HomeTopbarComponent } from '../home-topbar/home-topbar.component';
+import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
+import { FruitService } from '../../../../shared/services/fruit.service';
 
 @Component({
   selector: 'app-home',
@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: 'map',
       color: '#0ea5a0',
       highlights: [
-        'Filtro por estado: antes y después de digestión in vitro',
+        'Filtro por estado: antes y después de digestión <i>in vitro</i>',
         'Marcadores por provincia con datos de bioaccesibilidad',
         'Visualización de fenoles, flavonoides y antocianinas',
       ],
@@ -144,12 +144,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     private _fruitService: FruitService,
     private _customTitle: CustomTitleService,
     private _dialog: MatDialog,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._customTitle.set('Home');
     this._fruitService.getAll().subscribe((resp) => {
-      this.frutas = resp;      
+      this.frutas = resp;
     });
   }
 
@@ -244,11 +244,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  protected openFruitDetails(fruit: Fruta): void {    
-    
+  protected openFruitDetails(fruit: Fruta): void {
+
     this._dialog.open(FruitDetailModalComponent, {
       data: { fruit },
-      disableClose:true,
+      disableClose: true,
       autoFocus: false,
       restoreFocus: true,
       panelClass: 'fruit-detail-dialog',

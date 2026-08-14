@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { endpoint } from '../../../shared/apis/endpoints';
-import { UserProfile } from '../models/profile.model';
+import { UserProfile } from '../models/profile.interface';
 import { AuthService } from '../../auth-pages/services/auth.service';
 
 export interface ProfileResponse {

@@ -24,7 +24,7 @@ const childrenRoutes: Routes = [
   },
   {
     path: 'condiciones',
-    loadComponent: () => import('./pages/condition/condition.component').then((m) => m.Condition)
+    loadComponent: () => import('./pages/condition/components/condition/condition.component').then((m) => m.Condition)
   },
   {
     path: 'infusiones-funcionales',
@@ -51,21 +51,23 @@ const childrenRoutes: Routes = [
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
+    loadComponent: () => import('./pages/home/components/home/home.component').then((m) => m.HomeComponent),
     pathMatch: 'full',
   },
 
+  /*
   {
     path: 'fruit',
     loadComponent: () => import('./pages/fruit/fruit.component').then((m) => m.FruitComponent),
   },
+  */
   {
     path: 'signin',
-    loadComponent: () => import('./pages/auth-pages/sign-in/sign-in.component').then((m) => m.SignInComponent),
+    loadComponent: () => import('./pages/auth-pages/components/sign-in/sign-in.component').then((m) => m.SignInComponent),
   },
   {
     path: 'signup',
-    loadComponent: () => import('./pages/auth-pages/sign-up/sign-up.component').then((m) => m.SignUpComponent),
+    loadComponent: () => import('./pages/auth-pages/components/sign-up/sign-up.component').then((m) => m.SignUpComponent),
   },
   {
     path: '',
