@@ -4,7 +4,6 @@ from pydantic import BaseModel
 from typing import List
 import joblib
 import numpy as np
-import mysql.connector
 import os
 
 app = FastAPI(title="FrutasApp ML API (Red Neuronal)")
