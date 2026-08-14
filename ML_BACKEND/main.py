@@ -4,7 +4,6 @@ from pydantic import BaseModel
 from typing import List
 import joblib
 import numpy as np
-import mysql.connector
 import os
 
 app = FastAPI(title="FrutasApp ML API (Red Neuronal)")
@@ -58,26 +57,21 @@ class PredictionResponse(BaseModel):
     metrics: ModelMetrics
 
 def get_fruit_properties_from_db(fruit_ids: List[int]):
-    """Extrae las propiedades químicas de las frutas desde MySQL"""
+    """Extrae las propiedades químicas de las frutas llamando a la API de PHP en InfinityFree."""
     try:
-        conn = mysql.connector.connect(host="localhost", user="root", password="", database="db_frutas")
-        cursor = conn.cursor(dictionary=True)
-        
-        format_strings = ','.join(['%s'] * len(fruit_ids))
-        query = f"""
-            SELECT p.* 
-            FROM fruta f
-            JOIN frutapropiedad fp ON f.frutaId = fp.frutaId
-            JOIN propiedades p ON fp.propiedadId = p.propiedadId
-            WHERE f.frutaId IN ({format_strings})
-        """
-        cursor.execute(query, tuple(fruit_ids))
-        results = cursor.fetchall()
-        conn.close()
-        return results
+        import requests
+        # Llama a tu propia API en vivo para obtener los datos más recientes
+        response = requests.get("http://api-frutas-ecuador.gt.tc/api/frutas.php?accion=propiedades")
+        if response.status_code == 200:
+            data = response.json()
+            if data.get("isSuccess"):
+                all_properties = data.get("data", [])
+                # Filtrar solo las frutas solicitadas
+                results = [prop for prop in all_properties if prop.get('frutaId') in fruit_ids]
+                return results
     except Exception as e:
-        print(f"Error DB: {e}")
-        return []
+        print(f"Error HTTP obteniendo propiedades: {e}")
+    return []
 
 from fastapi.responses import FileResponse
 

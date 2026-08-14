@@ -69,4 +69,13 @@ class FrutaController
     }
 
 
+
+    public function propiedadesRaw(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            apiResponse(false, null, 'Metodo no permitido.', 405);
+            return;
+        }
+        apiResponse(true, $this->model->listarPropiedadesRaw(), 'Propiedades obtenidas correctamente.');
+    }
 }

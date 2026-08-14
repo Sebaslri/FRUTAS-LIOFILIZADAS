@@ -264,4 +264,11 @@ class Fruta
             return $fruta;
         }, $frutas);
     }
+    public function listarPropiedadesRaw(): array
+    {
+        $query = "SELECT fp.frutaId, p.* FROM frutapropiedad fp JOIN propiedades p ON fp.propiedadId = p.propiedadId";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

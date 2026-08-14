@@ -10,5 +10,5 @@ uvicorn
 pydantic
 scikit-learn
 pandas
-mysql-connector-python
+requests
 joblib

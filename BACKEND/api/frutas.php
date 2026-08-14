@@ -45,6 +45,10 @@ try {
             $controller->listarMixes();
             break;
 
+        case 'propiedades':
+            $controller->propiedadesRaw();
+            break;
+
         default:
             apiResponse(false,null,'Acción no encontrada.',404);
     }
