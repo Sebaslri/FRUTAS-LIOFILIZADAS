@@ -32,6 +32,8 @@ else:
 
 class MixRequest(BaseModel):
     fruit_ids: List[int]
+    properties_list: List[dict] = None
+
 
 class MetricValues(BaseModel):
     mae: float
@@ -92,7 +94,9 @@ def predict_mix(request: MixRequest):
     if not request.fruit_ids:
         raise HTTPException(status_code=400, detail="Debe enviar al menos el ID de una fruta")
         
-    properties_list = get_fruit_properties_from_db(request.fruit_ids)
+    properties_list = request.properties_list
+    if not properties_list:
+        properties_list = get_fruit_properties_from_db(request.fruit_ids)
     
     if not properties_list:
         raise HTTPException(status_code=404, detail="No se encontraron las propiedades para esas frutas en la BD")
