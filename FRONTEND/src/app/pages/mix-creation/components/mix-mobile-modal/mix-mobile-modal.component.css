@@ -1,0 +1,129 @@
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh; /* Ajuste para que encaje bien en pantallas pequeñas */
+  background: #fff;
+  border-radius: 12px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(120, 165, 73, 0.15);
+  background: #fcfdfa;
+}
+
+.modal-content {
+  padding: 1.5rem !important;
+  flex: 1;
+}
+
+.fruit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 0.8rem;
+}
+
+.fruit-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem;
+  border: 1px solid rgba(120, 165, 73, 0.2);
+  border-radius: 0.75rem;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.fruit-tile:active {
+  transform: scale(0.95);
+}
+
+.fruit-tile img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 0.55rem;
+  object-fit: cover;
+  background: #f6efdf;
+}
+
+.fruit-tile span {
+  width: 100%;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-align: center;
+  color: #3f6528;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Badges */
+.add-badge, .remove-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.add-badge {
+  background: #78a549;
+}
+
+.remove-badge {
+  background: #e74c3c;
+}
+
+.add-badge mat-icon, .remove-badge mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.selected-tile {
+  border-color: #78a549;
+  background: #f4f8ec;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 1.5rem;
+  text-align: center;
+  color: #899572;
+  font-size: 0.85rem;
+  font-style: italic;
+  background: rgba(120, 165, 73, 0.05);
+  border-radius: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem 1.5rem !important;
+  border-top: 1px solid rgba(120, 165, 73, 0.15);
+  background: #fcfdfa;
+  margin-bottom: 0;
+}
+
+.cancel-btn {
+  color: #58634d !important;
+}
+
+.confirm-btn {
+  background-color: #78a549 !important;
+  color: white !important;
+  font-weight: bold !important;
+}

@@ -63,11 +63,20 @@
           <div class="cup-wrapper" [class.is-stirring]="isMixing">
 
             <div class="cup-assembly">
+              <!-- Botón flotante indicativo en móvil -->
+              <div class="cup-hint-bubble" *ngIf="isMobile && !isMixing">
+                <span class="bubble-text">Toca la taza para agregar frutas</span>
+                <div class="bubble-arrow-down"></div>
+              </div>
+
               <div class="cup-handle"></div>
 
               <!-- Taza (Drop Area) -->
               <div id="mixerList" cdkDropList [cdkDropListData]="mixerFruits"
-                [cdkDropListConnectedTo]="['availableList']" class="cup-body" (cdkDropListDropped)="drop($event)">
+                [cdkDropListConnectedTo]="['availableList']" class="cup-body" (cdkDropListDropped)="drop($event)"
+                (click)="isMobile && !isMixing && openMobileSelectionModal()"
+                [class.mobile-clickable]="isMobile && !isMixing" [attr.role]="isMobile && !isMixing ? 'button' : null"
+                [attr.tabindex]="isMobile && !isMixing ? 0 : null">
 
                 <div class="cup-liquid"></div>
 
@@ -279,7 +288,7 @@
       <h3 class="text-xl font-bold mb-6" style="color: #3f6528">Análisis Visual: Valor Predicho vs Valor Real</h3>
       <div
         class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-center mb-12 animate-fade-in-up">
-        <img [src]="modelPlotUrl" alt="Gráfico Predicho vs Real" class="max-w-full h-auto rounded-lg"
+        <img src="http://localhost:8000/model-plot" alt="Gráfico Predicho vs Real" class="max-w-full h-auto rounded-lg"
           onerror="this.style.display='none'">
       </div>
 

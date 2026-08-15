@@ -522,6 +522,11 @@ h1 {
   50% { transform: translate(-50%, 5px); }
 }
 
+@keyframes pulseHint {
+  0%, 100% { transform: translate(-50%, 0) scale(1); }
+  50% { transform: translate(-50%, 0) scale(1.05); }
+}
+
 /* Animación de la cucharita revolviendo (entra por abajo) */
 @keyframes stirSpoonAnim {
   0% { transform: translate(0, 0) rotate(0deg); }
@@ -656,5 +661,60 @@ h1 {
   }
   .cup-wrapper {
     transform: scale(0.55);
+  }
+}
+
+@media (max-width: 1023px) {
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fruit-gallery {
+    display: none !important; /* Hide drag and drop area on mobile */
+  }
+
+  .cup-body.mobile-clickable {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .cup-hint-bubble {
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f2c769;
+    color: #26351f;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    animation: pulseHint 1.5s infinite ease-in-out; /* Animación de latido */
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  .cup-hint-bubble .bubble-arrow-down {
+    position: absolute;
+    bottom: -6px; /* Flecha apuntando hacia ABAJO a la taza */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #f2c769 transparent transparent transparent;
+  }
+
+  .cup-body.mobile-clickable:active {
+    transform: scale(0.98);
+  }
+
+  .cup-fruits-inner {
+    pointer-events: none; /* Prevent fruits from intercepting cup clicks */
   }
 }

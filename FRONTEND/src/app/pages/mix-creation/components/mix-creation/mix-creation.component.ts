@@ -13,11 +13,14 @@ import { FruitService } from '../../../../shared/services/fruit.service';
 import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
 import { CustomTitleService } from '../../../../shared/services/custom-title.service';
+import { HostListener } from '@angular/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MixMobileModalComponent } from '../mix-mobile-modal/mix-mobile-modal.component';
 
 @Component({
   selector: 'app-mix-creation',
   standalone: true,
-  imports: [CommonModule, DragDropModule, HttpClientModule, SweetAlert2Module, MatIconModule, MatButtonModule, MatTableModule],
+  imports: [CommonModule, DragDropModule, HttpClientModule, SweetAlert2Module, MatIconModule, MatButtonModule, MatTableModule, MatDialogModule],
   templateUrl: './mix-creation.component.html',
   styleUrls: ['./mix-creation.component.css'],
   animations: [fadeInRight400ms, scaleIn400ms, stagger40ms]
@@ -27,6 +30,9 @@ export class MixCreationComponent implements OnInit {
   private readonly _fruitService = inject(FruitService);
   private readonly _http = inject(HttpClient);
   private readonly customTitle = inject(CustomTitleService);
+  private readonly dialog = inject(MatDialog);
+
+  allFruitsDb: Fruta[] = [];
 
   availableFruits: Fruta[] = [];
   mixerFruits: Fruta[] = [];
@@ -36,10 +42,20 @@ export class MixCreationComponent implements OnInit {
   displayedColumns: string[] = ['variable', 'mae', 'rmse', 'nrmse', 'r2', 'estado'];
   metricsDataSource: any[] = [];
   envApi = env.api; // Para acceder a las imágenes si es necesario construir URL
-  modelPlotUrl = endpoint.MODEL_PLOT;
+  isMobile = false;
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkMobile();
+  }
+
+  checkMobile() {
+    this.isMobile = window.innerWidth <= 1023; // Breakpoint para vista móvil donde se oculta la galería
+  }
 
   ngOnInit(): void {
     this.customTitle.set('Laboratorio de Mixes');
+    this.checkMobile();
     this.loadFruits();
   }
 
@@ -49,6 +65,7 @@ export class MixCreationComponent implements OnInit {
 
     this._fruitService.getAll().subscribe({
       next: (frutas) => {
+        this.allFruitsDb = frutas;
         if (preselectedIds.length > 0) {
           this.availableFruits = frutas.filter(f => !preselectedIds.includes(f.frutaId));
           this.mixerFruits = frutas.filter(f => preselectedIds.includes(f.frutaId));
@@ -80,6 +97,28 @@ export class MixCreationComponent implements OnInit {
     }
   }
 
+  openMobileSelectionModal() {
+    if (!this.isMobile || this.isMixing) return;
+
+    const dialogRef = this.dialog.open(MixMobileModalComponent, {
+      width: '90vw',
+      maxWidth: '400px',
+      data: {
+        allFruits: this.allFruitsDb,
+        selectedFruits: [...this.mixerFruits]
+      },
+      panelClass: 'mix-mobile-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe((result: Fruta[] | undefined) => {
+      if (result) {
+        this.mixerFruits = result;
+        const selectedIds = this.mixerFruits.map(f => f.frutaId);
+        this.availableFruits = this.allFruitsDb.filter(f => !selectedIds.includes(f.frutaId));
+      }
+    });
+  }
+
   async mix() {
     if (this.mixerFruits.length < 2) {
       Swal.fire('Faltan ingredientes', 'Debes añadir al menos 2 frutas a la mezcladora', 'info');
@@ -96,57 +135,38 @@ export class MixCreationComponent implements OnInit {
   predictMix() {
     const fruitIds = this.mixerFruits.map(f => f.frutaId);
 
-    // 1. Obtener las propiedades crudas desde nuestra propia API PHP (sin problemas de antibot porque el navegador tiene la cookie)
-    this._http.get<any>(`${env.api}api/frutas.php?accion=propiedades`).subscribe({
-      next: (resp) => {
-        let properties_list = [];
-        if (resp.isSuccess && resp.data) {
-          properties_list = resp.data.filter((p: any) => fruitIds.includes(p.frutaId));
+    this._http.post<any>(endpoint.PREDICT_MIX, { fruit_ids: fruitIds }).subscribe({
+      next: (response) => {
+        this.isMixing = false;
+
+        if (response.metrics) {
+          this.modelMetrics = response.metrics;
+          this.metricsDataSource = ['cap_ant_digerido', 'bioacc_carotenoides', 'bioacc_flavonoides', 'bioacc_acAsc'].map(key => {
+            return {
+              id: key,
+              targetName: this.getTargetDisplayName(key),
+              mae: this.modelMetrics.per_target[key].mae,
+              rmse: this.modelMetrics.per_target[key].rmse,
+              nrmse: this.modelMetrics.per_target[key].nrmse,
+              r2: this.modelMetrics.per_target[key].r2,
+              quality: this.getScoreQuality(this.modelMetrics.per_target[key].r2)
+            };
+          });
         }
 
-        // 2. Enviar las propiedades extraídas directamente al motor de IA
-        this._http.post<any>(endpoint.PREDICT_MIX, { 
-          fruit_ids: fruitIds, 
-          properties_list: properties_list 
-        }).subscribe({
-          next: (response) => {
-            this.isMixing = false;
+        this.predictions = response;
 
-            if (response.metrics) {
-              this.modelMetrics = response.metrics;
-              this.metricsDataSource = ['cap_ant_digerido', 'bioacc_carotenoides', 'bioacc_flavonoides', 'bioacc_acAsc'].map(key => {
-                return {
-                  id: key,
-                  targetName: this.getTargetDisplayName(key),
-                  mae: this.modelMetrics.per_target[key].mae,
-                  rmse: this.modelMetrics.per_target[key].rmse,
-                  nrmse: this.modelMetrics.per_target[key].nrmse,
-                  r2: this.modelMetrics.per_target[key].r2,
-                  quality: this.getScoreQuality(this.modelMetrics.per_target[key].r2)
-                };
-              });
-            }
+        this.availableFruits.push(...this.mixerFruits);
+        this.mixerFruits = [];
 
-            this.predictions = response;
-
-            this.availableFruits.push(...this.mixerFruits);
-            this.mixerFruits = [];
-
-            setTimeout(() => {
-              document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 300);
-          },
-          error: (error) => {
-            this.isMixing = false;
-            console.error('Error de la IA:', error);
-            Swal.fire('Error', 'No se pudo conectar con el motor de IA.', 'error');
-          }
-        });
+        setTimeout(() => {
+          document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
       },
       error: (error) => {
         this.isMixing = false;
-        console.error('Error obteniendo propiedades:', error);
-        Swal.fire('Error', 'No se pudieron obtener las propiedades químicas de las frutas seleccionadas.', 'error');
+        console.error(error);
+        Swal.fire('Error', 'No se pudo conectar con el motor de IA.', 'error');
       }
     });
   }
