@@ -1,0 +1,62 @@
+<div class="modal-container">
+  <div class="modal-header">
+    <h2 mat-dialog-title class="m-0 text-xl font-bold text-[#26351f]">Ingredientes de la mezcla</h2>
+    <button mat-icon-button (click)="onCancel()" aria-label="Cerrar modal">
+      <mat-icon fontSet="material-symbols-outlined">close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content class="modal-content custom-scrollbar">
+    
+    <!-- Frutas Seleccionadas -->
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-bold text-[#78a549] uppercase tracking-wider m-0">En tu taza</h3>
+        <span class="text-xs font-bold px-2 py-1 bg-[#f1f5e7] text-[#3f6528] rounded-full">
+          {{ selectedFruits.length }}/4
+        </span>
+      </div>
+      
+      <div class="fruit-grid">
+        <article *ngFor="let fruit of selectedFruits" 
+                 class="fruit-tile selected-tile" 
+                 (click)="toggleFruit(fruit, true)">
+          <div class="remove-badge"><mat-icon fontSet="material-symbols-outlined">remove</mat-icon></div>
+          <img [src]="fruit.imagen || '/images/fruit-hero.png'" [alt]="fruit.nombreComun">
+          <span>{{fruit.nombreComun}}</span>
+        </article>
+        
+        <div *ngIf="selectedFruits.length === 0" class="empty-state">
+          Toca las frutas abajo para agregarlas a tu taza.
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-t border-[rgba(120,165,73,0.2)] mb-6">
+
+    <!-- Frutas Disponibles -->
+    <div>
+      <h3 class="text-sm font-bold text-[#58634d] uppercase tracking-wider mb-3">Frutas Disponibles</h3>
+      
+      <div class="fruit-grid">
+        <article *ngFor="let fruit of availableFruits" 
+                 class="fruit-tile available-tile" 
+                 (click)="toggleFruit(fruit, false)">
+          <div class="add-badge"><mat-icon fontSet="material-symbols-outlined">add</mat-icon></div>
+          <img [src]="fruit.imagen || '/images/fruit-hero.png'" [alt]="fruit.nombreComun">
+          <span>{{fruit.nombreComun}}</span>
+        </article>
+        
+        <div *ngIf="availableFruits.length === 0" class="empty-state">
+          No hay más frutas disponibles.
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="modal-actions">
+    <button mat-button class="cancel-btn" (click)="onCancel()">Cancelar</button>
+    <button mat-flat-button class="confirm-btn" (click)="onConfirm()">Confirmar Taza</button>
+  </mat-dialog-actions>
+</div>

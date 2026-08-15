@@ -13,11 +13,14 @@ import { FruitService } from '../../../../shared/services/fruit.service';
 import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
 import { fadeInRight400ms, scaleIn400ms, stagger40ms } from '../../../../shared/animations/page.animations';
 import { CustomTitleService } from '../../../../shared/services/custom-title.service';
+import { HostListener } from '@angular/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MixMobileModalComponent } from '../mix-mobile-modal/mix-mobile-modal.component';
 
 @Component({
   selector: 'app-mix-creation',
   standalone: true,
-  imports: [CommonModule, DragDropModule, HttpClientModule, SweetAlert2Module, MatIconModule, MatButtonModule, MatTableModule],
+  imports: [CommonModule, DragDropModule, HttpClientModule, SweetAlert2Module, MatIconModule, MatButtonModule, MatTableModule, MatDialogModule],
   templateUrl: './mix-creation.component.html',
   styleUrls: ['./mix-creation.component.css'],
   animations: [fadeInRight400ms, scaleIn400ms, stagger40ms]
@@ -27,6 +30,9 @@ export class MixCreationComponent implements OnInit {
   private readonly _fruitService = inject(FruitService);
   private readonly _http = inject(HttpClient);
   private readonly customTitle = inject(CustomTitleService);
+  private readonly dialog = inject(MatDialog);
+
+  allFruitsDb: Fruta[] = [];
 
   availableFruits: Fruta[] = [];
   mixerFruits: Fruta[] = [];
@@ -36,9 +42,20 @@ export class MixCreationComponent implements OnInit {
   displayedColumns: string[] = ['variable', 'mae', 'rmse', 'nrmse', 'r2', 'estado'];
   metricsDataSource: any[] = [];
   envApi = env.api; // Para acceder a las imágenes si es necesario construir URL
+  isMobile = false;
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkMobile();
+  }
+
+  checkMobile() {
+    this.isMobile = window.innerWidth <= 1023; // Breakpoint para vista móvil donde se oculta la galería
+  }
 
   ngOnInit(): void {
     this.customTitle.set('Laboratorio de Mixes');
+    this.checkMobile();
     this.loadFruits();
   }
 
@@ -48,6 +65,7 @@ export class MixCreationComponent implements OnInit {
 
     this._fruitService.getAll().subscribe({
       next: (frutas) => {
+        this.allFruitsDb = frutas;
         if (preselectedIds.length > 0) {
           this.availableFruits = frutas.filter(f => !preselectedIds.includes(f.frutaId));
           this.mixerFruits = frutas.filter(f => preselectedIds.includes(f.frutaId));
@@ -77,6 +95,28 @@ export class MixCreationComponent implements OnInit {
         event.currentIndex,
       );
     }
+  }
+
+  openMobileSelectionModal() {
+    if (!this.isMobile || this.isMixing) return;
+
+    const dialogRef = this.dialog.open(MixMobileModalComponent, {
+      width: '90vw',
+      maxWidth: '400px',
+      data: {
+        allFruits: this.allFruitsDb,
+        selectedFruits: [...this.mixerFruits]
+      },
+      panelClass: 'mix-mobile-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe((result: Fruta[] | undefined) => {
+      if (result) {
+        this.mixerFruits = result;
+        const selectedIds = this.mixerFruits.map(f => f.frutaId);
+        this.availableFruits = this.allFruitsDb.filter(f => !selectedIds.includes(f.frutaId));
+      }
+    });
   }
 
   async mix() {
