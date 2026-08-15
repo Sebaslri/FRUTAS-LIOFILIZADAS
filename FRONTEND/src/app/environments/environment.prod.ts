@@ -1,4 +1,6 @@
 export const environment = {
-  production: false,
-  environment: "local"
+  production: true,
+  environment: "production",
+  api: "/",
+  aiApi: "https://frutas-liofilizadas.onrender.com/"
 };
