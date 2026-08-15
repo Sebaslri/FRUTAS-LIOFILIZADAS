@@ -36,6 +36,7 @@ export class MixCreationComponent implements OnInit {
   displayedColumns: string[] = ['variable', 'mae', 'rmse', 'nrmse', 'r2', 'estado'];
   metricsDataSource: any[] = [];
   envApi = env.api; // Para acceder a las imágenes si es necesario construir URL
+  modelPlotUrl = endpoint.MODEL_PLOT;
 
   ngOnInit(): void {
     this.customTitle.set('Laboratorio de Mixes');
@@ -95,38 +96,57 @@ export class MixCreationComponent implements OnInit {
   predictMix() {
     const fruitIds = this.mixerFruits.map(f => f.frutaId);
 
-    this._http.post<any>(endpoint.PREDICT_MIX, { fruit_ids: fruitIds }).subscribe({
-      next: (response) => {
-        this.isMixing = false;
-
-        if (response.metrics) {
-          this.modelMetrics = response.metrics;
-          this.metricsDataSource = ['cap_ant_digerido', 'bioacc_carotenoides', 'bioacc_flavonoides', 'bioacc_acAsc'].map(key => {
-            return {
-              id: key,
-              targetName: this.getTargetDisplayName(key),
-              mae: this.modelMetrics.per_target[key].mae,
-              rmse: this.modelMetrics.per_target[key].rmse,
-              nrmse: this.modelMetrics.per_target[key].nrmse,
-              r2: this.modelMetrics.per_target[key].r2,
-              quality: this.getScoreQuality(this.modelMetrics.per_target[key].r2)
-            };
-          });
+    // 1. Obtener las propiedades crudas desde nuestra propia API PHP (sin problemas de antibot porque el navegador tiene la cookie)
+    this._http.get<any>(`${env.api}api/frutas.php?accion=propiedades`).subscribe({
+      next: (resp) => {
+        let properties_list = [];
+        if (resp.isSuccess && resp.data) {
+          properties_list = resp.data.filter((p: any) => fruitIds.includes(p.frutaId));
         }
 
-        this.predictions = response;
+        // 2. Enviar las propiedades extraídas directamente al motor de IA
+        this._http.post<any>(endpoint.PREDICT_MIX, { 
+          fruit_ids: fruitIds, 
+          properties_list: properties_list 
+        }).subscribe({
+          next: (response) => {
+            this.isMixing = false;
 
-        this.availableFruits.push(...this.mixerFruits);
-        this.mixerFruits = [];
+            if (response.metrics) {
+              this.modelMetrics = response.metrics;
+              this.metricsDataSource = ['cap_ant_digerido', 'bioacc_carotenoides', 'bioacc_flavonoides', 'bioacc_acAsc'].map(key => {
+                return {
+                  id: key,
+                  targetName: this.getTargetDisplayName(key),
+                  mae: this.modelMetrics.per_target[key].mae,
+                  rmse: this.modelMetrics.per_target[key].rmse,
+                  nrmse: this.modelMetrics.per_target[key].nrmse,
+                  r2: this.modelMetrics.per_target[key].r2,
+                  quality: this.getScoreQuality(this.modelMetrics.per_target[key].r2)
+                };
+              });
+            }
 
-        setTimeout(() => {
-          document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 300);
+            this.predictions = response;
+
+            this.availableFruits.push(...this.mixerFruits);
+            this.mixerFruits = [];
+
+            setTimeout(() => {
+              document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+          },
+          error: (error) => {
+            this.isMixing = false;
+            console.error('Error de la IA:', error);
+            Swal.fire('Error', 'No se pudo conectar con el motor de IA.', 'error');
+          }
+        });
       },
       error: (error) => {
         this.isMixing = false;
-        console.error(error);
-        Swal.fire('Error', 'No se pudo conectar con el motor de IA.', 'error');
+        console.error('Error obteniendo propiedades:', error);
+        Swal.fire('Error', 'No se pudieron obtener las propiedades químicas de las frutas seleccionadas.', 'error');
       }
     });
   }

@@ -12,6 +12,7 @@ export const endpoint = {
     BIOACTIVE_MAP: "api/frutas.php?accion=mapaBioactivo",
     LIST_MIXES: "api/frutas.php?accion=mixes",
     PREDICT_MIX: "https://frutas-liofilizadas.onrender.com/predict-mix",
+    MODEL_PLOT: "https://frutas-liofilizadas.onrender.com/model-plot",
 
     // CONDITIONS MODULE
     LIST_CONDITIONS: "api/condiciones.php?accion=listar",
