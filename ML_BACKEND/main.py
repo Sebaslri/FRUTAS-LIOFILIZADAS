@@ -63,8 +63,9 @@ def get_fruit_properties_from_db(fruit_ids: List[int]):
     """Extrae las propiedades químicas de las frutas llamando a la API de PHP en InfinityFree."""
     try:
         import requests
-        # Llama a tu propia API en vivo para obtener los datos más recientes
-        response = requests.get("http://api-frutas-ecuador.gt.tc/api/frutas.php?accion=propiedades")
+        # Llama a tu propia API en vivo (PHP) para obtener los datos más recientes
+        api_url = os.getenv("API_URL", "https://frutas-backend.onrender.com")
+        response = requests.get(f"{api_url}/api/frutas.php?accion=propiedades")
         if response.status_code == 200:
             data = response.json()
             if data.get("isSuccess"):
