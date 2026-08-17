@@ -8,6 +8,7 @@ function applyCorsHeaders(): void
     $allowedOrigins = [
         'http://localhost:4200',
         'http://127.0.0.1:4200',
+        'https://frutas-frontend.onrender.com',
     ];
 
     if (in_array($origin, $allowedOrigins, true)) {
