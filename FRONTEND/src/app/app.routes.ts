@@ -43,6 +43,10 @@ const childrenRoutes: Routes = [
     loadComponent: () => import('./pages/mix-creation/components/mix-creation/mix-creation.component').then((m) => m.MixCreationComponent),
   },
   {
+    path: 'referencias-bibliograficas',
+    loadComponent: () => import('./pages/references/components/references/references.component').then((m) => m.ReferencesComponent),
+  },
+  {
     path: '**',
     loadComponent: () => import('./pages/other-page/not-found/not-found.component').then((m) => m.NotFoundComponent),
   },

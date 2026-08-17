@@ -1,0 +1,309 @@
+:host {
+  display: block;
+}
+
+.references-shell {
+  min-height: 100vh;
+  padding: 6.5rem clamp(1rem, 4vw, 3rem) 4rem;
+  background:
+    radial-gradient(circle at 12% 12rem, rgba(242, 169, 34, 0.26), transparent 26rem),
+    linear-gradient(180deg, rgba(255, 248, 232, 0.95), rgba(238, 244, 223, 0.9)) !important;
+}
+
+.references-container {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+/* =========================================
+   HERO SECTION (Match other modules)
+========================================= */
+.map-header {
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.55rem;
+  color: #d9890f;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin-bottom: 0;
+  margin-top: 0;
+  color: #26351f;
+  font-weight: 950;
+  line-height: 1.05;
+  font-size: clamp(2.5rem, 6vw, 5.1rem);
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 1.8rem);
+}
+
+.module-icon {
+  display: grid;
+  width: clamp(4.2rem, 8vw, 6.6rem);
+  height: clamp(4.2rem, 8vw, 6.6rem);
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(120, 165, 73, 0.26);
+  border-radius: 8px;
+  background: rgba(255, 253, 244, 0.78);
+  color: #78a549;
+  box-shadow: 0 18px 44px rgba(49, 69, 34, 0.12);
+}
+
+.module-icon mat-icon {
+  width: auto;
+  height: auto;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+.lead {
+  max-width: 760px;
+  margin: 1.2rem 0 0;
+  color: #58634d;
+  font-size: 1.08rem;
+  font-weight: 650;
+  line-height: 1.7;
+}
+
+/* =========================================
+   FILTERS SECTION (Chips)
+========================================= */
+.map-toolbar {
+  display: block;
+  padding: 1.2rem 1.35rem;
+  border: 1px solid rgba(120, 165, 73, 0.24);
+  border-radius: 0.8rem;
+  background: rgba(255, 253, 244, 0.72);
+  margin-bottom: 2.5rem;
+}
+
+.map-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+:host ::ng-deep .map-filter-list.mat-mdc-chip-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+:host ::ng-deep .map-filter-list .mat-mdc-chip {
+  min-height: 2.55rem;
+  border: 1px solid rgba(120, 165, 73, 0.3);
+  border-radius: 999px;
+  background: #fff;
+  color: #3f6528;
+  font-weight: 900;
+  transition: transform 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+:host ::ng-deep .map-filter-list .mat-mdc-chip:hover {
+  transform: translateY(-2px);
+}
+
+:host ::ng-deep .map-filter-list .mat-mdc-chip.mat-mdc-chip-selected {
+  border-color: #3f6528;
+  background: #3f6528;
+  color: #fff8e8;
+}
+
+:host ::ng-deep .map-filter-list .mdc-evolution-chip__text-label {
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+/* =========================================
+   REFERENCES LIST (Thin floating cards)
+========================================= */
+.references-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 4rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 1.5rem;
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+  color: #718096;
+}
+
+.empty-state mat-icon {
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+/* List Card */
+.reference-list-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reference-list-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.08),
+    0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  border-color: rgba(242, 169, 34, 0.3);
+  /* Subtle orange border on hover */
+}
+
+.card-content {
+  flex: 1;
+  min-width: 0;
+  /* Important for text truncation inside flexbox */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ref-year {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: rgba(120, 165, 73, 0.4);
+}
+
+.ref-tags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ref-tag {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.6rem;
+  background: rgba(242, 169, 34, 0.1);
+  color: var(--brand-orange, #d99316);
+  border-radius: 1rem;
+  font-weight: 600;
+}
+
+.ref-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2d3748;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ref-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.ref-authors,
+.ref-journal {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #4a5568;
+  margin: 0;
+}
+
+.ref-authors mat-icon,
+.ref-journal mat-icon {
+  font-size: 1.1rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  color: #a0aec0;
+}
+
+/* Actions */
+.card-actions {
+  flex-shrink: 0;
+}
+
+.doi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(242, 169, 34, 0.1);
+  color: var(--brand-orange, #f2a922);
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.doi-btn:hover {
+  background: var(--brand-orange, #f2a922);
+  color: white;
+  transform: scale(1.02);
+}
+
+.doi-btn mat-icon {
+  font-size: 1.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 768px) {
+  .references-shell {
+    padding-left: clamp(1rem, 4vw, 3rem);
+    padding-top: 5rem;
+  }
+
+  .reference-list-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+
+  .doi-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ref-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
