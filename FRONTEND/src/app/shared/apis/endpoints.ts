@@ -1,4 +1,5 @@
 import { HttpHeaders } from "@angular/common/http"
+import { environment } from "../../environments/environment";
 
 export const endpoint = {
     //AUTH MODULE
@@ -11,8 +12,8 @@ export const endpoint = {
     FRUIT_BY_ID: "api/frutas.php?accion=frutaPorId&Id=",
     BIOACTIVE_MAP: "api/frutas.php?accion=mapaBioactivo",
     LIST_MIXES: "api/frutas.php?accion=mixes",
-    PREDICT_MIX: "https://frutas-liofilizadas.onrender.com/predict-mix",
-    MODEL_PLOT: "https://frutas-liofilizadas.onrender.com/model-plot",
+    PREDICT_MIX: environment.mlApi + "predict-mix",
+    MODEL_PLOT: environment.mlApi + "model-plot",
 
     // CONDITIONS MODULE
     LIST_CONDITIONS: "api/condiciones.php?accion=listar",

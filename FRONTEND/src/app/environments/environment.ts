@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
   environment: "local",
-  api: "/",
+  api: "https://frutas-backend.onrender.com/",
+  mlApi: "https://frutas-liofilizadas.onrender.com/"
 };
