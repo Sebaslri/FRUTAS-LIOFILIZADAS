@@ -7,6 +7,73 @@ import numpy as np
 import os
 
 app = FastAPI(title="FrutasApp ML API (Red Neuronal)")
+@app.get("/test-propiedades")
+def test_propiedades():
+    import requests
+
+    url = "http://api-frutas-ecuador.gt.tc/api/frutas.php?accion=propiedades"
+
+    try:
+        print("=" * 60)
+        print("TEST DE CONEXIÓN A API PHP")
+        print("URL:", url)
+
+        response = requests.get(
+            url,
+            timeout=20,
+            headers={
+                "User-Agent": "Mozilla/5.0"
+            }
+        )
+
+        print("STATUS CODE:", response.status_code)
+        print("HEADERS:", dict(response.headers))
+        print("BODY:", response.text[:2000])
+        print("=" * 60)
+
+        return {
+            "ok": True,
+            "url": url,
+            "status_code": response.status_code,
+            "headers": dict(response.headers),
+            "body": response.text[:2000]
+        }
+
+    except requests.exceptions.Timeout as e:
+        print("TIMEOUT:", str(e))
+
+        return {
+            "ok": False,
+            "error_type": "Timeout",
+            "error": str(e)
+        }
+
+    except requests.exceptions.ConnectionError as e:
+        print("CONNECTION ERROR:", repr(e))
+
+        return {
+            "ok": False,
+            "error_type": "ConnectionError",
+            "error": repr(e)
+        }
+
+    except requests.exceptions.RequestException as e:
+        print("REQUEST ERROR:", repr(e))
+
+        return {
+            "ok": False,
+            "error_type": type(e).__name__,
+            "error": repr(e)
+        }
+
+    except Exception as e:
+        print("UNEXPECTED ERROR:", repr(e))
+
+        return {
+            "ok": False,
+            "error_type": type(e).__name__,
+            "error": repr(e)
+        }
 
 # Configure CORS
 app.add_middleware(
