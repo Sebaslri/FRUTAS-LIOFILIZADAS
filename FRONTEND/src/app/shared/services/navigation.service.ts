@@ -59,6 +59,12 @@ export class NavigationService {
       label: 'Laboratorio de Mixes',
       route: '/creacion-mixes',
       icon: 'science'
+    },
+    {
+      type: 'link',
+      label: 'Referencias Bibliográficas',
+      route: '/referencias-bibliograficas',
+      icon: 'library_books'
     }
   ];
 

@@ -17,6 +17,12 @@
       </p>
     </div>
 
+    @if (loading) {
+      <div class="flex flex-col items-center justify-center py-20 min-h-[50vh]" aria-label="Cargando datos" aria-busy="true">
+        <mat-spinner diameter="60"></mat-spinner>
+        <h2 class="mt-6 text-2xl font-bold" style="color: #78a549">Cargando datos...</h2>
+      </div>
+    } @else {
     <!-- MAIN LAB WORKSPACE -->
     <div class="lab-grid" cdkDropListGroup>
 
@@ -122,34 +128,34 @@
         <h2 class="text-2xl font-extrabold m-0" style="color: #26351f">Resultados de la Predicción</h2>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left mb-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-left mb-6">
         <div
-          class="flex flex-col p-5 bg-red-50 rounded-xl shadow-sm border border-red-100 border-l-4 border-l-red-500 hover:shadow-md transition-shadow">
-          <span class="text-xs text-red-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Cap.
+          class="flex flex-col p-3 md:p-5 bg-red-50 rounded-xl shadow-sm border border-red-100 border-l-4 border-l-red-500 hover:shadow-md transition-shadow">
+          <span class="text-[10px] md:text-xs text-red-800/70 font-bold uppercase tracking-wider leading-tight mb-1 md:mb-2">Cap.
             Antioxidante despúes de digestión</span>
-          <span class="text-3xl font-extrabold text-red-600">{{ predictions.capacidad_antioxidante }}</span>
+          <span class="text-xl md:text-3xl font-extrabold text-red-600">{{ predictions.capacidad_antioxidante }}</span>
         </div>
         <div
-          class="flex flex-col p-5 bg-orange-50 rounded-xl shadow-sm border border-orange-100 border-l-4 border-l-orange-500 hover:shadow-md transition-shadow">
+          class="flex flex-col p-3 md:p-5 bg-orange-50 rounded-xl shadow-sm border border-orange-100 border-l-4 border-l-orange-500 hover:shadow-md transition-shadow">
           <span
-            class="text-xs text-orange-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Bioaccecibilidad
+            class="text-[10px] md:text-xs text-orange-800/70 font-bold uppercase tracking-wider leading-tight mb-1 md:mb-2">Bioaccecibilidad
             Carotenoides</span>
-          <span class="text-3xl font-extrabold text-orange-600">{{ predictions.carotenoides }}%</span>
+          <span class="text-xl md:text-3xl font-extrabold text-orange-600">{{ predictions.carotenoides }}%</span>
         </div>
         <div
-          class="flex flex-col p-5 bg-purple-50 rounded-xl shadow-sm border border-purple-100 border-l-4 border-l-purple-500 hover:shadow-md transition-shadow">
+          class="flex flex-col p-3 md:p-5 bg-purple-50 rounded-xl shadow-sm border border-purple-100 border-l-4 border-l-purple-500 hover:shadow-md transition-shadow">
           <span
-            class="text-xs text-purple-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Bioaccecibilidad
+            class="text-[10px] md:text-xs text-purple-800/70 font-bold uppercase tracking-wider leading-tight mb-1 md:mb-2">Bioaccecibilidad
             Flavonoides</span>
-          <span class="text-3xl font-extrabold text-purple-600">{{ predictions.flavonoides }}%</span>
+          <span class="text-xl md:text-3xl font-extrabold text-purple-600">{{ predictions.flavonoides }}%</span>
         </div>
         <div
-          class="flex flex-col p-5 bg-yellow-50 rounded-xl shadow-sm border border-yellow-100 border-l-4 border-l-yellow-500 hover:shadow-md transition-shadow">
+          class="flex flex-col p-3 md:p-5 bg-yellow-50 rounded-xl shadow-sm border border-yellow-100 border-l-4 border-l-yellow-500 hover:shadow-md transition-shadow">
           <span
-            class="text-xs text-yellow-800/70 font-bold uppercase tracking-wider leading-tight mb-2">Bioaccecibilidad
+            class="text-[10px] md:text-xs text-yellow-800/70 font-bold uppercase tracking-wider leading-tight mb-1 md:mb-2">Bioaccecibilidad
             Ác.
             Ascórbico</span>
-          <span class="text-3xl font-extrabold text-yellow-600">{{ predictions.acido_ascorbico }}%</span>
+          <span class="text-xl md:text-3xl font-extrabold text-yellow-600">{{ predictions.acido_ascorbico }}%</span>
         </div>
       </div>
     </div>
@@ -288,7 +294,7 @@
       <h3 class="text-xl font-bold mb-6" style="color: #3f6528">Análisis Visual: Valor Predicho vs Valor Real</h3>
       <div
         class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-center mb-12 animate-fade-in-up">
-        <img src="http://localhost:8000/model-plot" alt="Gráfico Predicho vs Real" class="max-w-full h-auto rounded-lg"
+        <img src="http://localhost/backend/api/model-plot.php" alt="Gráfico Predicho vs Real" class="max-w-full h-auto rounded-lg"
           onerror="this.style.display='none'">
       </div>
 
@@ -306,7 +312,8 @@
         </div>
       </div>
 
-    </div>
+      </div>
 
+    }
   </div>
 </main>

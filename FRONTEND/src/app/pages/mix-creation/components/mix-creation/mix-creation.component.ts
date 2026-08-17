@@ -16,11 +16,12 @@ import { CustomTitleService } from '../../../../shared/services/custom-title.ser
 import { HostListener } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MixMobileModalComponent } from '../mix-mobile-modal/mix-mobile-modal.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-mix-creation',
   standalone: true,
-  imports: [CommonModule, DragDropModule, HttpClientModule, SweetAlert2Module, MatIconModule, MatButtonModule, MatTableModule, MatDialogModule],
+  imports: [CommonModule, DragDropModule, HttpClientModule, SweetAlert2Module, MatIconModule, MatButtonModule, MatTableModule, MatDialogModule, MatProgressSpinnerModule],
   templateUrl: './mix-creation.component.html',
   styleUrls: ['./mix-creation.component.css'],
   animations: [fadeInRight400ms, scaleIn400ms, stagger40ms]
@@ -37,6 +38,7 @@ export class MixCreationComponent implements OnInit {
   availableFruits: Fruta[] = [];
   mixerFruits: Fruta[] = [];
   isMixing = false;
+  loading = true;
   modelMetrics: any = null;
   predictions: any = null;
   displayedColumns: string[] = ['variable', 'mae', 'rmse', 'nrmse', 'r2', 'estado'];
@@ -72,8 +74,10 @@ export class MixCreationComponent implements OnInit {
         } else {
           this.availableFruits = frutas;
         }
+        this.loading = false;
       },
       error: (err) => {
+        this.loading = false;
         console.error('Error cargando frutas:', err);
         Swal.fire('Error', 'No se pudieron cargar las frutas de la base de datos.', 'error');
       }
@@ -135,7 +139,7 @@ export class MixCreationComponent implements OnInit {
   predictMix() {
     const fruitIds = this.mixerFruits.map(f => f.frutaId);
 
-    this._http.post<any>(endpoint.PREDICT_MIX, { fruit_ids: fruitIds }).subscribe({
+    this._http.post<any>(`${env.api}${endpoint.PREDICT_MIX}`, { fruit_ids: fruitIds }).subscribe({
       next: (response) => {
         this.isMixing = false;
 

@@ -1,0 +1,76 @@
+<main class="references-shell">
+  <div class="references-container">
+    
+    <!-- Header: Match other modules exact structure -->
+    <header class="map-header">
+      <div class="title-row" data-stagger @fadeInRight400ms>
+        <span class="module-icon" @scaleIn400ms>
+          <mat-icon fontSet="material-symbols-outlined">library_books</mat-icon>
+        </span>
+        <div>
+          <p class="eyebrow">Literatura Científica</p>
+          <h1>Referencias Bibliográficas</h1>
+        </div>
+      </div>
+      <p class="lead" data-stagger @fadeInRight400ms>
+        Explora la bibliografía científica que respalda los beneficios y propiedades de nuestras frutas amazónicas y andinas. Utiliza los filtros para encontrar investigaciones específicas.
+      </p>
+    </header>
+
+    <!-- Filters Section using mat-chip-listbox (like bioactive map) -->
+    <section class="map-toolbar" aria-label="Filtros bibliográficos" data-stagger @fadeInRight400ms>
+      <mat-chip-listbox class="map-filter-list" aria-label="Filtra por fruta" [value]="selectedTag" (change)="selectTag($event.value)">
+        <mat-chip-option value="Todas">Todas</mat-chip-option>
+        @for (tag of availableTags; track tag) {
+          <mat-chip-option [value]="tag">
+            {{ tag }}
+          </mat-chip-option>
+        }
+      </mat-chip-listbox>
+    </section>
+
+    <!-- References List -->
+    <section class="references-list" data-stagger @fadeInRight400ms>
+      
+      <!-- Empty State -->
+      <div *ngIf="filteredReferences.length === 0" class="empty-state">
+        <mat-icon fontSet="material-symbols-outlined">search_off</mat-icon>
+        <p>No se encontraron referencias para esta fruta.</p>
+        <button mat-button color="primary" (click)="selectTag('Todas')">Limpiar Filtro</button>
+      </div>
+
+      <!-- Reference Cards (List Mode) -->
+      <div class="reference-list-card" *ngFor="let ref of filteredReferences">
+        <div class="card-content">
+          <div class="card-header">
+            <span class="ref-year">{{ ref.year }}</span>
+            <div class="ref-tags">
+              <span class="ref-tag" *ngFor="let tag of ref.tags">{{ tag }}</span>
+            </div>
+          </div>
+          
+          <h3 class="ref-title">{{ ref.title }}</h3>
+          
+          <div class="ref-meta">
+            <p class="ref-authors">
+              <mat-icon fontSet="material-symbols-outlined">group</mat-icon>
+              {{ ref.authors }}
+            </p>
+            <p class="ref-journal">
+              <mat-icon fontSet="material-symbols-outlined">menu_book</mat-icon>
+              <em>{{ ref.journal }}</em>
+            </p>
+          </div>
+        </div>
+        
+        <div class="card-actions">
+          <a class="doi-btn" [href]="'https://doi.org/' + ref.doi.replace('doi:', '')" target="_blank" rel="noopener noreferrer">
+            <mat-icon fontSet="material-symbols-outlined">open_in_new</mat-icon>
+            <span>Ver Artículo Original</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</main>
