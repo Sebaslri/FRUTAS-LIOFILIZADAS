@@ -20,6 +20,16 @@ try {
     $body = getJsonBody();
 
     switch ($accion) {
+        case 'fix_db':
+            try {
+                $db = $database->getConnection();
+                $db->exec("ALTER TABLE usuario MODIFY foto LONGTEXT");
+                apiResponse(true, null, "Database updated successfully.");
+            } catch (Exception $e) {
+                apiResponse(false, null, "Error: " . $e->getMessage());
+            }
+            break;
+
         case 'login':
         case 'iniciar-sesion':
             $controller->login($body);

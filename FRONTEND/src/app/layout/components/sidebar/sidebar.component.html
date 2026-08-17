@@ -69,7 +69,7 @@
       <div
         class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#78a5494d] bg-[#78a5491f] text-sm font-black text-[#314527] shadow-[0_4px_12px_rgba(49,69,39,0.08)]">
         @if (user.foto) {
-        <img [src]="user.foto.startsWith('http') ? user.foto : backendUrl + user.foto" alt="Avatar"
+        <img [src]="(user.foto.startsWith('http') || user.foto.startsWith('data:')) ? user.foto : backendUrl + user.foto" alt="Avatar"
           class="h-full w-full object-cover">
         } @else {
         {{ getInitials(user) }}

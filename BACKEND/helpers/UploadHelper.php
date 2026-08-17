@@ -8,12 +8,6 @@ function handleAvatarUpload(?array $fileInfo): ?string
         return null;
     }
 
-    $uploadDir = __DIR__ . '/../uploads/avatars/';
-    
-    if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
-    }
-
     $extension = strtolower(pathinfo($fileInfo['name'], PATHINFO_EXTENSION));
     $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
@@ -21,15 +15,10 @@ function handleAvatarUpload(?array $fileInfo): ?string
         return null; // Invalid extension
     }
 
-    // Generate unique name
-    $fileName = uniqid('avatar_') . '.' . $extension;
-    $destination = $uploadDir . $fileName;
-
-    if (move_uploaded_file($fileInfo['tmp_name'], $destination)) {
-        // Return the relative URL to be saved in DB
-        // Assuming your API is at /api-frutas/api/
-        return 'uploads/avatars/' . $fileName;
-    }
-
-    return null;
+    // Instead of saving to a temporary Docker folder, return Base64!
+    $fileData = file_get_contents($fileInfo['tmp_name']);
+    $mimeType = mime_content_type($fileInfo['tmp_name']) ?: 'image/' . $extension;
+    
+    // Return Base64 data URI to be stored directly in TiDB LONGTEXT column
+    return 'data:' . $mimeType . ';base64,' . base64_encode($fileData);
 }

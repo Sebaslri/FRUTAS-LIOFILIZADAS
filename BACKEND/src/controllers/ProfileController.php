@@ -50,14 +50,7 @@ class ProfileController
             require_once __DIR__ . '/../../helpers/UploadHelper.php';
             $uploadedFoto = handleAvatarUpload($_FILES['foto']);
             if ($uploadedFoto) {
-                // Fetch existing profile to delete old photo
-                $oldProfile = $this->model->getProfile($usuarioId);
-                if ($oldProfile && !empty($oldProfile['foto'])) {
-                    $oldFotoPath = __DIR__ . '/../../' . $oldProfile['foto'];
-                    if (file_exists($oldFotoPath) && is_file($oldFotoPath)) {
-                        unlink($oldFotoPath);
-                    }
-                }
+                // Delete old photo logic removed as we use Base64 in DB now
                 $foto = $uploadedFoto;
             }
         }

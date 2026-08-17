@@ -10,7 +10,7 @@
     <div class="profile-header">
       <div class="avatar-container cursor-pointer" (click)="fileInput.click()" title="Cambiar foto de perfil">
         @if (previewUrl || editFoto) {
-        <img [src]="previewUrl ? previewUrl : editFoto.startsWith('http') ? editFoto : backendUrl + editFoto"
+        <img [src]="previewUrl ? previewUrl : (editFoto.startsWith('http') || editFoto.startsWith('data:')) ? editFoto : backendUrl + editFoto"
           alt="Foto de perfil" class="avatar-img" (error)="editFoto = ''; previewUrl = null" />
         } @else {
         <div class="avatar-placeholder">
