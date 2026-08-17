@@ -11,7 +11,7 @@ export const endpoint = {
     FRUIT_BY_ID: "api/frutas.php?accion=frutaPorId&Id=",
     BIOACTIVE_MAP: "api/frutas.php?accion=mapaBioactivo",
     LIST_MIXES: "api/frutas.php?accion=mixes",
-    PREDICT_MIX: "http://localhost:8000/predict-mix",
+    PREDICT_MIX: "api/predict.php",
 
     // CONDITIONS MODULE
     LIST_CONDITIONS: "api/condiciones.php?accion=listar",

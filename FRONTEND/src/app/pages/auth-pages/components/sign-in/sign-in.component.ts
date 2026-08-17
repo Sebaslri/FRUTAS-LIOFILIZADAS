@@ -32,8 +32,8 @@ export class SignInComponent implements OnInit {
     private _alert: AlertService,
   ) {
     this.form = this.fb.group({
-      email: ['d123@gmail.com', [Validators.required, Validators.email]],
-      password: ['d123', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
   }
 

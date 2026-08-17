@@ -219,3 +219,30 @@ model_data = {
 joblib.dump(model_data, 'model.pkl')
 print("\nModelo guardado exitosamente en 'model.pkl'")
 
+import json
+# Exportar pesos para PHP
+weights = [w.tolist() for w in model_final.coefs_]
+biases = [b.tolist() for b in model_final.intercepts_]
+
+out_json = {
+    'weights': weights,
+    'biases': biases,
+    'scaler_X': {
+        'mean': scaler_X_final.mean_.tolist(),
+        'scale': scaler_X_final.scale_.tolist()
+    },
+    'scaler_y': {
+        'mean': scaler_y_final.mean_.tolist(),
+        'scale': scaler_y_final.scale_.tolist()
+    },
+    'input_features': input_features,
+    'target_features': target_features,
+    'metrics': model_data['metrics']
+}
+
+json_path = os.path.join(os.path.dirname(__file__), 'model_weights.json')
+with open(json_path, 'w') as f:
+    json.dump(out_json, f, indent=4)
+
+print(f"Pesos exportados exitosamente para PHP en '{json_path}'")
+
