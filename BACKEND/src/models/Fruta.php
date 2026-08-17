@@ -173,7 +173,11 @@ class Fruta
                            propertyAverages.promedioFrapFF,
                            propertyAverages.promedioFrapFL,
                            propertyAverages.promedioFlavonoidesFF,
-                           propertyAverages.promedioFlavonoidesFL
+                           propertyAverages.promedioFlavonoidesFL,
+                           propertyAverages.promedioActAntioxDpphInf22,
+                           propertyAverages.promedioActAntioxDpphInf90,
+                           propertyAverages.promedioFenolesTotalesInf22,
+                           propertyAverages.promedioFenolesTotalesInf90
                   ORDER BY f.frutaId";
 
         return $this->normalizarUbicacion($this->conn->query($query)->fetchAll());
