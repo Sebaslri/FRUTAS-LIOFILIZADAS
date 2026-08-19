@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, model, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../../../../shared/material.module';
@@ -24,12 +24,7 @@ export interface Reference {
   animations: [stagger40ms, scaleIn400ms, fadeInRight400ms],
 })
 export class ReferencesComponent implements OnInit {
-  selectedTag: string = 'Todas';
-  
-  availableTags: string[] = [
-    'Granadilla', 'Guanábana', 'Cacao', 'Guayaba', 'Mango', 
-    'Lulo', 'Maracuyá', 'Tomate de árbol', 'Otros'
-  ];
+  searchQuery: string = '';
 
   references: Reference[] = [
     {
@@ -369,25 +364,27 @@ export class ReferencesComponent implements OnInit {
 
   filteredReferences: Reference[] = [];
 
-  constructor(private titleService: CustomTitleService) {}
+  constructor(private titleService: CustomTitleService) { }
 
   ngOnInit(): void {
     this.titleService.set('Referencias Bibliográficas');
     this.applyFilters();
   }
 
-  selectTag(tag: string | undefined): void {
-    this.selectedTag = tag || 'Todas';
-    this.applyFilters();
-  }
-
   applyFilters(): void {
     let filtered = this.references;
-    
-    if (this.selectedTag !== 'Todas') {
-      filtered = filtered.filter(r => r.tags.includes(this.selectedTag));
+
+    if (this.searchQuery && this.searchQuery.trim() !== '') {
+      const q = this.searchQuery.toLowerCase().trim();
+      filtered = filtered.filter(r => 
+        r.title.toLowerCase().includes(q) ||
+        r.authors.toLowerCase().includes(q) ||
+        r.journal.toLowerCase().includes(q) ||
+        r.tags.some(tag => tag.toLowerCase().includes(q))
+      );
     }
-    
+
     this.filteredReferences = filtered;
   }
+
 }

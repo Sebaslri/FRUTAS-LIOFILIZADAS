@@ -37,6 +37,7 @@ import { FruitService } from '../../../../shared/services/fruit.service';
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('statsSection', { static: false }) private statsSection!: ElementRef<HTMLElement>;
+  @ViewChild('researchersList', { static: false }) private researchersList!: ElementRef<HTMLElement>;
 
   protected scrollY = 0;
   protected carouselIndex = 0;
@@ -48,6 +49,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   protected statsAnimated = false;
   protected displayedStats = { modules: 0, fruits: 0, indicators: 0 };
   private statsObserver?: IntersectionObserver;
+  
+  protected researchersAnimated = false;
+  private researchersObserver?: IntersectionObserver;
 
 
   protected readonly appModules = [
@@ -105,13 +109,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       eyebrow: 'Exploración lado a lado',
       title: 'Compara frutas con rigor científico',
-      description: 'Selecciona dos frutas y obtén una comparación visual e inmediata de sus propiedades fisicoquímicas, compuestos bioactivos y perfil sensorial. Ideal para tomar decisiones informadas sobre ingredientes.',
+      description: 'Selecciona dos frutas y obtén una comparación visual e inmediata de sus propiedades fisicoquímicas, compuestos bioactivos y perfil sensorial.',
       icon: 'compare',
       color: '#3f6528',
       highlights: [
-        'Composición proximal, pH, acidez y grados Brix',
-        'Fenoles totales, flavonoides y capacidad antioxidante',
-        'Tabla detallada exportable con todos los indicadores',
+        'Bioaccesibilidad de carotenoides, flavonoides y ácido ascórbico',
+        'Capacidad antioxidante antes y después de la digestión',
+        'Tabla comparativa con todos los indicadores',
       ],
     },
     {
@@ -122,20 +126,20 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       color: '#0ea5a0',
       highlights: [
         'Filtro por estado: antes y después de digestión <i>in vitro</i>',
-        'Marcadores por provincia con datos de bioaccesibilidad',
-        'Visualización de fenoles, flavonoides y antocianinas',
+        'Marcadores por fruta con datos de bioaccesibilidad',
+        'Visualización de capacidad antioxidante, carotenoides, flavonoides y ácido ascórbico',
       ],
     },
     {
       eyebrow: 'Inteligencia artificial aplicada',
       title: 'Diseña mixes y predice su potencial',
-      description: 'Arrastra frutas liofilizadas a la licuadora virtual y nuestro modelo de IA estimará la actividad antioxidante de tu mezcla. Un laboratorio digital para experimentar sin límites.',
+      description: 'Arrastra frutas liofilizadas a la taza y nuestro modelo de IA estimará los compuestos de bioaccesibilidad de esa infusión. Un laboratorio digital para experimentar sin límites.',
       icon: 'blender',
       color: '#06b6d4',
       highlights: [
-        'Drag & drop intuitivo de ingredientes',
-        'Predicción de DPPH y ABTS con machine learning',
-        'Guarda y compara tus formulaciones favoritas',
+        'Explora la lista de frutas y crea mixes',
+        'Predice bioaccesibilidad con machine learning',
+        'Prueba tus formulaciones favoritas',
       ],
     },
   ];
@@ -155,10 +159,25 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.setupStatsObserver();
+    this.setupResearchersObserver();
   }
 
   ngOnDestroy(): void {
     this.statsObserver?.disconnect();
+    this.researchersObserver?.disconnect();
+  }
+
+  private setupResearchersObserver(): void {
+    if (!this.researchersList) return;
+    this.researchersObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !this.researchersAnimated) {
+          this.researchersAnimated = true;
+        }
+      },
+      { threshold: 0.2 }
+    );
+    this.researchersObserver.observe(this.researchersList.nativeElement);
   }
 
   private setupStatsObserver(): void {
