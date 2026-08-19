@@ -1,6 +1,6 @@
 <main class="references-shell">
   <div class="references-container">
-    
+
     <!-- Header: Match other modules exact structure -->
     <header class="map-header">
       <div class="title-row" data-stagger @fadeInRight400ms>
@@ -13,30 +13,36 @@
         </div>
       </div>
       <p class="lead" data-stagger @fadeInRight400ms>
-        Explora la bibliografía científica que respalda los beneficios y propiedades de nuestras frutas amazónicas y andinas. Utiliza los filtros para encontrar investigaciones específicas.
+        Explora la bibliografía científica que respalda los beneficios y propiedades de nuestras frutas amazónicas y
+        andinas.
       </p>
     </header>
 
-    <!-- Filters Section using mat-chip-listbox (like bioactive map) -->
-    <section class="map-toolbar" aria-label="Filtros bibliográficos" data-stagger @fadeInRight400ms>
-      <mat-chip-listbox class="map-filter-list" aria-label="Filtra por fruta" [value]="selectedTag" (change)="selectTag($event.value)">
-        <mat-chip-option value="Todas">Todas</mat-chip-option>
-        @for (tag of availableTags; track tag) {
-          <mat-chip-option [value]="tag">
-            {{ tag }}
-          </mat-chip-option>
-        }
-      </mat-chip-listbox>
+    <!-- Search Bar -->
+    <section aria-label="Búsqueda de referencias" data-stagger @fadeInRight400ms
+      style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 2.5rem;">
+      <div style="position: relative; width: 100%; max-width: 600px;">
+        <mat-icon fontSet="material-symbols-outlined"
+          style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #78a549; pointer-events: none;">search</mat-icon>
+        <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()"
+          placeholder="Buscar referencias por título, autor, fruta..."
+          class="search-input" />
+      </div>
+
+      <button *ngIf="searchQuery" mat-flat-button
+        style="background-color: #78a549; color: white; border-radius: 8px; height: 50px; padding: 0 1.5rem; transition: transform 0.2s; cursor: pointer;"
+        (click)="searchQuery=''; applyFilters()">
+        Limpiar
+      </button>
     </section>
 
     <!-- References List -->
     <section class="references-list" data-stagger @fadeInRight400ms>
-      
+
       <!-- Empty State -->
       <div *ngIf="filteredReferences.length === 0" class="empty-state">
         <mat-icon fontSet="material-symbols-outlined">search_off</mat-icon>
-        <p>No se encontraron referencias para esta fruta.</p>
-        <button mat-button color="primary" (click)="selectTag('Todas')">Limpiar Filtro</button>
+        <p>No se encontraron referencias para tu búsqueda.</p>
       </div>
 
       <!-- Reference Cards (List Mode) -->
@@ -48,9 +54,9 @@
               <span class="ref-tag" *ngFor="let tag of ref.tags">{{ tag }}</span>
             </div>
           </div>
-          
+
           <h3 class="ref-title">{{ ref.title }}</h3>
-          
+
           <div class="ref-meta">
             <p class="ref-authors">
               <mat-icon fontSet="material-symbols-outlined">group</mat-icon>
@@ -62,9 +68,10 @@
             </p>
           </div>
         </div>
-        
+
         <div class="card-actions">
-          <a class="doi-btn" [href]="'https://doi.org/' + ref.doi.replace('doi:', '')" target="_blank" rel="noopener noreferrer">
+          <a class="doi-btn" [href]="'https://doi.org/' + ref.doi.replace('doi:', '')" target="_blank"
+            rel="noopener noreferrer">
             <mat-icon fontSet="material-symbols-outlined">open_in_new</mat-icon>
             <span>Ver Artículo Original</span>
           </a>
