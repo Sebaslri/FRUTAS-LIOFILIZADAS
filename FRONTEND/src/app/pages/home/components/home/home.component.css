@@ -692,3 +692,13 @@
 .footer-bottom a:hover {
   color: #f2c769;
 }
+
+@keyframes dashOrbit { to { stroke-dashoffset: -200; } }
+.orbit-dash-1 { animation: dashOrbit 15s linear infinite; }
+.orbit-dash-2 { animation: dashOrbit 10s linear infinite reverse; }
+
+.footer-researchers { flex: 1; min-width: 250px; max-width: 400px; }
+.footer-researchers h4 { font-size: 1.3rem; font-weight: 900; color: #fff5dc; margin: 0 0 0.5rem; }
+.footer-researchers ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.footer-researchers li { font-size: 0.85rem; color: #8a8672; position: relative; padding-left: 1rem; }
+.footer-researchers li::before { content: '\2022'; position: absolute; left: 0; color: #f2c769; }

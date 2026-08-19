@@ -46,8 +46,9 @@
         <h2 class="text-[clamp(2.2rem,4.6vw,4.8rem)] font-black leading-none text-[#26351f]">Datos claros para divulgar
           y decidir mejor.</h2>
         <p class="mt-5 max-w-[54ch] text-[1.05rem] leading-[1.8] text-[#58634d]">
-          Cada ficha resume origen, atributos sensoriales, composicion, acidez, Brix, color,
-          compuestos bioactivos, capacidad antioxidante y posibles usos agroindustriales.
+          Explora cada ficha a detalle iniciando sesión, en la cuál podrás descubrir el origen,
+          atributos sensoriales, compuestos bioactivos que actúan en tu cuerpo,
+          propiedades químicas y los beneficios que ofrece cada fruta.
         </p>
         <div class="mt-6 flex flex-wrap gap-2">
           <span
@@ -134,7 +135,8 @@
 
       <div class="modules-grid">
         @for (mod of appModules; track mod.name) {
-        <div class="module-card cursor-pointer" [style.--module-accent]="mod.color" (click)="openLoginPrompt(mod)" (keydown.enter)="openLoginPrompt(mod)" tabindex="0" role="button">
+        <div class="module-card cursor-pointer" [style.--module-accent]="mod.color" (click)="openLoginPrompt(mod)"
+          (keydown.enter)="openLoginPrompt(mod)" tabindex="0" role="button">
           <span class="module-card-badge">
             <mat-icon fontSet="material-symbols-outlined">lock</mat-icon>
             Explora
@@ -168,19 +170,10 @@
           }
         </ul>
       </div>
-      <div class="featured-visual">
-        <div class="featured-icon-showcase">
-          <div class="featured-icon-ring"></div>
-          <div class="featured-icon-ring-inner"></div>
-          <div class="featured-icon-glow" [style.background]="featuredModules[0].color"></div>
-          <div class="featured-icon-main"
-            [style.background]="'linear-gradient(135deg, ' + featuredModules[0].color + ', ' + featuredModules[0].color + 'cc)'"
-            style="color: #fff">
-            <mat-icon fontSet="material-symbols-outlined">{{ featuredModules[0].icon }}</mat-icon>
-          </div>
-          <span class="featured-orbit-dot featured-orbit-dot--1" [style.background]="featuredModules[0].color"></span>
-          <span class="featured-orbit-dot featured-orbit-dot--2" [style.background]="featuredModules[0].color"></span>
-          <span class="featured-orbit-dot featured-orbit-dot--3" [style.background]="featuredModules[0].color"></span>
+      <div class="featured-visual flex items-center justify-center">
+        <div class="relative w-full max-w-lg overflow-hidden rounded-2xl shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
+          <img src="/images/comparation.png" alt="Tabla comparativa de frutas" class="w-full h-auto object-cover" />
+          <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/10 pointer-events-none"></div>
         </div>
       </div>
     </div>
@@ -205,19 +198,12 @@
           }
         </ul>
       </div>
-      <div class="featured-visual">
-        <div class="featured-icon-showcase">
-          <div class="featured-icon-ring"></div>
-          <div class="featured-icon-ring-inner"></div>
-          <div class="featured-icon-glow" [style.background]="featuredModules[1].color"></div>
-          <div class="featured-icon-main"
-            [style.background]="'linear-gradient(135deg, ' + featuredModules[1].color + ', ' + featuredModules[1].color + 'cc)'"
-            style="color: #fff">
-            <mat-icon fontSet="material-symbols-outlined">{{ featuredModules[1].icon }}</mat-icon>
-          </div>
-          <span class="featured-orbit-dot featured-orbit-dot--1" [style.background]="featuredModules[1].color"></span>
-          <span class="featured-orbit-dot featured-orbit-dot--2" [style.background]="featuredModules[1].color"></span>
-          <span class="featured-orbit-dot featured-orbit-dot--3" [style.background]="featuredModules[1].color"></span>
+      <div class="featured-visual flex items-center justify-center">
+        <div
+          class="relative w-full max-w-lg overflow-hidden rounded-2xl shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
+          <img src="/images/map-leaflet.png" alt="Mapa interactivo de Ecuador con distribución de frutas bioactivas"
+            class="w-full h-auto object-cover" />
+          <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/10 pointer-events-none"></div>
         </div>
       </div>
     </div>
@@ -241,19 +227,11 @@
           }
         </ul>
       </div>
-      <div class="featured-visual">
-        <div class="featured-icon-showcase">
-          <div class="featured-icon-ring"></div>
-          <div class="featured-icon-ring-inner"></div>
-          <div class="featured-icon-glow" [style.background]="featuredModules[2].color"></div>
-          <div class="featured-icon-main"
-            [style.background]="'linear-gradient(135deg, ' + featuredModules[2].color + ', ' + featuredModules[2].color + 'cc)'"
-            style="color: #fff">
-            <mat-icon fontSet="material-symbols-outlined">{{ featuredModules[2].icon }}</mat-icon>
-          </div>
-          <span class="featured-orbit-dot featured-orbit-dot--1" [style.background]="featuredModules[2].color"></span>
-          <span class="featured-orbit-dot featured-orbit-dot--2" [style.background]="featuredModules[2].color"></span>
-          <span class="featured-orbit-dot featured-orbit-dot--3" [style.background]="featuredModules[2].color"></span>
+      <div class="featured-visual flex items-center justify-center">
+        <div
+          class="relative w-full max-w-lg overflow-hidden rounded-2xl shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
+          <img src="/images/cup.png" alt="Laboratorio de Mixes interactivo" class="w-full h-auto object-cover" />
+          <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/10 pointer-events-none"></div>
         </div>
       </div>
     </div>
@@ -267,10 +245,20 @@
     <div class="home-footer-container">
       <div class="footer-top">
         <div class="footer-brand">
-          <h3>Frutas Liofilizadas EC</h3>
-          <p>Plataforma científica para conocer, comparar y valorizar frutas ecuatorianas liofilizadas e infusiones
-            derivadas.</p>
+          <h3 class="transition-all duration-700" [class.opacity-100]="researchersAnimated" [class.opacity-0]="!researchersAnimated" [class.translate-y-0]="researchersAnimated" [class.translate-y-4]="!researchersAnimated">Frutas Liofilizadas EC</h3>
+          <p class="transition-all duration-700 delay-[100ms]" [class.opacity-100]="researchersAnimated" [class.opacity-0]="!researchersAnimated" [class.translate-y-0]="researchersAnimated" [class.translate-y-4]="!researchersAnimated">Plataforma científica para conocer, comparar y valorizar frutas ecuatorianas liofilizadas e infusiones derivadas.</p>
         </div>
+        
+        <div class="footer-researchers" #researchersList>
+          <h4>Equipo de Investigación</h4>
+          <ul>
+            <li class="transition-all duration-700 delay-[100ms]" [class.opacity-100]="researchersAnimated" [class.opacity-0]="!researchersAnimated" [class.translate-y-0]="researchersAnimated" [class.translate-y-4]="!researchersAnimated">Ana María Campuzano Vera, Msc</li>
+            <li class="transition-all duration-700 delay-[250ms]" [class.opacity-100]="researchersAnimated" [class.opacity-0]="!researchersAnimated" [class.translate-y-0]="researchersAnimated" [class.translate-y-4]="!researchersAnimated">Carolina Alicia Paz Yépez, PhD</li>
+            <li class="transition-all duration-700 delay-[400ms]" [class.opacity-100]="researchersAnimated" [class.opacity-0]="!researchersAnimated" [class.translate-y-0]="researchersAnimated" [class.translate-y-4]="!researchersAnimated">Ing. Delia Mariana Valverde Torres</li>
+            <li class="transition-all duration-700 delay-[550ms]" [class.opacity-100]="researchersAnimated" [class.opacity-0]="!researchersAnimated" [class.translate-y-0]="researchersAnimated" [class.translate-y-4]="!researchersAnimated">Ing. Julio Andrés Palmay Paredes</li>
+          </ul>
+        </div>
+
         <div class="footer-cta">
           <a routerLink="/signup">Crear cuenta gratis</a>
           <a routerLink="/signin">Iniciar sesión</a>
