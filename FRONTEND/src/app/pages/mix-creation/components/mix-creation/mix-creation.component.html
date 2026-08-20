@@ -3,7 +3,7 @@
     <div class="comparison-hero">
       <div class="title-row" data-stagger @fadeInRight400ms>
         <span class="module-icon" @scaleIn400ms>
-          <mat-icon fontSet="material-symbols-outlined">blender</mat-icon>
+          <mat-icon fontSet="material-symbols-outlined">science</mat-icon>
         </span>
         <div>
           <p class="eyebrow">Laboratorio Inteligente</p>
@@ -66,7 +66,7 @@
         </div>
 
         <div class="cup-scale-container">
-          <div class="cup-wrapper" [class.is-stirring]="isMixing">
+          <div class="cup-wrapper" [class.is-stirring]="isMixing" [class.is-mixed]="predictions && !isMixing && mixerFruits.length === 0">
 
             <div class="cup-assembly">
               <!-- Botón flotante indicativo en móvil -->
@@ -78,8 +78,7 @@
               <div class="cup-handle"></div>
 
               <!-- Taza (Drop Area) -->
-              <div id="mixerList" cdkDropList [cdkDropListData]="mixerFruits"
-                [cdkDropListConnectedTo]="['availableList']" class="cup-body" (cdkDropListDropped)="drop($event)"
+              <div class="cup-body" 
                 (click)="isMobile && !isMixing && openMobileSelectionModal()"
                 [class.mobile-clickable]="isMobile && !isMixing" [attr.role]="isMobile && !isMixing ? 'button' : null"
                 [attr.tabindex]="isMobile && !isMixing ? 0 : null">
@@ -87,7 +86,8 @@
                 <div class="cup-liquid"></div>
 
                 <!-- Contenedor interno para evitar que las frutas se salgan de la taza -->
-                <div class="cup-fruits-inner">
+                <div id="mixerList" cdkDropList [cdkDropListData]="mixerFruits"
+                  [cdkDropListConnectedTo]="['availableList']" (cdkDropListDropped)="drop($event)" class="cup-fruits-inner">
                   <!-- Frutas arrastradas dentro de la taza -->
                   <div *ngFor="let item of mixerFruits; let i = index" class="cup-fruit-wrapper" cdkDrag>
                     <img [src]="item.imagen || '/images/fruit-hero.png'" class="cup-fruit-item"
