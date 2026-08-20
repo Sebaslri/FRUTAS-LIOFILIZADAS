@@ -1,0 +1,69 @@
+================================================================================
+INFORME DE REQUERIMIENTOS TÉCNICOS - "FRUTASAPP"
+================================================================================
+
+Fecha: 18 de agosto de 2026
+Objetivo: Presentar al Centro de Cómputo la estimación técnica de red y 
+          hardware (Ancho de Banda y RAM) para la aplicación FRUTASAPP, 
+          dimensionada para una carga de 100 usuarios concurrentes.
+
+--------------------------------------------------------------------------------
+1. ARQUITECTURA Y CONSUMO DE DATOS
+--------------------------------------------------------------------------------
+FRUTASAPP es una "Single Page Application" (SPA) desarrollada con una arquitectura moderna:
+- Frontend: Angular 20 (Archivos estáticos: HTML, CSS, JS compilado).
+- Backend: PHP 8.2 (Respuestas estructuradas en formato JSON).
+
+Esto significa que es altamente eficiente porque la mayor parte del sistema de 
+interfaz se descarga solo una vez:
+
+- Carga Inicial (Frontend): ~2.5 MB a 4 MB (Solo la primera vez que un usuario entra).
+- Navegación (Peticiones API a PHP): 5 KB a 50 KB por clic (Formatos JSON ultra ligeros).
+- Imágenes del Catálogo (Frutas): ~100 KB a 300 KB por imagen optimizada.
+
+--------------------------------------------------------------------------------
+2. EVALUACIÓN DE ANCHO DE BANDA: ENLACE DE 1 GIGABIT (1 Gbps)
+--------------------------------------------------------------------------------
+Considerando la carga esperada de 100 usuarios activos simultáneos:
+
+Un usuario navegando intensivamente consume alrededor de 1 a 1.5 Mbps de 
+tráfico combinado (datos e imágenes). 
+- Consumo máximo teórico (100 usuarios interactuando a la vez): ~150 Mbps.
+
+- Enlace Propuesto: 1 Gigabit por segundo (1,000 Mbps) para un ancho de banda estable.
+
+Con 1 Gbps, el consumo pico de los 100 usuarios simultáneos representaría 
+apenas el 15% de la capacidad total de la red. Por lo tanto, el ancho de banda 
+asignado evitará cualquier cuello de botella.
+
+--------------------------------------------------------------------------------
+3. ESTIMACIÓN DE HARDWARE: MEMORIA RAM DEL SERVIDOR
+--------------------------------------------------------------------------------
+La Memoria RAM determina cuántas peticiones simultáneas puede procesar el 
+backend y la base de datos sin encolar solicitudes.
+
+PHP 8.2 es altamente eficiente. Cada proceso para atender a un usuario ocupa 
+apenas unos 15 a 25 MB de memoria. Para atender a los 100 usuarios enviando 
+peticiones simultáneamente, el motor web requerirá aproximadamente entre 
+2 GB y 2.5 GB de RAM.
+
+- Requisito Recomendado: 4 GB a 8 GB de Memoria RAM.
+
+Con 4 GB a 8 GB de RAM, el servidor podrá alojar cómodamente al sistema 
+operativo, la base de datos y a los 100 usuarios concurrentes sin presentar 
+saturación en el equipo.
+
+--------------------------------------------------------------------------------
+4. CONCLUSIÓN
+--------------------------------------------------------------------------------
+Para el volumen proyectado de 100 usuarios activos concurrentes:
+
+- RED: El enlace de 1 Gigabit (1 Gbps) es excepcionalmente holgado.
+- HARDWARE: Un servidor con 4 GB a 8 GB de RAM es el dimensionamiento perfecto.
+
+Estas especificaciones son ideales para que FRUTASAPP opere de manera muy 
+fluida y con tiempos de respuesta instantáneos.
+
+================================================================================
+Fin del Informe.
+================================================================================
