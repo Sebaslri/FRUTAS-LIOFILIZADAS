@@ -55,12 +55,12 @@
 }
 
 h1 {
-  margin-bottom: 0;
-  margin-top: 0;
-  color: #26351f;
-  font-weight: 950;
+  font-size: clamp(1.8rem, 6vw, 5.1rem);
+  font-weight: 800;
   line-height: 1.05;
-  font-size: clamp(2.5rem, 6vw, 5.1rem);
+  letter-spacing: -0.04em;
+  margin: 0;
+  color: #2c4a16;
 }
 
 .comparison-lead {
@@ -93,11 +93,12 @@ h1 {
 .blender-section {
   background: white;
   border-radius: 20px;
-  padding: 2rem;
+  padding: clamp(1rem, 3vw, 2rem);
   box-shadow: 0 10px 40px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: hidden; /* Fix horizontal scroll on mobile */
 }
 
 .section-heading {
@@ -334,7 +335,10 @@ h1 {
   left: 0;
   width: 100%;
   height: 60%;
-  background: linear-gradient(180deg, rgba(225, 215, 60, 0.6) 0%, rgba(180, 170, 30, 0.8) 100%); /* Más amarillo que verde */
+  /* Liquid is initially light blue */
+  background-color: rgba(60, 170, 240, 0.75);
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.05) 100%);
+  transition: background-color 2s ease-in-out;
   z-index: 1;
 }
 
@@ -348,13 +352,25 @@ h1 {
   width: 100%;
   height: 40px; /* Óvalo del líquido más grande */
   border-radius: 50%;
-  background-color: rgba(215, 205, 50, 0.9); /* Más amarillo que verde */
-  background-image: repeating-radial-gradient(ellipse at center, transparent 0%, rgba(160, 150, 20, 0.4) 10%, transparent 20%);
+  /* Liquid surface is initially light blue */
+  background-color: rgba(60, 170, 240, 0.9);
+  background-image: repeating-radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.1) 10%, transparent 20%);
   background-position: center;
   border: 1px solid rgba(255,255,255,0.3);
   box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
-  transition: all 0.5s ease;
+  transition: background-color 2s ease-in-out;
   z-index: 2;
+}
+
+/* Liquid changes to clean yellow when stirring or mixed */
+.is-stirring .cup-liquid::after,
+.is-mixed .cup-liquid::after {
+  background-color: rgba(245, 205, 30, 0.8);
+}
+
+.is-stirring .cup-liquid::before,
+.is-mixed .cup-liquid::before {
+  background-color: rgba(245, 205, 30, 0.9);
 }
 
 /* Animación de líquido revolviéndose como remolino real */
@@ -367,11 +383,6 @@ h1 {
 @keyframes whirlpoolBody {
   0% { background-position: 0% 0%; }
   100% { background-position: 0% 100%; }
-}
-
-.is-stirring .cup-liquid::after {
-  animation: whirlpoolBody 0.8s linear infinite;
-  background-size: 100% 200%;
 }
 
 .is-stirring .cup-liquid::before {
@@ -572,22 +583,9 @@ h1 {
   aspect-ratio: 1;
 }
 
-/* El placeholder normal (en la lista de frutas) */
+/* El placeholder normal (en la lista de frutas y en la taza) */
 .cdk-drag-placeholder {
   opacity: 0.2;
-}
-
-/* Ocultar totalmente el placeholder cuando la fruta se arrastra SOBRE LA TAZA
-   para que no modifique ni empuje el diseño interno de la taza */
-.cup-body .cdk-drag-placeholder {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  position: absolute !important;
 }
 
 .cdk-drag-animating {
@@ -625,7 +623,7 @@ h1 {
   width: 100%;
   flex: 1; /* Stretch to fill parent in desktop */
   min-height: 420px; /* Base height for unscaled cup */
-  overflow: visible; 
+  overflow: hidden; /* Prevent horizontal scroll from intrinsic unscaled width */
   display: flex;
   justify-content: center;
   align-items: center; /* Vertically center the cup to lower it naturally */
@@ -638,6 +636,9 @@ h1 {
   }
   .cup-wrapper {
     transform: scale(0.85);
+  }
+  h1 {
+    font-size: 2.2rem;
   }
 }
 

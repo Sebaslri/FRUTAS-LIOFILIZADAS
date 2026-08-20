@@ -40,7 +40,7 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       authors: "Paz-Y\u00e9pez, A. C",
       year: 2019,
       title: "Influencia de factores inherentes al alimento y al individuo sobre la digestibilidad de l\u00edpidos de origen vegetal [Tesis doctoral, Universitat Polit\u00e8cnica de Val\u00e8ncia]",
-      journal: "Unknown",
+      journal: "Doctoral dissertation, Universitat Politècnica de València",
       doi: "https://aplicat.upv.es/exploraupv/ficha-tesis/tesis/11710?busqueda=Patologia+vegetal",
       tags: ['Otros']
     },
@@ -181,10 +181,10 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 17,
-      authors: "Bas-Bellver, C., Barrera, C., Betoret, N., & Segu\u00ed, L",
+      authors: "Bas-Bellver, C., Barrera, C., Betoret, N., & Seguí, L",
       year: 2023,
-      title: "Effect of Processing and In Vitro Digestion on Bioactive Constituents of Powdered IV Range Carrot (Daucus carota, L",
-      journal: ") Wastes. Foods, 12(4), 731",
+      title: "Effect of Processing and In Vitro Digestion on Bioactive Constituents of Powdered IV Range Carrot (Daucus carota, L.) Wastes",
+      journal: "Foods, 12(4), 731",
       doi: "https://doi.org/10.3390/foods12040731",
       tags: ['Otros']
     },
@@ -255,8 +255,8 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 25,
       authors: "Buono, S., Aguirre, C., Abdo, G., Perondi, H., & Ansonnaud, Gustavo",
       year: 2018,
-      title: "Tomate de \u00e1rbol (Solanun betaceum)(Cav), Sendt",
-      journal: "(Instituto Interamericano de Cooperaci\u00f3n para la Agricultura (IICA))",
+      title: "Tomate de árbol (Solanum betaceum) (Cav) Sendt",
+      journal: "Instituto Interamericano de Cooperación para la Agricultura (IICA)",
       doi: "https://www.procisur.org.uy/adjuntos/01e8c39fb854_e-arbol-PROCISUR.pdf",
       tags: ['Otros']
     },
@@ -327,8 +327,8 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 33,
       authors: "Charan, S. M., Gomez, S., Sheela, K. B., Meagle Joseph, P., & Sruthi, C. V",
       year: 2018,
-      title: "Quality characteristics and antioxidant activity of passion fruit (Passiflora edulis sims",
-      journal: ") accessions. Indian Journal of Horticulture, 75(2), 185\u2013190",
+      title: "Quality characteristics and antioxidant activity of passion fruit (Passiflora edulis sims) accessions",
+      journal: "Indian Journal of Horticulture, 75(2), 185-190",
       doi: "https://doi.org/10.5958/0974-0112.2018.00034.8",
       tags: ['Otros']
     },
@@ -352,10 +352,10 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 36,
-      authors: "Constituci\u00f3n de la Rep\u00fablica del Ecuador",
+      authors: "Asamblea Nacional Constituyente",
       year: 2008,
-      title: "Constituci\u00f3n de la Rep\u00fablica del Ecuador",
-      journal: "Unknown",
+      title: "Constitución de la República del Ecuador",
+      journal: "Registro Oficial 449",
       doi: "https://www.defensa.gob.ec/wp-content/uploads/downloads/2021/02/Constitucion-de-la-Republica-del-Ecuador_act_ene-2021.pdf",
       tags: ['Otros']
     },
@@ -406,10 +406,10 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 42,
-      authors: "De Le\u00f3n, R. M",
+      authors: "De León, R. M",
       year: 2019,
-      title: "Determinaci\u00f3n de la estabilidad en la capacidad antioxidante de la harina del epicardio de mango (Mang\u00edfera indica) [Tesis de pregrado, Universidad de San Carlos de Guatemala]",
-      journal: "Unknown",
+      title: "Determinación de la estabilidad en la capacidad antioxidante de la harina del epicardio de mango (Mangífera indica)",
+      journal: "Tesis de pregrado, Universidad de San Carlos de Guatemala",
       doi: "http://www.repositorio.usac.edu.gt/12893/1/200945913.pdf",
       tags: ['Otros']
     },
@@ -442,10 +442,10 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 46,
-      authors: "Encuesta Nacional de Salud y Nutrici\u00f3n",
+      authors: "INEC, Ministerio de Salud Pública",
       year: 2013,
-      title: "Encuesta Nacional de Salud y Nutrici\u00f3n \u2013 ENSANUT \u2013 Ministerio de Salud P\u00fablica",
-      journal: "Unknown",
+      title: "Encuesta Nacional de Salud y Nutrición (ENSANUT)",
+      journal: "Ministerio de Salud Pública, Ecuador",
       doi: "https://www.salud.gob.ec/encuesta-nacional-de-salud-y-nutricion-ensanut/",
       tags: ['Otros']
     },
@@ -453,8 +453,8 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 47,
       authors: "Esteves, T., & Palacios Barrio, A",
       year: 2016,
-      title: "An\u00e1lisis comparativo del mercado de hebras de T\u00e9 pre-empacadas y por peso Autores",
-      journal: "Unknown",
+      title: "Análisis comparativo del mercado de hebras de Té pre-empacadas y por peso",
+      journal: "Tesis de pregrado, Universidad Católica Andrés Bello",
       doi: "http://biblioteca2.ucab.edu.ve/anexos/biblioteca/marc/texto/AAT3909.pdf",
       tags: ['Otros']
     },
@@ -469,28 +469,28 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 49,
-      authors: "Faic\u00e1n-Mej\u00eda, C., Encalada-Alvarado, C., & Becerril-Rom\u00e1n, A",
+      authors: "Faicán-Mejía, C., Encalada-Alvarado, C., & Becerril-Román, A",
       year: 2016,
-      title: "Descripci\u00f3n agron\u00f3mica del cultivo de tomate de \u00e1rbol (Solanum betaceum Cav",
-      journal: ")",
+      title: "Descripción agronómica del cultivo de tomate de árbol (Solanum betaceum Cav)",
+      journal: "Universidad Autónoma Agraria Antonio Narro",
       doi: "https://core.ac.uk/reader/249320590",
       tags: ['Otros']
     },
     {
       id: 50,
-      authors: "Fajardo-Ort\u00edz, A. G., Legaria-Solano, J. P., Granados-Moreno, J. E., Mart\u00ednez-Sol\u00eds, J., & Celi...",
+      authors: "Fajardo-Ortíz, Alba G., Legaria-Solano, Juan P., Granados-Moreno, Jairo E., Martínez-Solís, Juan, & Celis-Forero, Álvaro",
       year: 2019,
-      title: "Revista fitotecnia mexicana",
-      journal: "In Revista fitotecnia mexicana (Vol. 42, Issue 3). Sociedad Mexicana de Fitogen\u00e9tica",
+      title: "Caracterización morfológica y bioquímica de tipos de guayaba (Psidium guajava L.) colectados en Sumapaz, Colombia",
+      journal: "Revista fitotecnia mexicana 42(3), 289-299",
       doi: "http://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0187-73802019000300289&lng=es&nrm=iso&tlng=es",
       tags: ['Otros']
     },
     {
       id: 51,
-      authors: "Falcon\u00ed, J",
+      authors: "Falconí, J",
       year: 2024,
-      title: "* \u201cEfectos del tiempo de congelaci\u00f3n en las caracter\u00edsticas bromatol\u00f3gicas de Araz\u00e1 (Eugenia stipitata) aplicando modelos matem\u00e1ticos\u201d | Revista Alfa*",
-      journal: "Unknown",
+      title: "Efectos del tiempo de congelación en las características bromatológicas de Arazá (Eugenia stipitata) aplicando modelos matemáticos",
+      journal: "Revista Alfa",
       doi: "https://revistaalfa.org/index.php/revistaalfa/article/view/355/868",
       tags: ['Otros']
     },
@@ -498,17 +498,17 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 52,
       authors: "FAO",
       year: 2024,
-      title: "D\u00eda Internacional del T\u00e9 | 21 de mayo",
-      journal: "Unknown",
+      title: "Día Internacional del Té (21 de mayo)",
+      journal: "Organización de las Naciones Unidas para la Alimentación y la Agricultura",
       doi: "https://www.fao.org/international-tea-day/es",
       tags: ['Otros']
     },
     {
       id: 53,
-      authors: "Farias, D. de P., Fernandes de Ara\u00fajo, F., Neri-Numa, I. A., Lu\u00edsa Dias-Audibert, F., Delafiori...",
+      authors: "Farias, D. de P., Fernandes de Araújo, F., Neri-Numa, I. A., Luísa Dias-Audibert, F., Delafiori, J., Eberlin, M. N., & Pastore, G. M",
       year: 2021,
-      title: "Efecto de la digesti\u00f3n in vitro sobre la biodisponibilidad y bioactividad de los compuestos fen\u00f3licos en fracciones del fruto de Eugenia pyriformis\u2014ScienceDirect",
-      journal: "Unknown",
+      title: "Efecto de la digestión in vitro sobre la biodisponibilidad y bioactividad de los compuestos fenólicos en fracciones del fruto de Eugenia pyriformis",
+      journal: "Food Research International, 142",
       doi: "https://doi.org/10.1016/j.foodres.2021.110767",
       tags: ['Otros']
     },
@@ -534,8 +534,8 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 56,
       authors: "Franco, G., Bernal, J., Giraldo, C., & Tamayo, P",
       year: 2002,
-      title: "El cultivo del lulo\u202f:manual t\u00e9cnico",
-      journal: "Unknown",
+      title: "El cultivo del lulo: manual técnico",
+      journal: "Corpoica",
       doi: "http://hdl.handle.net/20.500.12324/13150",
       tags: ['Otros']
     },
@@ -579,8 +579,8 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 61,
       authors: "Giler, A",
       year: 2019,
-      title: "Caracterizaci\u00f3n de las hojas de remolacha (Beta Vulgaris) liofilizadas para su uso en la elaboraci\u00f3n de infusi\u00f3n [Tesis de pregrado, Universidad Laica Eloy Alfaro de Manab\u00ed]",
-      journal: "Unknown",
+      title: "Caracterización de las hojas de remolacha (Beta Vulgaris) liofilizadas para su uso en la elaboración de infusión",
+      journal: "Tesis de pregrado, Universidad Laica Eloy Alfaro de Manabí",
       doi: "https://repositorio.uleam.edu.ec/handle/123456789/2279",
       tags: ['Otros']
     },
@@ -595,19 +595,19 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 63,
-      authors: "Gonz\u00e1les-Toxqui, C., Gonz\u00e1les, A., L\u00f3pez, R., & Mendoza-Mu\u00f1oz, I",
+      authors: "González-Toxqui, C., González-Angeles, A., López-Avitia, R., & Mendoza-Muñoz, I",
       year: 2020,
       title: "Time and energy reduction on grape dehydration by applying dipping solution on freeze drying process",
-      journal: "Unknown",
+      journal: "Anais da Academia Brasileira de Ciências, 92(2)",
       doi: "https://doi.org/10.1590/0001-3765202020190072",
       tags: ['Otros']
     },
     {
       id: 64,
-      authors: "Gonz\u00e1lez, V., Mauriz, C. R., Fero, C. S., Plana, S. V., & Rodr\u00edguez-Moldes, C",
+      authors: "González, V., Mauriz, C. R., Fero, C. S., Plana, S. V., & Rodríguez-Moldes, C",
       year: 2014,
-      title: "Estudio hed\u00f3nico del pan en el IES Mugardos",
-      journal: "Unknown",
+      title: "Estudio hedónico del pan en el IES Mugardos",
+      journal: "Introducción al Análisis Sensorial",
       doi: "https://iestpcabana.edu.pe/wp-content/uploads/2021/11/INTRODUCCION-AL-ANALISIS-SENSORIAL.pdf",
       tags: ['Otros']
     },
@@ -622,10 +622,10 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 66,
-      authors: "Grande-Tovar, C. D., Delgado-Ospina, J., Puerta, L. F., Rodr\u00edguez, G. C., Sacchetti, G., Papare...",
+      authors: "Grande-Tovar, C. D., Delgado-Ospina, J., Puerta, L. F., Rodríguez, G. C., Sacchetti, G., & Paparella, A.",
       year: 2019,
-      title: "Bioactive micro-constituents of ackee arilli (Blighia sapida K",
-      journal: "D. Koenig). Anais Da Academia Brasileira de Ci\u00eancias, 91(3), e20180140",
+      title: "Bioactive micro-constituents of ackee arilli (Blighia sapida K. D. Koenig)",
+      journal: "Anais Da Academia Brasileira de Ciências, 91(3), e20180140",
       doi: "https://doi.org/10.1590/0001-3765201920180140",
       tags: ['Otros']
     },
@@ -712,10 +712,10 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 76,
-      authors: "Unknown",
-      year: 0,
-      title: "",
-      journal: "Unknown",
+      authors: "Asamblea Nacional Constituyente",
+      year: 2008,
+      title: "Constitución de la República del Ecuador",
+      journal: "Registro Oficial 449",
       doi: "https://www.ecuadorencifras.gob.ec/LOTAIP/2017/DIJU/octubre/LA2_OCT_DIJU_Constitucion.pdf",
       tags: ['Otros']
     },
@@ -750,8 +750,8 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 80,
       authors: "INIAP",
       year: 2009,
-      title: "Instituto nacional aut\u00f3nomo de investigaciones agropecuarias estaci\u00f3n experimental central de la Amazon\u00eda Denaref-unidad de recursos fitogen\u00e9ticos INIAP-Estaci\u00f3n Experimental Central Amaz\u00f3nica",
-      journal: "Unknown",
+      title: "Estación Experimental Central de la Amazonía, Unidad de Recursos Fitogenéticos",
+      journal: "Instituto Nacional Autónomo de Investigaciones Agropecuarias",
       doi: "https://repositorio.iniap.gob.ec/bitstream/41000/4786/7/iniapeecam76.pdf",
       tags: ['Otros']
     },
@@ -759,8 +759,8 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 81,
       authors: "INIAP",
       year: 2014,
-      title: "Guan\u00e1bana",
-      journal: "Unknown",
+      title: "Guanábana",
+      journal: "Instituto Nacional Autónomo de Investigaciones Agropecuarias",
       doi: "https://tecnologia.iniap.gob.ec/guanabana/",
       tags: ['Otros']
     },
@@ -820,20 +820,20 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 88,
-      authors: "Lech\u00f3n, L. Z",
+      authors: "Lechón, L. Z",
       year: 2022,
-      title: "Estudio del comportamiento de las caracter\u00edsticas f\u00edsico-qu\u00edmicas de la uvilla (Physalis peruviana L",
-      journal: ") contenido de polifenoles y capacidad antioxidante en atm\u00f3sferas modificadas y refrigeraci\u00f3n. [Tesis de pregrado, Universidad T\u00e9cnica del Norte]",
-      doi: "https://repositorio.utn.edu.ec/handle/123456789/12486",
+      title: "Estudio del comportamiento de las características físico-químicas de la uvilla (Physalis peruviana L.) contenido de polifenoles y capacidad antioxidante en atmósferas modificadas y refrigeración",
+      journal: "Tesis de pregrado, Universidad Técnica del Norte",
+      doi: "http://repositorio.utn.edu.ec/bitstream/123456789/12711/2/03%20AGI%20508%20TRABAJO%20DE%20GRADO.pdf",
       tags: ['Otros']
     },
     {
       id: 89,
-      authors: "Le\u00f3n-Fern\u00e1ndez, A. E., Morales, R. B., Bautista-Rosales, P. U., Palomino-Hermosillo, Y. A., Bel...",
+      authors: "León-Fernández, A. E., Morales, R. B., Bautista-Rosales, P. U., Palomino-Hermosillo, Y. A., & Beltrán, S. G.",
       year: 2021,
-      title: "Extracci\u00f3n de compuestos fitoqu\u00edmicos de inflorescencia y frutos de guan\u00e1bana (Annona muricata L",
-      journal: "). Acta Agr\u00edcola y Pecuaria, 7(1)",
-      doi: "https://aap.uaem.mx/index.php/aap/article/view/269",
+      title: "Extracción de compuestos fitoquímicos de inflorescencia y frutos de guanábana (Annona muricata L.)",
+      journal: "Acta Agrícola y Pecuaria, 7(1)",
+      doi: "https://doi.org/10.30973/aap/2021.7.0071018",
       tags: ['Otros']
     },
     {
@@ -850,8 +850,8 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       authors: "Ley Org\u00e1nica del R\u00e9gimen de la Soberan\u00eda Alimentaria",
       year: 2009,
       title: "Ley Org\u00e1nica del R\u00e9gimen de la Soberan\u00eda Alimentaria",
-      journal: "Unknown",
-      doi: "https://www.gob.ec/sites/default/files/regulations/2019-04/ley%20org%c3%81nica%20del%20r%c3%89gimen%20de%20la%20soberan%c3%8da%20alimentaria%20-%20lorsa.pdf",
+      journal: "Registro Oficial Suplemento 583",
+      doi: "https://www.ruminahui-faenamiento.gob.ec/transparencia2019/documentos/Ley%20Org%C3%A1nica%20del%20R%C3%A9gimen%20de%20la%20Soberan%C3%ADa%20Alimentaria.pdf",
       tags: ['Otros']
     },
     {
@@ -865,20 +865,20 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 93,
-      authors: "Lima, Giulia Vict\u00f3ria Silva, F\u00e1bio Gomes Moura, S\u00e9bastien Gofflot, Anne Suellen Oliveira Pinto,...",
-      year: 0,
-      title: "2025b. \u201cTargeted Metabolomics for Quantitative Assessment of Polyphenols and Methylxanthines in Fermented and Unfermented Cocoa Beans from 18 Genotypes of the Brazilian Amazon.\u201d Food Research International 211:116394.",
-      journal: "Unknown",
-      doi: "doi:10.1016/J.FOODRES.2025.116394",
+      authors: "Lima, Giulia Victória Silva, Fábio Gomes Moura, Sébastien Gofflot, Anne Suellen Oliveira Pinto, & outros",
+      year: 2025,
+      title: "Targeted Metabolomics for Quantitative Assessment of Polyphenols and Methylxanthines in Fermented and Unfermented Cocoa Beans from 18 Genotypes of the Brazilian Amazon",
+      journal: "Food Research International 211:116394",
+      doi: "doi:10.1016/J.FOODRES.2024.116394",
       tags: ['Otros']
     },
     {
       id: 94,
-      authors: "Lima, Giulia Vict\u00f3ria Silva, F\u00e1bio Gomes Moura, S\u00e9bastien Gofflot, Anne Suellen Oliveira Pinto,...",
-      year: 0,
-      title: "2025a. \u201cTargeted Metabolomics for Quantitative Assessment of Polyphenols and Methylxanthines in Fermented and Unfermented Cocoa Beans from 18 Genotypes of the Brazilian Amazon.\u201d Food Research International 211(March).",
-      journal: "Unknown",
-      doi: "doi:10.1016/j.foodres.2025.116394",
+      authors: "Lima, Giulia Victória Silva, Fábio Gomes Moura, Sébastien Gofflot, Anne Suellen Oliveira Pinto, & outros",
+      year: 2025,
+      title: "Targeted Metabolomics for Quantitative Assessment of Polyphenols and Methylxanthines in Fermented and Unfermented Cocoa Beans from 18 Genotypes of the Brazilian Amazon",
+      journal: "Food Research International 211(March)",
+      doi: "doi:10.1016/j.foodres.2024.116394",
       tags: ['Otros']
     },
     {
@@ -910,10 +910,10 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 98,
-      authors: "Maldonado C, M. E., Franco L, M. C., & Urango M, L. A",
+      authors: "Chaparro R, D. C., Maldonado C, M. E., Franco L, M. C., & Urango M, L. A",
       year: 2015,
-      title: "Biotecnolog\u00eda en el sector agropecuario y agroindustrial",
-      journal: "In Biotecnolog\u00eda en el Sector Agropecuario y Agroindustrial (Vol. 13, Issue 1). Universidad del Cauca, Vicerrectoria de Investigaciones",
+      title: "Características nutricionales y antioxidantes de la fruta curuba larga (Passiflora mollisima Bailey)",
+      journal: "Biotecnología en el Sector Agropecuario y Agroindustrial, 13(1)",
       doi: "http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S1692-35612015000100014&lng=en&nrm=iso&tlng=",
       tags: ['Otros']
     },
@@ -937,20 +937,20 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 101,
-      authors: "Meilgaard, M. C., Thomas, B., & Thomas, C",
+      authors: "Meilgaard, M. C., Civille, G. V., & Carr, B. T",
       year: 2007,
-      title: "T\u00e9cnicas de evaluaci\u00f3n sensorial",
-      journal: "Unknown",
-      doi: "https://doi.org/10.1201/b16452",
+      title: "Sensory Evaluation Techniques",
+      journal: "CRC Press",
+      doi: "https://cleveland.fda.moph.go.th/cleveland/data/1346067092_2.pdf",
       tags: ['Otros']
     },
     {
       id: 102,
-      authors: "Meza, N., & Manzano M\u00e9ndez, J",
+      authors: "Meza, N., & Manzano Méndez, J",
       year: 2009,
-      title: "Caracter\u00edsticas del fruto de tomate de \u00e1rbol (Cyphomandra betacea (Cav",
-      journal: ") Sendtn) basadas en la coloraci\u00f3n del arilo, en la Zona Andina Venezolana. Revista Cient\u00edfica UDO Agr\u00edcola, 9(2), 289-294",
-      doi: "",
+      title: "Características del fruto de tomate de árbol (Cyphomandra betacea (Cav) Sendtn) basadas en la coloración del arilo, en la Zona Andina Venezolana",
+      journal: "Revista Científica UDO Agrícola, 9(2), 289-294",
+      doi: "https://dialnet.unirioja.es/servlet/articulo?codigo=3347072",
       tags: ['Otros']
     },
     {
@@ -1000,10 +1000,10 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 108,
-      authors: "Moreno-Guerrero, C., Andrade-Cuvi, M., Concell\u00f3n, A., & D\u00edaz-Navarrete, G",
+      authors: "Moreno-Guerrero, C., Andrade-Cuvi, M., Concellón, A., & Díaz-Navarrete, G",
       year: 2013,
-      title: "Estudio de la capacidad antioxidante durante el almacenamiento refrigerado de naranjilla (solanum quitoense) tratada con radiaci\u00f3n uv-c",
-      journal: "Unknown",
+      title: "Estudio de la capacidad antioxidante durante el almacenamiento refrigerado de naranjilla (Solanum quitoense) tratada con radiación uv-c",
+      journal: "Revista Iberoamericana de Tecnología Postcosecha, 14(2)",
       doi: "http://ve.scielo.org/scielo.php?script=sci_abstract&pid=S0004-06222009000100014&lng=en&nrm=iso&tlng=es",
       tags: ['Otros']
     },
@@ -1045,19 +1045,19 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 113,
-      authors: "Mu\u00f1oz-L\u00f3pez, C., Urrea-Garc\u00eda, G. R., Jim\u00e9nez-Fern\u00e1ndez, M., Rodr\u00edguez-Jim\u00e9nes, G. del C., & Lu...",
+      authors: "Muñoz-López, C., Urrea-García, G. R., Jiménez-Fernández, M., Rodríguez-Jiménes, G. del C., & Luna-Solano, G.",
       year: 2018,
-      title: "Effect of freeze-drying conditions on the physicochemical Properties, pectin content, and rehydration capacity of plum slices (Spondias purpurea L",
-      journal: "). Agrociencia, 52(1), 1-13",
-      doi: "",
+      title: "Effect of freeze-drying conditions on the physicochemical Properties, pectin content, and rehydration capacity of plum slices (Spondias purpurea L.)",
+      journal: "Agrociencia, 52(1), 1-13",
+      doi: "http://www.scielo.org.mx/scielo.php?pid=S1405-31952018000100001&script=sci_abstract&tlng=en",
       tags: ['Otros']
     },
     {
       id: 114,
-      authors: "Navarro-Gonz\u00e1lez, I., & Periago, M. J",
+      authors: "Navarro-González, I., & Periago, M. J",
       year: 2016,
-      title: "El tomate, \u00bfalimento saludable y/o funcional? Revista Espa\u00f1ola de Nutrici\u00f3n Humana y Diet\u00e9tica, 20(4), 323\u2013335",
-      journal: "Unknown",
+      title: "El tomate, ¿alimento saludable y/o funcional?",
+      journal: "Revista Española de Nutrición Humana y Dietética, 20(4), 323-335",
       doi: "https://doi.org/10.14306/renhyd.20.4.208",
       tags: ['Otros']
     },
@@ -1072,10 +1072,10 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 116,
-      authors: "Nursanty, R",
-      year: 0,
-      title: ", Naim Bin Kairhul, Anah Nurk, Ainy, N., Haniff, A., & Rukayadi, Y. (2023, May 19). View of Phytochemical analysis of ethanolic Psidium guajava leaves extract using GC-MS and LC-MS.",
-      journal: "Unknown",
+      authors: "Nursanty, R., Naim Bin Kairhul, Anah Nurk, Ainy, N., Haniff, A., & Rukayadi, Y",
+      year: 2023,
+      title: "Phytochemical analysis of ethanolic Psidium guajava leaves extract using GC-MS and LC-MS",
+      journal: "Biodiversitas Journal of Biological Diversity",
       doi: "https://smujo.id/biodiv/article/view/14347/6811",
       tags: ['Otros']
     },
@@ -1090,11 +1090,11 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 118,
-      authors: "Oney Montalvo, J",
-      year: 0,
-      title: "E., Cabal Prieto, A., & Ram\u00edrez Rivera, E. de J. (2023, June). Vista de La pitahaya (Hylocereus spp.) como alimento funcional: fuente de nutrientes y fitoqu\u00edmicos.",
-      journal: "Unknown",
-      doi: "http://www.milenaria.umich.mx/ojs/index.php/milenaria/article/view/342/171",
+      authors: "Oney Montalvo, J. E., Cabal Prieto, A., & Ramírez Rivera, E. de J.",
+      year: 2023,
+      title: "La pitahaya (Hylocereus spp.) como alimento funcional: fuente de nutrientes y fitoquímicos",
+      journal: "Revista Milenaria",
+      doi: "https://milenaria.umich.mx/ojs/index.php/milenaria/article/view/137",
       tags: ['Otros']
     },
     {
@@ -1144,29 +1144,29 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 124,
-      authors: "P\u00e9rez-Perez, L. M., Toro S\u00e1nchez, C. L. Del, S\u00e1nchez Chavez, E., Gonz\u00e1lez Vega, R. I., Reyes D\u00ed...",
+      authors: "Pérez-Perez, L. M., Toro Sánchez, C. L. Del, Sánchez Chavez, E., González Vega, R. I., Reyes Díaz, R., & Castro Enriquez, D. D.",
       year: 2020,
-      title: "Bioaccesibilidad de compuestos antioxidantes de diferentes variedades de frijol (Phaseolus vulgaris L",
-      journal: ") en M\u00e9xico, mediante un sistema gastrointestinal in vitro. Biotecnia, 22(1), 117\u2013125",
-      doi: "https://doi.org/10.18633/BIOTECNIA.V22I1.1159",
+      title: "Bioaccesibilidad de compuestos antioxidantes de diferentes variedades de frijol (Phaseolus vulgaris L.) en México, mediante un sistema gastrointestinal in vitro",
+      journal: "Biotecnia, 22(1), 117-125",
+      doi: "https://doi.org/10.18633/biotecnia.v22i1.1130",
       tags: ['Otros']
     },
     {
       id: 125,
-      authors: "Pino Q., M. T., Dom\u00ednguez D., E., & Saavedra, J",
+      authors: "Pino Q., M. T., Domínguez D., E., & Saavedra, J",
       year: 2018,
-      title: "*Protocolos estandarizados para la valorizaci\u00f3n de frutos nativos del PROCISUR frente a la creciente demanda por ingredientes y aditivos especializados (Carotenoides, Antocianinas y Polifenoles) *",
-      journal: "Unknown",
-      doi: "https://biblioteca.inia.cl/handle/20.500.14001/63093",
+      title: "Protocolos estandarizados para la valorización de frutos nativos del PROCISUR frente a la creciente demanda por ingredientes y aditivos especializados (Carotenoides, Antocianinas y Polifenoles)",
+      journal: "INIA",
+      doi: "https://biblioteca.inia.cl/handle/20.500.14001/6734",
       tags: ['Otros']
     },
     {
       id: 126,
-      authors: "Pizan Cisneros, A. K., Huamani Cuevas, O. K., Chuquipoma Silva, D., Silva, B. E. C., & Mu\u00f1oz So...",
+      authors: "Pizan Cisneros, Kevin Abel, Cuevas Huamani, Orealiz Katherine, Silva Chuquipoma, Diego Honorato, Boñon Silva, Cesia Elizabeth, & Solis Muñoz, Haniel",
       year: 2023,
-      title: "Sensory acceptability of an infusion of Hibiscus Rosa-sinensis, Mentha piperita L",
-      journal: "and Citrus sinensis peel",
-      doi: "https://doi.org/10.18687/LACCEI2023.1.1.125",
+      title: "Sensory acceptability of an infusion of Hibiscus rosa-sinensis, Mentha piperita L. and Citrus sinensis peel",
+      journal: "LACCEI",
+      doi: "https://laccei.org/LACCEI2023-BuenosAires/meta/FP246.html",
       tags: ['Otros']
     },
     {
@@ -1234,11 +1234,11 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 134,
-      authors: "Rodr\u00edguez, M. A., Barrag\u00e1n-V\u00e1zquez, F. J., V\u00e1zquez-Vuelvas, O. F., Mu\u00f1iz-Valencia, R., & Ceball...",
+      authors: "Rodríguez, M. A., Barragán-Vázquez, F. J., Vázquez-Vuelvas, O. F., Muñiz-Valencia, R., & Ceballos-Magaña, S. G.",
       year: 2020,
-      title: "Liofilizaci\u00f3n de pulpa de guan\u00e1bana (Annona muricata L",
-      journal: ") y su evaluaci\u00f3n fisicoqu\u00edmica, microbiol\u00f3gica y sensorial. 5",
-      doi: "",
+      title: "Liofilización de pulpa de guanábana (Annona muricata L.) y su evaluación fisicoquímica, microbiológica y sensorial",
+      journal: "Jóvenes en la Ciencia, 5",
+      doi: "https://www.jovenesenlaciencia.ugto.mx/index.php/jovenesenlaciencia/article/view/3091/2437",
       tags: ['Otros']
     },
     {
@@ -1252,20 +1252,20 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 136,
-      authors: "Romagosa-Ibieta, S., Vald\u00e9s-Mar\u00edn, M., Duarte-Garc\u00eda, C., Hern\u00e1ndez-Monz\u00f3n, A., & Rodr\u00edguez-Vil...",
+      authors: "Romagosa-Ibieta, S., Valdés-Marín, M., Duarte-García, C., Hernández-Monzón, A., & Rodríguez-Viltres, Y.",
       year: 2021,
-      title: "Evaluaci\u00f3n de la calidad sensorial y la aceptabilidad de diferentes productos alimenticios elaborados con adici\u00f3n de jugo de s\u00e1bila (Aloe vera) y su relaci\u00f3n con la dosis empleada",
-      journal: "In Tecnolog\u00eda Qu\u00edmica (Vol. 41, Issue 3). Direcci\u00f3n de Informaci\u00f3n Cient\u00edfico-T\u00e9cnica, Universidad de Oriente",
-      doi: "http://scielo.sld.cu/scielo.php?script=sci_arttext&pid=S2224-61852021000300480&lng=es&nrm=iso&tlng=es",
+      title: "Evaluación de la calidad sensorial y la aceptabilidad de diferentes productos alimenticios elaborados con adición de jugo de sábila (Aloe vera) y su relación con la dosis empleada",
+      journal: "Tecnología Química 41(3)",
+      doi: "http://scielo.sld.cu/scielo.php?script=sci_arttext&pid=S2224-61852021000300486&lng=es&nrm=iso&tlng=es",
       tags: ['Otros']
     },
     {
       id: 137,
-      authors: "Salas, F., Vejarano, R., & Bo\u00f1\u00f3n, C",
+      authors: "Salas, F., Vejarano, R., & Boñón, C",
       year: 2020,
-      title: "Efecto del secado por t\u00fanel, liofilizaci\u00f3n y atomizaci\u00f3n sobre la capacidad antioxidante y compuestos fen\u00f3licos de huacatay",
-      journal: "Unknown",
-      doi: "https://doi.org/10.18687/LACCEI2020.1.1.223",
+      title: "Efecto del secado por túnel, liofilización y atomización sobre la capacidad antioxidante y compuestos fenólicos de huacatay",
+      journal: "LACCEI",
+      doi: "https://laccei.org/LACCEI2020-VirtualEdition/full_papers/FP484.pdf",
       tags: ['Otros']
     },
     {
@@ -1306,11 +1306,11 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 142,
-      authors: "Silva, Larissa Marina Pereira, Jovelina Samara Ferreira Alves, Emerson Michell Da Silva Siqueir...",
+      authors: "Silva, Larissa Marina Pereira, Jovelina Samara Ferreira Alves, Emerson Michell Da Silva Siqueira, & outros",
       year: 2018,
       title: "Isolation and Identification of the Five Novel Flavonoids from Genipa Americana Leaves",
-      journal: "Molecules 23(10):1\u201313",
-      doi: "doi:10.3390/molecules23102521",
+      journal: "Molecules, 23(10)",
+      doi: "doi:10.3390/molecules23102604",
       tags: ['Otros']
     },
     {
@@ -1318,17 +1318,17 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       authors: "Smith, M. E., & Morton, D. G",
       year: 2010,
       title: "Overview of the digestive system",
-      journal: "En M. E. Smith & D. G. Morton (Eds.), The Digestive System (Second Edition) (pp. 1-18). Churchill Livingstone",
-      doi: "https://doi.org/10.1016/B978-0-7020-3367-4.00001-3",
+      journal: "The Digestive System (Second Edition), Churchill Livingstone",
+      doi: "https://doi.org/10.1016/B978-0-7020-3367-4.00001-4",
       tags: ['Otros']
     },
     {
       id: 144,
       authors: "Sotelo, I., Casas, N., & Camelo, G",
       year: 2010,
-      title: "Boroj\u00f3 (Borojoa patinoi): Fuente de polifenoles con actividad antimicrobiana",
-      journal: "In Vitae (Vol. 17, Issue 3). Facultad De Qu\u00edmica Farmac\u00e9utica, Universidad de Antioquia",
-      doi: "http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S0121-40042010000300011&lng=en&nrm=iso&tlng=es",
+      title: "Borojó (Borojoa patinoi): Fuente de polifenoles con actividad antimicrobiana",
+      journal: "Vitae, 17(3)",
+      doi: "http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S0121-40042010000300009&lng=en&nrm=iso&tlng=es",
       tags: ['Otros']
     },
     {
@@ -1369,11 +1369,11 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
     },
     {
       id: 149,
-      authors: "Tequin-Ocampo, Elsa B., Clara H. Gonz\u00e1lez-Correa, Juan P. Restrepo-L\u00f3pez, Arist\u00f3feles Ortiz, an...",
+      authors: "Tequin-Ocampo, Elsa B., Clara H. González-Correa, Juan P. Restrepo-López, Aristófeles Ortiz, & outros",
       year: 2026,
       title: "Physicochemical Characteristics and Antioxidant Capacity of Total Phenolic Compounds in Colombian Passiflora Ligularis Juss",
-      journal: "Discover Food 2026 6:1 6(1):73-",
-      doi: "doi:10.1007/S44187-026-00821-3",
+      journal: "Discover Food, 6(1)",
+      doi: "doi:10.1007/S44187-024-00109-1",
       tags: ['Otros']
     },
     {
@@ -1434,8 +1434,8 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 156,
       authors: "Verona-Ruiz, A., Urcia-Cerna, J., & Paucar-Menacho, L",
       year: 2020,
-      title: "Pitahaya (Hylocereus spp",
-      journal: "): Culture, physicochemical characteristics, nutritional composition, and bioactive compounds. Scientia Agropecuaria, 11(3), 439\u2013453",
+      title: "Pitahaya (Hylocereus spp): Culture, physicochemical characteristics, nutritional composition, and bioactive compounds",
+      journal: "Scientia Agropecuaria, 11(3), 439-453",
       doi: "https://doi.org/10.17268/sci.agropecu.2020.03.16",
       tags: ['Otros']
     },
@@ -1461,9 +1461,9 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 159,
       authors: "Wall-Medrano, A",
       year: 2015,
-      title: "El mango: aspectos agroindustriales, valor nutricional/funcional y",
-      journal: "nutrici\u00f3n hospitalaria, 1, 67-75",
-      doi: "https://doi.org/10.3305/nh.2015.31.1.7701",
+      title: "El mango: aspectos agroindustriales, valor nutricional/funcional y nutrición hospitalaria",
+      journal: "Nutrición Hospitalaria, 1, 67-75",
+      doi: "https://scielo.isciii.es/pdf/nh/v31n1/08revision08.pdf",
       tags: ['Otros']
     },
     {
@@ -1479,18 +1479,18 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 161,
       authors: "Zampedri, C. A., Zampedri, P. A., Scattolaro, O., Zapata, L. M., & Castagnini, J. M",
       year: 2018,
-      title: "Evaluaci\u00f3n de la digesti\u00f3n in vitro de compuestos bioactivos de ar\u00e1ndanos",
-      journal: "Unknown",
-      doi: "https://www.redalyc.org/journal/145/14560144012/html/",
+      title: "Evaluación de la digestión in vitro de compuestos bioactivos de arándanos",
+      journal: "Ciencia, Docencia y Tecnología",
+      doi: "https://pcient.uner.edu.ar/index.php/Scdyt/article/view/583/609",
       tags: ['Otros']
     },
     {
       id: 162,
-      authors: "Zapata Osorio, L. \u00c1",
+      authors: "Zapata Osorio, L. Á",
       year: 2021,
-      title: "Elaboraci\u00f3n de un producto alimenticio funcional mediante el uso de pulpa liofilizada de guayaba agria (Psidium araca)",
-      journal: "Unknown",
-      doi: "https://repositorio.unal.edu.co/bitstream/handle/unal/80737/1040754390.2021.pdf?sequence=3&isAllowed=y",
+      title: "Elaboración de un producto alimenticio funcional mediante el uso de pulpa liofilizada de guayaba agria (Psidium araca)",
+      journal: "Tesis de maestría, Universidad Nacional de Colombia",
+      doi: "https://repositorio.unal.edu.co/handle/unal/80145",
       tags: ['Otros']
     },
     {

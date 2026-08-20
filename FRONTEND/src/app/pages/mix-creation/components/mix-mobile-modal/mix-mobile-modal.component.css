@@ -127,3 +127,19 @@
   color: white !important;
   font-weight: bold !important;
 }
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 1rem !important;
+  }
+  .modal-header {
+    padding: 1rem;
+  }
+  .modal-actions {
+    padding: 1rem !important;
+  }
+  .fruit-grid {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 0.5rem;
+  }
+}
