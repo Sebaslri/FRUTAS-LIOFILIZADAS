@@ -324,3 +324,53 @@ h1 {
   border-color: #78a549;
   box-shadow: 0 0 0 3px rgba(120, 165, 73, 0.2);
 }
+
+/* =========================================
+   TABLE ZEBRA STRIPING & STICKY COLUMN
+========================================= */
+.ref-table-row:nth-child(even) {
+  background-color: #f9fbf7;
+}
+
+.ref-table-row:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.ref-table-row:hover {
+  background-color: #f0f4eb !important;
+}
+
+/* Ensure sticky author column matches row background */
+.ref-table-row:nth-child(even) td.mat-column-authors {
+  background-color: #f9fbf7;
+}
+
+.ref-table-row:nth-child(odd) td.mat-column-authors {
+  background-color: #ffffff;
+}
+
+.ref-table-row:hover td.mat-column-authors {
+  background-color: #f0f4eb !important;
+}
+
+/* =========================================
+   CUSTOM HEADER (Similar to reference image)
+========================================= */
+.custom-header-row {
+  background-color: #e2eccf !important; /* Soft pale green */
+}
+
+.custom-header-cell {
+  color: #2c3f1c !important; /* Dark bold green */
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem !important;
+  border-bottom: 2px solid #d0dfb9 !important;
+}
+
+/* Ensure sticky author column header matches header background */
+.custom-header-row th.mat-column-authors {
+  background-color: #e2eccf !important;
+}
+
