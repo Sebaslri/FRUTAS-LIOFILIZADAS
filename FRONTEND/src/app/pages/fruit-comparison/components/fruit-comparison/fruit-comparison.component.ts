@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Fruta } from '../../../../shared/interfaces/Fruta.interface';
 import { MaterialModule } from '../../../../shared/material.module';
@@ -82,30 +83,69 @@ export class FruitComparisonComponent implements OnInit {
 
   ngOnInit(): void {
     this.customTitle.set('Comparador de Frutas');
-    this.comparisonService.getFruits().subscribe({
-      next: (fruits) => {
-        this.fruits = fruits;
-      },
-      error: () => {
-        this.fruits = [];
-        this.loading = false;
-      },
-      complete: () => {
-        this.loading = false;
-      },
-    });
-    this.mixService.getAll().subscribe({
-      next: (mixes) => {
-        this.mixes = mixes.map(mix => {
+    
+    forkJoin({
+      fruits: this.comparisonService.getFruits(),
+      mixes: this.mixService.getAll()
+    }).subscribe({
+      next: (result) => {
+        this.fruits = result.fruits || [];
+        
+        // Asignar imágenes a los mixes ahora que sabemos que las frutas ya cargaron
+        this.mixes = (result.mixes || []).map(mix => {
           const fruitImages = mix.frutaIds.map(id => {
             const fruit = this.fruits.find(f => f.frutaId === id);
             return fruit?.imagen || '/images/fruit-hero.png';
           });
           return { ...mix, fruitImages };
         });
+
+        // Preload images before hiding the loading screen
+        this.preloadAllImages().then(() => {
+          this.loading = false;
+        });
       },
-      error: () => undefined,
+      error: (err) => {
+        console.error('Error loading data', err);
+        this.fruits = [];
+        this.mixes = [];
+        this.loading = false;
+      }
     });
+  }
+
+  private preloadAllImages(): Promise<void[]> {
+    const urlsToPreload = new Set<string>();
+    
+    // Add fruit images
+    this.fruits.forEach(f => {
+      if (f.imagen) {
+        urlsToPreload.add(f.imagen);
+      }
+    });
+    
+    // Add mix fruit images
+    this.mixes.forEach(m => {
+      if (m.fruitImages) {
+        m.fruitImages.forEach(img => urlsToPreload.add(img));
+      }
+      if (m.imagen) {
+        urlsToPreload.add(m.imagen);
+      }
+    });
+    
+    urlsToPreload.add('/images/fruit-hero.png');
+    
+    const promises = Array.from(urlsToPreload).map(url => {
+      return new Promise<void>((resolve) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => resolve();
+        img.onerror = () => resolve(); // Resolve anyway to not block the UI forever
+      });
+    });
+    
+    return Promise.all(promises);
   }
 
   protected get readyToCompare(): boolean {

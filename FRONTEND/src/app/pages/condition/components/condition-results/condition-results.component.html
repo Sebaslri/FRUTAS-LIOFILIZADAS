@@ -6,20 +6,20 @@
     </a>
 
     @if (loading) {
-      <section class="results-skeleton" aria-label="Cargando recomendación" aria-busy="true">
-        <span class="skeleton-line skeleton-line-short"></span>
-        <span class="skeleton-line skeleton-line-title"></span>
-        <span class="skeleton-line skeleton-line-copy"></span>
-      </section>
+    <section class="results-skeleton" aria-label="Cargando recomendación" aria-busy="true">
+      <span class="skeleton-line skeleton-line-short"></span>
+      <span class="skeleton-line skeleton-line-title"></span>
+      <span class="skeleton-line skeleton-line-copy"></span>
+    </section>
     } @else if (condition) {
-      <header class="results-header">
-        <p class="eyebrow">Recomendador educativo de infusiones</p>
-        <h1>{{ condition.nombre }}</h1>
-        <p class="results-lead">
-          {{ condition.descripcion }} Úsalas como punto de partida para comparar perfiles de sabor,
-          bioactividad y aceptación sensorial.
-        </p>
-      </header>
+    <header class="results-header">
+      <p class="eyebrow">Recomendador educativo de infusiones</p>
+      <h1>{{ condition.nombre }}</h1>
+      <p class="results-lead">
+        {{ condition.descripcion }} Úsalas como punto de partida para comparar perfiles de sabor,
+        bioactividad y aceptación sensorial.
+      </p>
+    </header>
     }
 
     @if (!loading) {
@@ -28,23 +28,20 @@
         <p class="eyebrow">Personaliza la exploración</p>
         <h2 id="goal-title">¿Qué perfil de infusión buscas?</h2>
         @if (selectedGoalDetails) {
-          <p>{{ selectedGoalDetails.description }} <br> <span style="font-size: 0.85em; opacity: 0.8; margin-top: 0.25rem; display: inline-block;">* Los valores mostrados están en una escala del 1 al 10.</span></p>
+        <p>{{ selectedGoalDetails.description }} <br> <span
+            style="font-size: 0.85em; opacity: 0.8; margin-top: 0.25rem; display: inline-block;">* Los valores mostrados
+            están en una escala del 1 al 10.</span></p>
         } @else {
-          <p>Selecciona una intención para ordenar las frutas relacionadas.</p>
+        <p>Selecciona una intención para ordenar las frutas relacionadas.</p>
         }
       </div>
 
       <div class="goal-buttons">
         @for (goal of goals; track goal.key) {
-          <button
-            type="button"
-            class="goal-button"
-            [class.goal-button-active]="selectedGoal === goal.key"
-            [attr.aria-pressed]="selectedGoal === goal.key"
-            (click)="selectGoal(goal.key)"
-          >
-            {{ goal.label }}
-          </button>
+        <button type="button" class="goal-button" [class.goal-button-active]="selectedGoal === goal.key"
+          [attr.aria-pressed]="selectedGoal === goal.key" (click)="selectGoal(goal.key)">
+          {{ goal.label }}
+        </button>
         }
       </div>
     </section>
@@ -60,39 +57,37 @@
 
       <div class="results-grid">
         @for (fruit of visibleFruits; track fruit.frutaId) {
-          <app-card [fruit]="fruit" [badgeValue]="getBadgeValue(fruit)" 
-            [mixMode]="mixMode"
-            [isSelected]="selectedFruitIds.includes(fruit.frutaId)"
-            (detailsRequested)="openFruitDetails($event)" />
+        <app-card [fruit]="fruit" [badgeValue]="getBadgeValue(fruit)" [mixMode]="mixMode"
+          [isSelected]="selectedFruitIds.includes(fruit.frutaId)" (detailsRequested)="openFruitDetails($event)" />
         } @empty {
-          <p class="empty-results">No hay frutas asociadas todavía a esta condición.</p>
+        <p class="empty-results">No hay frutas asociadas todavía a esta condición.</p>
         }
       </div>
     </section>
 
     @if (!loading && visibleFruits.length > 0) {
-      <section class="mix-creation-banner" aria-labelledby="mix-creation-title" @fadeInRight400ms>
-        <div class="mix-banner-content">
-          <div class="mix-banner-text">
-            <h2 id="mix-creation-title">¿Deseas hacer un mix en el laboratorio con estas frutas?</h2>
-            <p>Selecciona hasta 4 frutas y pon a prueba tu propia infusión.</p>
-          </div>
-          <div class="mix-banner-actions">
-            @if (mixMode) {
-              <button mat-stroked-button class="cancel-mix-btn" (click)="toggleMixMode()">Cancelar</button>
-              <button class="lab-action-button" [disabled]="selectedFruitIds.length < 2" (click)="goToLab()">
-                <span>Ir al laboratorio ({{ selectedFruitIds.length }}/4)</span>
-                <mat-icon fontSet="material-symbols-outlined">science</mat-icon>
-              </button>
-            } @else {
-              <button class="lab-action-button pulse-animation" (click)="toggleMixMode()">
-                <span>¡Sí, crear mi mix!</span>
-                <mat-icon fontSet="material-symbols-outlined">blender</mat-icon>
-              </button>
-            }
-          </div>
+    <section class="mix-creation-banner" aria-labelledby="mix-creation-title" @fadeInRight400ms>
+      <div class="mix-banner-content">
+        <div class="mix-banner-text">
+          <h2 id="mix-creation-title">¿Deseas hacer un mix en el laboratorio con estas frutas?</h2>
+          <p>Selecciona hasta 4 frutas y pon a prueba tu propia infusión.</p>
         </div>
-      </section>
+        <div class="mix-banner-actions">
+          @if (mixMode) {
+          <button mat-stroked-button class="cancel-mix-btn" (click)="toggleMixMode()">Cancelar</button>
+          <button class="lab-action-button" [disabled]="selectedFruitIds.length < 2" (click)="goToLab()">
+            <span>Ir al laboratorio ({{ selectedFruitIds.length }}/4)</span>
+            <mat-icon fontSet="material-symbols-outlined">science</mat-icon>
+          </button>
+          } @else {
+          <button class="lab-action-button pulse-animation" (click)="toggleMixMode()">
+            <span>¡Sí, crear mi mix!</span>
+            <mat-icon fontSet="material-symbols-outlined">emoji_food_beverage</mat-icon>
+          </button>
+          }
+        </div>
+      </div>
+    </section>
     }
     }
   </div>

@@ -74,7 +74,11 @@ export class MixCreationComponent implements OnInit {
         } else {
           this.availableFruits = frutas;
         }
-        this.loading = false;
+        
+        // Preload images before hiding the loading screen
+        this.preloadImages(frutas).then(() => {
+          this.loading = false;
+        });
       },
       error: (err) => {
         this.loading = false;
@@ -82,6 +86,27 @@ export class MixCreationComponent implements OnInit {
         Swal.fire('Error', 'No se pudieron cargar las frutas de la base de datos.', 'error');
       }
     });
+  }
+
+  private preloadImages(frutas: Fruta[]): Promise<void[]> {
+    const urlsToPreload = new Set<string>();
+    frutas.forEach(f => {
+      if (f.imagen) {
+        urlsToPreload.add(f.imagen);
+      }
+    });
+    urlsToPreload.add('/images/fruit-hero.png');
+
+    const promises = Array.from(urlsToPreload).map(url => {
+      return new Promise<void>((resolve) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => resolve();
+        img.onerror = () => resolve();
+      });
+    });
+
+    return Promise.all(promises);
   }
 
   drop(event: CdkDragDrop<Fruta[]>) {
