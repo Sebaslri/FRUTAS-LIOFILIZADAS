@@ -374,3 +374,34 @@ h1 {
   background-color: #e2eccf !important;
 }
 
+/* =========================================
+   AUTHORS COLUMN RESPONSIVE WIDTH
+========================================= */
+.author-col-header {
+  min-width: 250px;
+  max-width: 350px;
+  border-right: 1px solid #d0dfb9 !important;
+}
+
+.author-col-cell {
+  background: inherit;
+  border-right: 1px solid #eee;
+  min-width: 250px;
+  max-width: 350px;
+  white-space: normal;
+  word-wrap: break-word;
+  padding-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  .author-col-header {
+    min-width: 150px;
+    max-width: 200px;
+  }
+  .author-col-cell {
+    min-width: 150px;
+    max-width: 200px;
+  }
+}
+
+
