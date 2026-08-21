@@ -39,7 +39,7 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       id: 1,
       authors: "Paz-Y\u00e9pez, A. C",
       year: 2019,
-      title: "Influencia de factores inherentes al alimento y al individuo sobre la digestibilidad de l\u00edpidos de origen vegetal [Tesis doctoral, Universitat Polit\u00e8cnica de Val\u00e8ncia]",
+      title: "Influencia de factores inherentes al alimento y al individuo sobre la digestibilidad de l\u00edpidos de origen vegetal",
       journal: "Doctoral dissertation, Universitat Politècnica de València",
       doi: "https://aplicat.upv.es/exploraupv/ficha-tesis/tesis/11710?busqueda=Patologia+vegetal",
       tags: ['Otros']
@@ -68,15 +68,6 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       year: 2014,
       title: "A standardised static in vitro digestion method suitable for food \u2013 an international consensus",
       journal: "Food & Function, 5(6), 1113\u20131124",
-      doi: "https://doi.org/10.1039/C3FO60702J",
-      tags: ['Otros']
-    },
-    {
-      id: 5,
-      authors: "Minekus, M., Alminger, M., Alvito, P., Ballance, S., Bohn, T., Bourlieu, C., Carri\u00e8re, F., Bout...",
-      year: 2014,
-      title: "A standardised static in vitro digestion method suitable for food \u2013 an international consensus",
-      journal: "Food & Function, 5(6), 1113-1124",
       doi: "https://doi.org/10.1039/C3FO60702J",
       tags: ['Otros']
     },
@@ -711,15 +702,6 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       tags: ['Otros']
     },
     {
-      id: 76,
-      authors: "Asamblea Nacional Constituyente",
-      year: 2008,
-      title: "Constitución de la República del Ecuador",
-      journal: "Registro Oficial 449",
-      doi: "https://www.ecuadorencifras.gob.ec/LOTAIP/2017/DIJU/octubre/LA2_OCT_DIJU_Constitucion.pdf",
-      tags: ['Otros']
-    },
-    {
       id: 77,
       authors: "Huerta-Vera, K., Flores-Andrade, E., Contreras-Oliva, A., Villegas-Monter, \u00c1., Chavez-Franco, S...",
       year: 2024,
@@ -870,15 +852,6 @@ export class ReferencesComponent implements OnInit, AfterViewInit {
       title: "Targeted Metabolomics for Quantitative Assessment of Polyphenols and Methylxanthines in Fermented and Unfermented Cocoa Beans from 18 Genotypes of the Brazilian Amazon",
       journal: "Food Research International 211:116394",
       doi: "doi:10.1016/J.FOODRES.2024.116394",
-      tags: ['Otros']
-    },
-    {
-      id: 94,
-      authors: "Lima, Giulia Victória Silva, Fábio Gomes Moura, Sébastien Gofflot, Anne Suellen Oliveira Pinto, & outros",
-      year: 2025,
-      title: "Targeted Metabolomics for Quantitative Assessment of Polyphenols and Methylxanthines in Fermented and Unfermented Cocoa Beans from 18 Genotypes of the Brazilian Amazon",
-      journal: "Food Research International 211(March)",
-      doi: "doi:10.1016/j.foodres.2024.116394",
       tags: ['Otros']
     },
     {
